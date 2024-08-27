@@ -1,12 +1,14 @@
+import { Outlet } from "react-router-dom"
 import Navbar from "../pages/CommonPages/Navbar"
-import Home from "../pages/home/Home"
+import { Footer } from "antd/es/layout/layout"
 
 
 const MainLayout = () => {
     return (
         <>
             <Navbar />
-            <Home />
+            <Outlet />
+            <Footer />
         </>
     )
 }
