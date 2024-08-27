@@ -1,8 +1,16 @@
+import Section from "../../components/common/Section"
 
 
 const MeetingRooms = () => {
     return (
-        <div>MeetingRooms</div>
+        <>
+            <Section className="min-h-[calc(100vh-357px)]">
+                <div>Meeting rrom</div>
+            </Section>
+            {/* <Section>
+                <div>Meeting rrom</div>
+            </Section > */}
+        </>
     )
 }
 

@@ -24,4 +24,5 @@ export const userPath = [
     path: "contact-us",
     element: <ContactUs />,
   },
+
 ];

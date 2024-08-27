@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, Button, Drawer, MenuProps } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.png"
@@ -20,7 +20,7 @@ const Navbar = () => {
     };
 
     const items: MenuItem[] = navbarGenerator(userPath)
-
+    items.push({ key: "login", label: <NavLink to="/login">Login/SignUp</NavLink> })
     return (
         <nav className="bg-white shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
