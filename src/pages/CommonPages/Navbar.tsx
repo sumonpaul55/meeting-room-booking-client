@@ -12,8 +12,6 @@ const Navbar = () => {
     const [visible, setVisible] = useState(false);
 
 
-
-
     const showDrawer = () => {
         setVisible(true);
     };
