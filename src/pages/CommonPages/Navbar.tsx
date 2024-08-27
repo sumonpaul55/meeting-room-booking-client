@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Menu, Button, Drawer } from "antd";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu, Button, Drawer, MenuProps } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.png"
+import { navbarGenerator } from "../../utils/navbarGenerator";
+import { userPath } from "../../utils/userPaths";
+type MenuItem = Required<MenuProps>['items'][number];
+
+
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
-    const screenSize = window.innerWidth;
-    console.log(screenSize)
-    useEffect(() => {
 
-    }, [])
+
+
 
     const showDrawer = () => {
         setVisible(true);
@@ -17,21 +20,9 @@ const Navbar = () => {
     const closeDrawer = () => {
         setVisible(false);
     };
-    const items =
-        <>
-            <Menu.Item key="1">
-                <NavLink to="/">Home</NavLink>
-            </Menu.Item>
-            <Menu.Item key="2">
-                <NavLink to="/about">About</NavLink>
-            </Menu.Item>
-            <Menu.Item key="3">
-                <NavLink to="/products">Products</NavLink>
-            </Menu.Item>
-            <Menu.Item key="4">
-                <NavLink to="/contact">Contact</NavLink>
-            </Menu.Item>
-        </>
+
+    const items: MenuItem[] = navbarGenerator(userPath)
+
     return (
         <nav className="bg-white shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,19 +34,8 @@ const Navbar = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="hidden md:flex space-x-4 items-center">
-                        <NavLink to="/meeting-rooms" className={({ isActive }) => isActive ? "active" : `text-gray-800 hover:text-blue-600`}>
-                            Meeting Rooms
-                        </NavLink>
-                        <NavLink to="/about" className={({ isActive }) => isActive ? "active" : `text-gray-800 hover:text-blue-600`}>
-                            About Us
-                        </NavLink>
-                        <NavLink to="/products" className="text-gray-800 hover:text-blue-600">
-                            Contact Us
-                        </NavLink>
-                        <NavLink to="/contact" className="text-gray-800 hover:text-blue-600">
-                            Login/Register
-                        </NavLink>
+                    <div className="hidden md:flex space-x-4 items-center w-full">
+                        <Menu mode="horizontal" style={{ width: "100%", justifyContent: "end", border: "0", fontSize: "18px", fontWeight: 500 }} items={items} />
                     </div>
                     <div className="flex md:hidden items-center">
                         <Button type="primary" icon={<MenuOutlined />} onClick={showDrawer} />
@@ -67,9 +47,7 @@ const Navbar = () => {
                 placement="right"
                 onClose={closeDrawer}
                 open={visible}>
-                <Menu mode="inline" onClick={closeDrawer}>
-                    {items}
-                </Menu>
+                <Menu mode="inline" onClick={closeDrawer} items={items} />
             </Drawer>
         </nav>
     );

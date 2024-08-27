@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "../pages/CommonPages/Navbar"
-import { Footer } from "antd/es/layout/layout"
+import RoomifyFooter from "../pages/CommonPages/Footer"
 
 
 const MainLayout = () => {
@@ -8,7 +8,7 @@ const MainLayout = () => {
         <>
             <Navbar />
             <Outlet />
-            <Footer />
+            <RoomifyFooter />
         </>
     )
 }
