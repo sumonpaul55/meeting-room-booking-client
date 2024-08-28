@@ -5,7 +5,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarker
 const RoomifyFooter = () => {
     const thisYear = new Date().getFullYear()
     return (
-        <footer className="bg-slate-900 text-white py-10">
+        <footer className="bg-slate-900 text-white py-16 font-roboto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Contact Information */}

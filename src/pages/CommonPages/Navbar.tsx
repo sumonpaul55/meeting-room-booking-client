@@ -46,7 +46,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="hidden md:flex space-x-4 items-center w-full">
-                        <Menu mode="horizontal" style={{ width: "100%", justifyContent: "end", border: "0", fontSize: "17px", fontWeight: 500 }} items={items} />
+                        <Menu mode="horizontal" style={{ width: "100%", justifyContent: "end", border: "0", fontSize: "17px" }} items={items} className="font-poppins font-medium" />
                         {/* user icon and dropdown based on user */}
                         <Dropdown trigger={['click']} menu={{ items: UserdropDownItems }} arrow={true} overlayStyle={{ border: "1px solid #ccc", borderRadius: "8px" }}>
                             <Button className="px-6 font-semibold">User <FaUser size={15} /></Button>
