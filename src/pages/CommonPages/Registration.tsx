@@ -23,7 +23,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-primary bg-opacity-20">
+    <div className="py-10 min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-primary bg-opacity-20">
       <motion.div
         className="p-8 bg-white shadow-lg rounded-lg w-full max-w-lg"
         initial={{ opacity: 0, y: -50 }}
@@ -35,9 +35,9 @@ const Registration = () => {
         <RoomForm onSubmit={onSubmit} resolver={zodResolver(ReagistrationSCema)}>
           <RoomInput name='name' label='Name' placeholder='Name' />
 
-          <div className='relative text-primary'>
+          <div className='relative text-primary h-[85px]'>
             <RoomInput name='password' label='Password' placeholder='Password' type={showPassword ? "text" : "password"} />
-            <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2 bottom-[5px] cursor-pointer'>
+            <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2 bottom-[30px] cursor-pointer'>
               {
                 showPassword ?
                   <FaEye size={20} className='text-primary' />

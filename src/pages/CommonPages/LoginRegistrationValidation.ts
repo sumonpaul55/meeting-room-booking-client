@@ -10,3 +10,8 @@ export const ReagistrationSCema = z.object({
     .regex(/^\d+$/, "Phone number must be numeric"),
   address: z.string().min(1, "Address is required"),
 });
+
+export const logiValidationSchema = z.object({
+  email: z.string({ invalid_type_error: "Valid Email please", required_error: "Email Required" }).email(),
+  password: z.string({ required_error: "Please provide password" }),
+});

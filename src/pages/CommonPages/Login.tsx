@@ -14,6 +14,8 @@ import { toast } from 'sonner';
 import { useAppDispatch } from '../../redux/hooks';
 import { setUser } from '../../redux/features/auth/authSlice';
 import { verifiyToken } from '../../utils/VerifyToken';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { logiValidationSchema } from './LoginRegistrationValidation';
 
 const { Title } = Typography;
 
@@ -51,11 +53,11 @@ const Login = () => {
                 <Title level={2} className="text-center mb-6 text-blue-600 font-poppins">
                     Login
                 </Title>
-                <RoomForm onSubmit={onSubmit}>
+                <RoomForm onSubmit={onSubmit} resolver={(zodResolver(logiValidationSchema))}>
                     <RoomInput name='email' label='Email' placeholder='Email' className="text-primary font-semibold text-base" />
-                    <div className='relative text-primary'>
+                    <div className='relative text-primary h-[85px]'>
                         <RoomInput name='password' label='Password' placeholder='Password' type={showPassword ? "text" : "password"} />
-                        <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2 bottom-[5px] cursor-pointer'>
+                        <span onClick={() => setShowPassword(!showPassword)} className='absolute right-2 bottom-[30px] cursor-pointer'>
                             {
                                 showPassword ?
                                     <FaEye size={20} className='text-primary' />
@@ -63,8 +65,7 @@ const Login = () => {
                             }
                         </span>
                     </div>
-
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" className='mt-6'>
                         Register
                     </Button>
                 </RoomForm>

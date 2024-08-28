@@ -12,7 +12,7 @@ type TInputProps = {
 
 const RoomInput = ({ name, defaultValue, type, label, placeholder, className }: TInputProps) => {
     return (
-        <div className="mt-2">
+        <div className="mt-1">
             <Controller name={name} render={({ field, fieldState: { error } }) => {
                 return <Form.Item label={label}>
                     <Input {...field} defaultValue={defaultValue} placeholder={placeholder} type={type} className={className && className} />

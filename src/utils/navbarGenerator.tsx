@@ -3,9 +3,12 @@ import { TNavbarItem } from "../types/navbarItems";
 
 export const navbarGenerator = (navbarItems: TNavbarItem[]) => {
     const navbar = navbarItems.map(items => {
+        if (!items.name) {
+            return null
+        }
         return {
-            key: items.name,
-            label: <NavLink to={`${items.path}`}>{items.name}</NavLink>
+            key: items?.name,
+            label: <NavLink to={`${items?.path}`}>{items?.name}</NavLink>
         }
     })
     return navbar

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 import { Form } from 'antd';
@@ -17,7 +18,7 @@ type TFormConfig = {
 }
 
 const RoomForm = ({ children, defaultValue, onSubmit, resolver }: TSubmitHandler) => {
-    let formConfig: TFormConfig = {}
+    const formConfig: TFormConfig = {}
     if (defaultValue) {
         formConfig["defaultValue"] = defaultValue
     }

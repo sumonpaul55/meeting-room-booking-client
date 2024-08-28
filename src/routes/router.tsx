@@ -4,7 +4,6 @@ import DashBoard from "../layOuts/DashBoard";
 import MainLayout from "../layOuts/MainLayout";
 import { generateRoute } from "../utils/generateChildRoute";
 import { NavItemsPath } from "../utils/userPaths";
-import Login from "../pages/CommonPages/Login";
 import ScrollToTop from "../components/common/ScrollToTop";
 import Registration from "../pages/CommonPages/Registration";
 
@@ -18,10 +17,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: generateRoute(NavItemsPath)
     },
-    {
-        path: "/login",
-        element: <Login />
-    },
+
     {
         path: 'register',
         element: <Registration></Registration>

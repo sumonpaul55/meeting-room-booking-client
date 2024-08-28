@@ -25,10 +25,7 @@ const Navbar = () => {
     };
 
     const items: MenuItem[] = navbarGenerator(NavItemsPath)
-    items.push(
-        { key: "login", label: <NavLink to="/login">Login/SignUp</NavLink> }
-        // { key: "user", label: <FaUser /> }
-    )
+
     const UserdropDownItems: MenuItem[] = [
         {
             key: "Logout", label: <Button className="px-2 w-full justify-start">Logout <BiExit size={16} /></Button>
