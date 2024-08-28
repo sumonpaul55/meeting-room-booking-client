@@ -5,7 +5,10 @@ import MainLayout from "../layOuts/MainLayout";
 import { generateRoute } from "../utils/generateChildRoute";
 import { userPath } from "../utils/userPaths";
 import Login from "../pages/CommonPages/Login";
+import ScrollToTop from "../components/common/ScrollToTop";
 
+
+<ScrollToTop />
 
 const router = createBrowserRouter([
     {
