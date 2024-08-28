@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button } from 'antd';
 import { motion } from 'framer-motion';
@@ -8,14 +9,36 @@ import RoomInput from '../../components/forms/RoomInput';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLogInMutation } from '../../redux/features/auth/auth.api';
+import { toast } from 'sonner';
+import { useAppDispatch } from '../../redux/hooks';
+import { setUser } from '../../redux/features/auth/authSlice';
+import { verifiyToken } from '../../utils/VerifyToken';
 
 const { Title } = Typography;
 
 const Login = () => {
+    const [loginUser] = useLogInMutation()
+    const dispatch = useAppDispatch()
     const [showPassword, setShowPassword] = useState(false)
-    const onSubmit: SubmitHandler<FieldValues> = (values) => {
-        console.log('Success:', values);
-        // Add your registration logic here
+    const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+        const toastId = toast.loading("Logining...")
+
+        try {
+            const res: any = await loginUser(values)
+            if (res?.data?.success) {
+                const token = res?.data?.token
+                const user = verifiyToken(token)
+                dispatch(setUser({ user, token }))
+                toast.success(res?.data?.message, { id: toastId })
+            }
+            if (res.error) {
+                toast.error(res?.error?.data?.message, { id: toastId })
+            }
+        } catch (error: any) {
+            toast.error(error)
+        }
+
     };
 
     return (
@@ -41,7 +64,7 @@ const Login = () => {
                         </span>
                     </div>
 
-                    <Button type="primary" htmlType="submit" block>
+                    <Button type="primary" htmlType="submit">
                         Register
                     </Button>
                 </RoomForm>

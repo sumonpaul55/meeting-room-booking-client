@@ -3,7 +3,7 @@ import ContactUs from "../pages/contactUs/ContactUs";
 import Home from "../pages/home/Home";
 import MeetingRooms from "../pages/meetingRooms/MeetingRooms";
 
-export const userPath = [
+export const NavItemsPath = [
   {
     name: "Home",
     path: "/",
@@ -24,5 +24,4 @@ export const userPath = [
     path: "contact-us",
     element: <ContactUs />,
   },
-
 ];

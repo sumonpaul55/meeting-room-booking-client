@@ -4,13 +4,16 @@ import { Menu, Button, Drawer, MenuProps, Dropdown } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.png"
 import { navbarGenerator } from "../../utils/navbarGenerator";
-import { userPath } from "../../utils/userPaths";
+import { NavItemsPath } from "../../utils/userPaths";
 import { FaUser } from "react-icons/fa";
 import { BiBox, BiExit } from "react-icons/bi";
+import { useAppSelector } from "../../redux/hooks";
 type MenuItem = Required<MenuProps>['items'][number];
 
 
 const Navbar = () => {
+    const user = useAppSelector(state => state.auth.user)
+
     const [visible, setVisible] = useState(false);
 
 
@@ -21,7 +24,7 @@ const Navbar = () => {
         setVisible(false);
     };
 
-    const items: MenuItem[] = navbarGenerator(userPath)
+    const items: MenuItem[] = navbarGenerator(NavItemsPath)
     items.push(
         { key: "login", label: <NavLink to="/login">Login/SignUp</NavLink> }
         // { key: "user", label: <FaUser /> }
@@ -48,9 +51,12 @@ const Navbar = () => {
                     <div className="hidden md:flex space-x-4 items-center w-full">
                         <Menu mode="horizontal" style={{ width: "100%", justifyContent: "end", border: "0", fontSize: "17px" }} items={items} className="font-poppins font-medium" />
                         {/* user icon and dropdown based on user */}
-                        <Dropdown trigger={['click']} menu={{ items: UserdropDownItems }} arrow={true} overlayStyle={{ border: "1px solid #ccc", borderRadius: "8px" }}>
-                            <Button className="px-6 font-semibold">User <FaUser size={15} /></Button>
-                        </Dropdown>
+                        {
+                            user &&
+                            <Dropdown trigger={['click']} menu={{ items: UserdropDownItems }} arrow={true} overlayStyle={{ border: "1px solid #ccc", borderRadius: "8px" }}>
+                                <Button className="px-6 font-semibold">User <FaUser size={15} /></Button>
+                            </Dropdown>
+                        }
                     </div>
                     <div className="flex md:hidden items-center">
                         <Button type="primary" icon={<MenuOutlined />} onClick={showDrawer} />
