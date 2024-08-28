@@ -6,6 +6,7 @@ import { generateRoute } from "../utils/generateChildRoute";
 import { userPath } from "../utils/userPaths";
 import Login from "../pages/CommonPages/Login";
 import ScrollToTop from "../components/common/ScrollToTop";
+import Registration from "../pages/CommonPages/Registration";
 
 
 <ScrollToTop />
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login />
+    },
+    {
+        path: 'register',
+        element: <Registration></Registration>
     },
     // dashboard paths
     {

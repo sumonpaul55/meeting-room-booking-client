@@ -1,4 +1,4 @@
-import { Form, Input } from "antd"
+import { Form, InputNumber } from "antd"
 import { Controller } from "react-hook-form"
 
 type TInputProps = {
@@ -10,12 +10,12 @@ type TInputProps = {
     className?: string
 }
 
-const RoomInput = ({ name, defaultValue, type, label, placeholder, className }: TInputProps) => {
+const RoomInputNumber = ({ name, defaultValue, label, placeholder, className }: TInputProps) => {
     return (
         <div className="mt-2">
             <Controller name={name} render={({ field, fieldState: { error } }) => {
                 return <Form.Item label={label}>
-                    <Input {...field} defaultValue={defaultValue} placeholder={placeholder} type={type} className={className && className} />
+                    <InputNumber {...field} defaultValue={defaultValue} placeholder={placeholder} className={className && className} />
                     {
                         error && <p className="text-[red] mt-1">{error?.message}</p>
                     }
@@ -26,4 +26,4 @@ const RoomInput = ({ name, defaultValue, type, label, placeholder, className }: 
     )
 }
 
-export default RoomInput
+export default RoomInputNumber
