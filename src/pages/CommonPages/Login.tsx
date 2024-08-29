@@ -25,7 +25,6 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const onSubmit: SubmitHandler<FieldValues> = async (values) => {
         const toastId = toast.loading("Logining...")
-
         try {
             const res: any = await loginUser(values)
             if (res?.data?.success) {

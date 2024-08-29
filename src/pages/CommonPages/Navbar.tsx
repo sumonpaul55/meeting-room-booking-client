@@ -49,9 +49,9 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-white shadow-md">
+        <nav className="shadow-md sticky top-0 backdrop-blur py-1">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
+                <div className="flex justify-between">
                     <div className="flex">
                         <div className="flex-shrink-0 flex items-center">
                             <Link to="/" className="text-xl font-bold text-blue-600">
@@ -60,7 +60,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="hidden md:flex space-x-4 items-center w-full">
-                        <Menu mode="horizontal" style={{ width: "100%", justifyContent: "end", border: "0", fontSize: "17px" }} items={items} className="font-poppins font-medium" />
+                        <Menu mode="horizontal" style={{ width: "100%", justifyContent: "end", border: "0", fontSize: "17px" }} items={items} className="font-poppins font-medium bg-transparent" />
                         {/* user icon and dropdown based on user */}
                         {
                             user &&
@@ -80,9 +80,12 @@ const Navbar = () => {
                 onClose={closeDrawer}
                 open={visible}>
                 <Menu mode="inline" onClick={closeDrawer} items={items} />
-                <Dropdown className="ml-7" trigger={['click']} menu={{ items: UserdropDownItems }} arrow={true}>
-                    <Button className="px-7">User <FaUser size={15} /></Button>
-                </Dropdown>
+                {
+                    user &&
+                    <Dropdown className="ml-7" trigger={['click']} menu={{ items: UserdropDownItems }} arrow={true} overlayStyle={{ border: "1px solid #ccc", borderRadius: "8px" }}>
+                        <Button className="px-6 font-semibold">User <FaUser size={15} /></Button>
+                    </Dropdown>
+                }
             </Drawer>
         </nav>
     );
