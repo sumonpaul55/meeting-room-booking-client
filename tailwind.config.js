@@ -15,7 +15,7 @@ export default {
         sectionBg: '#F2F4F7',     // Light gray for section backgrounds
         cartBg: '#FFFFFF',        // Clean white for cart backgrounds
         lightBg: '#FAFAFA',       // Very light gray (almost white) for light background
-        lightText: '#757575',     // Medium gray for lighter text elements
+        lightText: '#444',     // Medium gray for lighter text elements
         danger: '#E74C3C',        // Strong red for error or danger alerts
       },
       fontFamily: {

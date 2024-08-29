@@ -1,3 +1,4 @@
+import DashBoard from "../layOuts/DashBoard";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import Login from "../pages/CommonPages/Login";
 import Registration from "../pages/CommonPages/Registration";
@@ -38,5 +39,10 @@ export const NavItemsPath = [
   {
     path: "myBookings",
     element: <MyBookings />
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoard />,
+    // children: 
   }
 ];

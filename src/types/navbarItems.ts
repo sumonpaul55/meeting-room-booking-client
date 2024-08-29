@@ -4,4 +4,5 @@ export type TNavbarItem = {
   name?: string;
   path: string;
   element: ReactNode;
+  children?: TNavbarItem[];
 };

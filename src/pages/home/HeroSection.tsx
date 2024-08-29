@@ -1,8 +1,11 @@
 
 import { Button } from "antd";
 import { motion } from "framer-motion";
+// import { useGetAllRoomsQuery } from "../../redux/features/roomManagement/room.api";
 
 const HeroSection = () => {
+    // const { data: rooms } = useGetAllRoomsQuery(undefined);
+
     return (
         <div
             className="relative items-center flex md:items-start h-[50vh] sm:h-[80vh] bg-cover bg-center"
@@ -14,7 +17,7 @@ const HeroSection = () => {
                 <div className="text-left lg:mt-32 sm:mt-16 p-3 md:p-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2">
                         <motion.div
-                            className="relative text-center text-white space-y-4 sm:space-y-7"
+                            className="relative text-white space-y-4 sm:space-y-7 md:px-10"
                             initial={{ opacity: 0, y: -50 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1 }}
@@ -28,11 +31,12 @@ const HeroSection = () => {
                             <Button
                                 type="primary"
                                 className="mt-8"
-                                size="large"
-                                style={{ backgroundColor: "#1DA57A", borderColor: "#1DA57A" }}
-                            >
-                                Get Started
+                                size="large">
+                                Book Now
                             </Button>
+                            <div>
+
+                            </div>
                         </motion.div>
                         <div></div>
                     </div>
