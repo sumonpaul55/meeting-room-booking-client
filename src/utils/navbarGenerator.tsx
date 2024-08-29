@@ -3,7 +3,7 @@ import { TNavbarItem } from "../types/navbarItems";
 
 export const navbarGenerator = (navbarItems: TNavbarItem[]) => {
     const navbar = navbarItems.map(items => {
-        if (!items.name) {
+        if (!items.name || items?.index) {
             return null
         }
         return {

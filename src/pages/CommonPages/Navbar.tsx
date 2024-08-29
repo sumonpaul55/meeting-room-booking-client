@@ -10,11 +10,16 @@ import { BiBox, BiExit } from "react-icons/bi";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
+import { verifiyToken } from "../../utils/VerifyToken";
 type MenuItem = Required<MenuProps>['items'][number];
 
 
 const Navbar = () => {
-    const user = useAppSelector(state => state.auth.user)
+    const token = useAppSelector(state => state.auth.token)
+    let user;
+    if (token) {
+        user = verifiyToken(token)
+    }
     const dispatch = useAppDispatch()
     const [visible, setVisible] = useState(false);
 

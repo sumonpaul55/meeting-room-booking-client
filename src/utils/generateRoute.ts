@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 export type TRoute = {
   path: string;
   element: ReactNode;
+  index?: boolean | any;
   children?: TRoute[];
 };
 type TRoutPath = {
@@ -25,11 +26,15 @@ export const generateRoute = (routePaths: TRoutPath[]) => {
       // console.log(items.path);
       const mychildren: any = [];
       items?.children?.map((itms: TRoute) => {
+        if (itms?.index) {
+          mychildren.push({ index: itms.index, element: itms?.element });
+        }
         mychildren.push({
           path: itms?.path,
           element: itms?.element,
         });
       });
+
       acc.push({
         path: items?.path,
         element: items?.element,
