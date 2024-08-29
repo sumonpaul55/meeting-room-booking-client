@@ -3,9 +3,10 @@ import AboutUs from "../pages/aboutUs/AboutUs";
 import Login from "../pages/CommonPages/Login";
 import Registration from "../pages/CommonPages/Registration";
 import ContactUs from "../pages/contactUs/ContactUs";
+import Bookings from "../pages/Dashboard/bookings/Bookings";
 import Home from "../pages/home/Home";
 import MeetingRooms from "../pages/meetingRooms/MeetingRooms";
-import MyBookings from "../pages/myBookings/MyBookings";
+import { adminDashDashboarditmes } from "./adminDashboardpath";
 
 export const NavItemsPath = [
   {
@@ -38,11 +39,16 @@ export const NavItemsPath = [
   },
   {
     path: "myBookings",
-    element: <MyBookings />
+    element: <Bookings />
   },
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
     element: <DashBoard />,
-    // children: 
-  }
+    children: adminDashDashboarditmes
+  },
+  // {
+  //   path: "user/dashboard",
+  //   element: <DashBoard />,
+  //   children: userDashBoardPath
+  // }
 ];

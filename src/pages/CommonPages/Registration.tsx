@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import RoomTextArea from '../../components/forms/RoomTextArea';
-import { ReagistrationSCema } from './LoginRegistrationValidation';
+import { ReagistrationSCema } from '../../schemaValidation/LoginRegistrationValidation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const { Title } = Typography;

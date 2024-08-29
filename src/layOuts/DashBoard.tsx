@@ -1,21 +1,33 @@
 import React from 'react';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+// import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import { Outlet } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks';
+import { adminDashDashboarditmes } from '../lib/adminDashboardpath';
+import { userDashBoardPath } from '../lib/userDashboardPath';
+import { ItemType, MenuItemType } from 'antd/es/menu/interface';
+import { navbarGenerator } from '../utils/navbarGenerator';
 
 const { Header, Content, Sider } = Layout;
 
-const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-    (icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-        label: `nav ${index + 1}`,
-    }),
-);
+
+
+
+
 
 const DashBoard: React.FC = () => {
     const user = useAppSelector(state => state.auth.user)
+
+    let items: ItemType<MenuItemType>[] = []
+    switch (user?.role) {
+        case "admin":
+            items = navbarGenerator(adminDashDashboarditmes)
+            break;
+        case "user":
+            items = navbarGenerator(userDashBoardPath)
+            break;
+    }
+
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -27,7 +39,7 @@ const DashBoard: React.FC = () => {
                     className='lg:fixed top-0 h-screen'
                     breakpoint="lg"
                     collapsedWidth="0">
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
+                    <Menu theme="dark" mode="inline" items={items} />
                 </Sider>
             </div>
             <Layout>

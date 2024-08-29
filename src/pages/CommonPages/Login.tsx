@@ -15,7 +15,7 @@ import { useAppDispatch } from '../../redux/hooks';
 import { setUser } from '../../redux/features/auth/authSlice';
 import { verifiyToken } from '../../utils/VerifyToken';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { logiValidationSchema } from './LoginRegistrationValidation';
+import { logiValidationSchema } from '../../schemaValidation/LoginRegistrationValidation';
 
 const { Title } = Typography;
 

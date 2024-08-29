@@ -35,7 +35,7 @@ const Navbar = () => {
     }
     const UserdropDownItems: MenuItem[] = [
         {
-            key: "bookings-or-dashboard", label: <NavLink to={user?.role === "user" ? `/myBookings` : "/dashboard"}><Button className="px-2">{user?.role === "user" ? "My Bookings" : "Dashboard"}<BiBox size={16} /></Button></NavLink>
+            key: "bookings-or-dashboard", label: <NavLink to={user?.role === "user" ? `/myBookings` : "admin/dashboard"}><Button className="px-2">{user?.role === "user" ? "My Bookings" : "Dashboard"}<BiBox size={16} /></Button></NavLink>
         },
         {
             key: "Logout", label: <Button onClick={() => handleLogout()} className="px-2 w-full justify-start">Logout <BiExit size={16} /></Button>
