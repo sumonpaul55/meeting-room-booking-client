@@ -17,7 +17,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: generateRoute(NavItemsPath)
     },
-
     {
         path: 'register',
         element: <Registration></Registration>

@@ -4,6 +4,7 @@ import Registration from "../pages/CommonPages/Registration";
 import ContactUs from "../pages/contactUs/ContactUs";
 import Home from "../pages/home/Home";
 import MeetingRooms from "../pages/meetingRooms/MeetingRooms";
+import MyBookings from "../pages/myBookings/MyBookings";
 
 export const NavItemsPath = [
   {
@@ -27,7 +28,6 @@ export const NavItemsPath = [
     element: <ContactUs />,
   },
   {
-    name: "Login",
     path: "login",
     element: <Login />
   },
@@ -35,4 +35,8 @@ export const NavItemsPath = [
     path: "register",
     element: <Registration />
   },
+  {
+    path: "myBookings",
+    element: <MyBookings />
+  }
 ];

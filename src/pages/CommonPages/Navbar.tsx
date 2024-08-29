@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Menu, Button, Drawer, MenuProps, Dropdown } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.png"
@@ -7,16 +7,18 @@ import { navbarGenerator } from "../../utils/navbarGenerator";
 import { NavItemsPath } from "../../utils/userPaths";
 import { FaUser } from "react-icons/fa";
 import { BiBox, BiExit } from "react-icons/bi";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logOut } from "../../redux/features/auth/authSlice";
+import { toast } from "sonner";
 type MenuItem = Required<MenuProps>['items'][number];
 
 
 const Navbar = () => {
     const user = useAppSelector(state => state.auth.user)
-
+    const dispatch = useAppDispatch()
     const [visible, setVisible] = useState(false);
 
-
+    const navigate = useNavigate()
     const showDrawer = () => {
         setVisible(true);
     };
@@ -25,15 +27,27 @@ const Navbar = () => {
     };
 
     const items: MenuItem[] = navbarGenerator(NavItemsPath)
-
+    if (!user) {
+        items.push({
+            key: "Login",
+            label: <NavLink to="/login">Login</NavLink>
+        })
+    }
     const UserdropDownItems: MenuItem[] = [
         {
-            key: "Logout", label: <Button className="px-2 w-full justify-start">Logout <BiExit size={16} /></Button>
+            key: "bookings-or-dashboard", label: <NavLink to={user?.role === "user" ? `/myBookings` : "/dashboard"}><Button className="px-2">{user?.role === "user" ? "My Bookings" : "Dashboard"}<BiBox size={16} /></Button></NavLink>
         },
         {
-            key: "Logout", label: <NavLink to="/login"><Button className="px-2">My Bookings <BiBox size={16} /></Button></NavLink>
-        }
+            key: "Logout", label: <Button onClick={() => handleLogout()} className="px-2 w-full justify-start">Logout <BiExit size={16} /></Button>
+        },
     ]
+    const handleLogout = () => {
+        const tosatId = toast.loading("Porccessing...")
+        dispatch(logOut());
+        toast.success("Logged Out Successful", { id: tosatId })
+        navigate('/')
+    }
+
     return (
         <nav className="bg-white shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
