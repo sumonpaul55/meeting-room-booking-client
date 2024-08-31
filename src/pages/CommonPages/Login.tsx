@@ -8,7 +8,7 @@ import RoomForm from '../../components/forms/RoomForm';
 import RoomInput from '../../components/forms/RoomInput';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogInMutation } from '../../redux/features/auth/auth.api';
 import { toast } from 'sonner';
 import { useAppDispatch } from '../../redux/hooks';
@@ -23,6 +23,12 @@ const Login = () => {
     const [loginUser] = useLogInMutation()
     const dispatch = useAppDispatch()
     const [showPassword, setShowPassword] = useState(false)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const dynamiNaviGateLink = location?.state?.from?.pathname || "/"
+
+
+
     const onSubmit: SubmitHandler<FieldValues> = async (values) => {
         const toastId = toast.loading("Logining...")
         try {
@@ -31,6 +37,7 @@ const Login = () => {
                 const token = res?.data?.token
                 const user = verifiyToken(token)
                 dispatch(setUser({ user, token }))
+                navigate(dynamiNaviGateLink, { replace: true })
                 toast.success(res?.data?.message, { id: toastId })
             }
             if (res.error) {

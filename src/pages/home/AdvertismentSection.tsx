@@ -31,7 +31,7 @@ const ServiceAdvertisement = () => {
         <Section className="py-20 bg-gray-100 px-2 text-center">
             <div className="container mx-auto ">
                 <motion.h2
-                    className="text-3xl md:text-4xl font-bold mb-8"
+                    className="text-2xl md:text-4xl font-roboto font-bold mb-8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 2 }}>

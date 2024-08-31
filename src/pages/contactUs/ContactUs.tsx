@@ -16,17 +16,17 @@ const ContactUs: React.FC = () => {
                 <div className="container mx-auto bg-white bg-opacity-90 backdrop-blur mt-16 py-16 rounded-lg shadow-lg ">
                     <div className="mt-5 p-4 text-center">
                         <h2 className="text-xl lg:text-5xl font-bold mb-6 text-blue-600">Follow Us</h2>
-                        <div className="flex justify-center space-x-6">
-                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-5xl hover:text-blue-800">
+                        <div className="flex justify-center space-x-6 mt-10">
+                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-4xl hover:text-blue-800">
                                 <FacebookOutlined />
                             </a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 text-5xl hover:text-blue-600">
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 text-4xl hover:text-blue-600">
                                 <TwitterOutlined />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-700 text-5xl hover:text-blue-900">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-700 text-4xl hover:text-blue-900">
                                 <LinkedinOutlined />
                             </a>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-500 text-5xl hover:text-pink-700">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-500 text-4xl hover:text-pink-700">
                                 <InstagramOutlined />
                             </a>
                         </div>

@@ -8,31 +8,31 @@ const testimonials = [
     {
         name: "John Doe",
         title: "CEO, Company A",
-        image: "https://via.placeholder.com/150",
+        image: "https://i.postimg.cc/vHrWqFvH/jhon-dow.jpg",
         feedback: "As a tech-driven company, we needed a solution that was both efficient and scalable. Roomify delivered on all fronts. The real-time notifications and integration with our existing calendar systems have streamlined our operations. Our employees love how easy it is to find and book rooms on the fly."
     },
     {
         name: "Jane Smith",
         title: "Manager, Company B",
-        image: "https://via.placeholder.com/150",
+        image: "https://i.postimg.cc/dVJGgHWR/man.jpg",
         feedback: "I’ve tried several room booking tools, but Roomify stands out for its ease of use and reliability. Our team has been able to organize meetings with minimal effort, and the system's reminders ensure no one ever misses a scheduled session. It’s been a game-changer for our productivity."
     },
     {
         name: "Alex Johnson",
         title: "CTO, Company C",
-        image: "https://via.placeholder.com/150",
+        image: "https://i.ibb.co/745fRGT/emily.png",
         feedback: "As a tech-driven company, we needed a solution that was both efficient and scalable. Roomify delivered on all fronts. The real-time notifications and integration with our existing calendar systems have streamlined our operations. Our employees love how easy it is to find and book rooms on the fly."
     },
     {
         name: "Emily Davis",
         title: "HR, Company D",
-        image: "https://via.placeholder.com/150",
+        image: "https://i.postimg.cc/x1gLQv7w/girl.jpg",
         feedback: "Roomify has become an indispensable tool for our HR department. Coordinating meetings, interviews, and training sessions has never been easier. The platform’s user-friendly design and robust features have significantly improved our workflow, making scheduling a breeze."
     },
     {
         name: "Michael Brown",
         title: "COO, Company E",
-        image: "https://via.placeholder.com/150",
+        image: "https://i.postimg.cc/dVJGgHWR/man.jpg",
         feedback: "Implementing Roomify was one of the best decisions we've made. The platform is incredibly versatile, allowing us to manage multiple meeting rooms across different locations effortlessly. The analytics feature also provides valuable insights into room usage, helping us optimize our resources effectively."
     }
 ];
@@ -64,7 +64,7 @@ const TestimonialSlider = () => {
 
     return (
         <Section className="py-20 bg-lightBg">
-            <h2 className="text-3xl font-semibold text-center mb-6">What Our Clients Say</h2>
+            <h2 className="text-2xl md:text-4xl text-center mb-6 font-roboto font-bold">What Our Clients Say</h2>
             <Slider {...settings}>
                 {testimonials.map((testimonial, index) => (
                     <div key={index} className="px-4 py-10">

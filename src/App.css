@@ -24,3 +24,16 @@
 .contact .ant-form-item-label label {
     color:white !important;
 }
+.featuredRooms{
+    position: relative;
+}
+.featuredRooms::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 70px;
+    transform: skewX(-35deg);
+    background: #000;
+    bottom: 0;
+    z-index: -1;
+}

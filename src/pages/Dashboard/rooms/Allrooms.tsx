@@ -1,5 +1,5 @@
 import { useGetAllRoomsQuery } from "../../../redux/features/roomManagement/room.api"
-import AddaRoomModal from "./addRoomModal"
+import AddaRoomModal from "./AddRoomModal"
 import AllRoomsTable from "./AllRoomsTable";
 
 
