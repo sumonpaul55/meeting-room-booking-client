@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button } from 'antd';
 import { motion } from 'framer-motion';
@@ -5,20 +6,37 @@ import { Typography } from 'antd';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import RoomForm from '../../components/forms/RoomForm';
 import RoomInput from '../../components/forms/RoomInput';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import RoomTextArea from '../../components/forms/RoomTextArea';
 import { ReagistrationSCema } from '../../schemaValidation/LoginRegistrationValidation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRegisterMutation } from '../../redux/features/auth/auth.api';
+import { TResponse } from '../../types/ResponseType';
+import { toast } from 'sonner';
+import { regiResponse } from '../../types/registerResponse';
 
 const { Title } = Typography;
 
 const Registration = () => {
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
+  const [registration] = useRegisterMutation()
+  const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+    const id = toast.loading("Regitering...")
+    try {
+      const res = await registration(values) as TResponse<regiResponse>
+      if (res.error) {
+        toast.error(res.error?.data?.message, { id })
+      } else {
+        toast.success(res?.data?.message, { id, duration: 5000 })
+        navigate("/login")
+      }
+    } catch (error: any) {
+      toast.error(error?.message)
+    }
 
-  const onSubmit: SubmitHandler<FieldValues> = (values) => {
-    console.log('Success:', values);
     // Add your registration logic here
   };
 

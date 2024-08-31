@@ -13,15 +13,31 @@ const roomApi = baseApi.injectEndpoints({
       invalidatesTags: ["rooms"],
     }),
     getAllRooms: builder.query({
-      query: () => {
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((element: { name: string; value: string }) => {
+            params.append(element.name, element.value);
+          });
+        }
         return {
           url: "/rooms",
           method: "GET",
+          params: params,
         };
       },
       providesTags: ["rooms"],
     }),
+    deleteRoom: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/rooms/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["rooms"],
+    }),
   }),
 });
 
-export const { useGetAllRoomsQuery, useCreateRoomMutation } = roomApi;
+export const { useGetAllRoomsQuery, useCreateRoomMutation, useDeleteRoomMutation } = roomApi;

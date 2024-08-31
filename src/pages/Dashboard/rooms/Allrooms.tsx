@@ -5,7 +5,7 @@ import AllRoomsTable from "./AllRoomsTable";
 
 
 const Allrooms = () => {
-    const { data: allrooms } = useGetAllRoomsQuery(undefined)
+    const { data: allrooms } = useGetAllRoomsQuery([])
     const room = allrooms?.data;
     console.log(room)
     return (
