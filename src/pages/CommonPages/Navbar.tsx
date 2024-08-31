@@ -54,7 +54,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="shadow-md sticky top-0 bg-white bg-opacity-60 backdrop-blur z-50 py-1">
+        <nav className="shadow-md sticky top-0 bg-white bg-opacity-70 backdrop-blur z-50 py-1">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between">
                     <div className="flex">

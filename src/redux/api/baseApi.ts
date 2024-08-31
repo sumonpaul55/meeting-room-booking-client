@@ -47,5 +47,6 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   // baseQuery: BaseQueryWithRefreshToken,
   baseQuery: baseQuery,
+  tagTypes: ["rooms"],
   endpoints: () => ({}),
 });

@@ -10,6 +10,7 @@ const roomApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["rooms"],
     }),
     getAllRooms: builder.query({
       query: () => {
@@ -18,6 +19,7 @@ const roomApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["rooms"],
     }),
   }),
 });

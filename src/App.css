@@ -20,3 +20,7 @@
 .ant-upload-list-item-name{
     display: none;
 }
+
+.contact .ant-form-item-label label {
+    color:white !important;
+}
