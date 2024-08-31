@@ -17,3 +17,6 @@
     width: 100%;
     flex-wrap: wrap;
 }
+.ant-upload-list-item-name{
+    display: none;
+}
