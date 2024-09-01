@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Tag } from 'antd';
+import { Link } from 'react-router-dom';
 
 interface RoomCardProps {
     name: string;
@@ -13,6 +14,7 @@ interface RoomCardProps {
     pricePerSlot: number;
     amenities: string[];
     roomImg: string[];
+    _id: string
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({
@@ -22,7 +24,8 @@ const RoomCard: React.FC<RoomCardProps> = ({
     capacity,
     pricePerSlot,
     amenities,
-    roomImg
+    roomImg,
+    _id
 }) => {
     const sliderSettings = {
         dots: true,
@@ -63,12 +66,14 @@ const RoomCard: React.FC<RoomCardProps> = ({
                 </div>
             </div>
             <div className="px-6 pt-4 pb-10">
-                <motion.button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.2 }}>
-                    See Details
-                </motion.button>
+                <Link to={`/room-details/${_id}`}>
+                    <motion.button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}>
+                        See Details
+                    </motion.button>
+                </Link>
             </div>
         </motion.div>
     );

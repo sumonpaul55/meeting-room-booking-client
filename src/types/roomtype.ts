@@ -6,5 +6,6 @@ export interface RoomData {
   pricePerSlot: number;
   amenities: string[];
   roomImg: string[];
+  _id: string;
   isDeleted: boolean;
 }

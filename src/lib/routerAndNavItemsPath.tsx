@@ -1,3 +1,4 @@
+
 import DashBoard from "../layOuts/DashBoard";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import Login from "../pages/CommonPages/Login";
@@ -6,6 +7,7 @@ import ContactUs from "../pages/contactUs/ContactUs";
 import Bookings from "../pages/Dashboard/bookings/Bookings";
 import Home from "../pages/home/Home";
 import MeetingRooms from "../pages/meetingRooms/MeetingRooms";
+import RoomDetails from "../pages/meetingRooms/RoomDetails";
 import { adminDashDashboarditmes } from "./adminDashboardpath";
 
 export const NavItemsPath = [
@@ -46,6 +48,10 @@ export const NavItemsPath = [
     element: <DashBoard />,
     children: adminDashDashboarditmes
   },
+  {
+    path: "/room-details/:id",
+    element: <RoomDetails />
+  }
   // {
   //   path: "user/dashboard",
   //   element: <DashBoard />,
