@@ -7,7 +7,7 @@ import { RoomData } from '../../types/roomtype'
 import { Link } from 'react-router-dom'
 
 const FeaturedRooms = () => {
-    const { data: rooms } = useGetAllRoomsQuery([])
+    const { data: rooms } = useGetAllRoomsQuery([{ name: "limit", value: 6 }])
     const allRoom = rooms?.data
 
     return (

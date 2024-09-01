@@ -37,7 +37,7 @@ const Faq: React.FC = () => {
     };
 
     return (
-        <Section className='py-20 px-4 md:px-0 bg-gray-100'>
+        <Section className='py-20 px-4 md:px-0n bg-gray-100'>
             <div className="container mx-auto">
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-7'>
                     <div className="">

@@ -25,8 +25,8 @@ const HeroSection = () => {
                             <h1 className="sm:text-2xl md:text-4xl font-bold text-left">
                                 Seamless Room Bookings, Anytime, Anywhere
                             </h1>
-                            <p className="sm:mt-4 text-sm sm:text-lg md:text-xl text-left">
-                                Find and reserve the perfect meeting space with ease. Experience hassle-free scheduling with Roomify.
+                            <p className="sm:mt-4 text-sm sm:text-base md:text-lg text-left font-roboto text-gray-300">
+                                Easily find and reserve the perfect meeting space tailored to your needs. With Roomify, experience a seamless, hassle-free scheduling process that takes the stress out of booking. Whether you're planning a quick meeting or a full-day event, Roomify ensures you have the right space, exactly when you need it.
                             </p>
                             <Button
                                 type="primary"

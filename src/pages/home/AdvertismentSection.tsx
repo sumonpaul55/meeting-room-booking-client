@@ -35,7 +35,7 @@ const ServiceAdvertisement = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 2 }}>
-                    Why Choose Roomify?
+                    What Sets Us Apart?
                 </motion.h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-8">

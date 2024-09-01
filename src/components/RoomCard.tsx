@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import { motion } from 'framer-motion';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Tag } from 'antd';
 
 interface RoomCardProps {
     name: string;
@@ -44,15 +45,15 @@ const RoomCard: React.FC<RoomCardProps> = ({
                     </div>
                 ))}
             </Slider>
-            <div className="px-3 md:px-6 py-4">
+            <div className="px-3 py-4">
                 <div className="font-bold text-xl mb-2">{name}</div>
-                <p className="text-gray-700 text-base">
-                    Room No: {roomNo} | Floor No: {floorNo}
-                </p>
-                <p className="text-gray-700 text-base">
-                    Capacity: {capacity} | Price: ${pricePerSlot} per slot
-                </p>
-                <div className="mt-4">
+                <div className="px-2 text-base flex justify-around">
+                    <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Room No: {roomNo}</Tag>
+                    <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Floor No: {floorNo}</Tag>
+                    <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Capacity: {capacity}</Tag>
+                    <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Price: ${pricePerSlot} per slot</Tag>
+                </div>
+                <div className="mt-4 md:px-10">
                     <h4 className="font-semibold text-gray-800">Amenities:</h4>
                     <ul className="list-disc list-inside text-gray-700">
                         {amenities?.map((amenity, index) => (
