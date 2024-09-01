@@ -14,7 +14,8 @@ interface RoomCardProps {
     pricePerSlot: number;
     amenities: string[];
     roomImg: string[];
-    _id: string
+    _id: string;
+    pageName?: string
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({
@@ -25,7 +26,8 @@ const RoomCard: React.FC<RoomCardProps> = ({
     pricePerSlot,
     amenities,
     roomImg,
-    _id
+    _id,
+    pageName
 }) => {
     const sliderSettings = {
         dots: true,
@@ -44,13 +46,13 @@ const RoomCard: React.FC<RoomCardProps> = ({
             <Slider {...sliderSettings} className="room-img-slider">
                 {roomImg?.map((img, index) => (
                     <div key={index}>
-                        <img className="w-full h-64 object-cover" src={img} alt={`Room ${name}`} />
+                        <img className={`w-full object-cover ${pageName ? "h-52" : "h-64"}`} src={img} alt={`Room ${name}`} />
                     </div>
                 ))}
             </Slider>
             <div className="px-3 py-4">
                 <div className="font-bold text-xl mb-2">{name}</div>
-                <div className="px-2 text-base flex justify-around">
+                <div className={`px-2 text-base flex ${pageName ? "flex-wrap justify-start gap-2" : "justify-around"}`}>
                     <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Room No: {roomNo}</Tag>
                     <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Floor No: {floorNo}</Tag>
                     <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Capacity: {capacity}</Tag>
