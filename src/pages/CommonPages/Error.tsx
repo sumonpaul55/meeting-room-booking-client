@@ -24,6 +24,12 @@ const ErrorPage = () => {
                         >
                             Back
                         </button>
+                        <button
+                            onClick={() => navigate("/login")}
+                            className="mt-6 px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg"
+                        >
+                            Login
+                        </button>
                     </div>
                 </div>
             </div>

@@ -38,7 +38,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
 
     return (
         <motion.div
-            className="rounded-lg overflow-hidden shadow-lg bg-white h-full"
+            className="rounded-lg overflow-hidden shadow-md bg-white h-full"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}>
             <Slider {...sliderSettings} className="room-img-slider">

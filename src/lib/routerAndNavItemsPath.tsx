@@ -8,7 +8,9 @@ import Bookings from "../pages/Dashboard/bookings/Bookings";
 import Home from "../pages/home/Home";
 import MeetingRooms from "../pages/meetingRooms/MeetingRooms";
 import RoomDetails from "../pages/meetingRooms/RoomDetails";
+import PrivacyPolicy from "../pages/privacyandTerm/PrivacyPolicy";
 import { adminDashDashboarditmes } from "./adminDashboardpath";
+import TermsAndConditions from "../pages/privacyandTerm/Term&Condition";
 
 export const NavItemsPath = [
   {
@@ -51,6 +53,14 @@ export const NavItemsPath = [
   {
     path: "/room-details/:id",
     element: <RoomDetails />
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />
+  },
+  {
+    path: "/terms-of-service",
+    element: <TermsAndConditions />
   }
   // {
   //   path: "user/dashboard",
