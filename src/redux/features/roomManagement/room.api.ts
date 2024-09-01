@@ -13,12 +13,22 @@ const roomApi = baseApi.injectEndpoints({
       invalidatesTags: ["rooms"],
     }),
     getAllRooms: builder.query({
-      query: (args) => {
+      query: ({ search, range, limit, sort, capacity }: { search?: string; range?: string; limit?: number; sort?: string; capacity?: string }) => {
         const params = new URLSearchParams();
-        if (args) {
-          args.forEach((element: { name: string; value: string }) => {
-            params.append(element.name, element.value);
-          });
+        if (search) {
+          params.append("search", search);
+        }
+        if (range) {
+          params.append("range", range);
+        }
+        if (limit) {
+          params.append("limit", String(limit));
+        }
+        if (sort) {
+          params.append("sort", sort);
+        }
+        if (capacity) {
+          params.append("capacity", capacity);
         }
         return {
           url: "/rooms",

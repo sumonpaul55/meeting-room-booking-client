@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Loading from '../../components/common/Loading'
 
 const FeaturedRooms = () => {
-    const { data: rooms, isLoading } = useGetAllRoomsQuery([{ name: "limit", value: 6 }])
+    const { data: rooms, isLoading } = useGetAllRoomsQuery({ limit: 6 })
     const allRoom = rooms?.data
 
 

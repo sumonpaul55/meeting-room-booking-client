@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react"
-import Section from "../../components/common/Section"
 import { useGetAllRoomsQuery } from "../../redux/features/roomManagement/room.api"
 import Loading from "../../components/common/Loading"
 import { Input, Form, Select, SelectProps, Button } from "antd"
@@ -13,11 +12,12 @@ import { useDebounce } from "../../useHooks/useDebounce"
 const MeetingRooms = () => {
     const [sideOpen, setSideOpen] = useState(false)
     const [search, setSearch] = useState("")
-
+    const [range, setRange] = useState<string | undefined>()
+    const [capacity, setCapacity] = useState("")
     // const [searchParams, setSearchParams] = useState<[] | undefined>(undefined)
     const srcDebounce = useDebounce(search, 1000)
 
-    const { data, isLoading } = useGetAllRoomsQuery([{ name: "search", value: srcDebounce }]);
+    const { data, isLoading } = useGetAllRoomsQuery({ search: srcDebounce, range, capacity });
     const rooms = data?.data;
 
     if (isLoading) {
@@ -26,7 +26,7 @@ const MeetingRooms = () => {
     const capaCityOptions: SelectProps['options'] = []
 
     // Remove duplicates based on 'value'
-    const uniqueArray = rooms.filter((item: RoomData, index: number, self: RoomData[]) =>
+    const uniqueArray = rooms?.filter((item: RoomData, index: number, self: RoomData[]) =>
         index === self.findIndex((t: any) => t.capacity === item.capacity)
     );
     uniqueArray?.map((item: RoomData) => {
@@ -37,8 +37,6 @@ const MeetingRooms = () => {
     })
 
 
-
-
     let maxValue = 0
     rooms?.forEach((item: any) => {
         if (maxValue < item?.pricePerSlot) {
@@ -47,29 +45,27 @@ const MeetingRooms = () => {
     })
     const priceFilter: SelectProps['options'] = [
         {
-            value: `0 - ${Math.ceil((maxValue / 5) * 1)}`,
-            label: `0 - ${Math.ceil((maxValue / 5) * 1)}`,
+            value: `0-5000`,
+            label: `0-5000`,
         },
         {
-            value: `${Math.ceil((maxValue / 5) * 1)} - ${Math.ceil((maxValue / 5) * 2)}`,
-            label: `${Math.ceil((maxValue / 5) * 1)} - ${Math.ceil((maxValue / 5) * 2)}`,
+            value: `5000-10000`,
+            label: `5000-10000`,
         },
         {
-            value: `${Math.ceil((maxValue / 5) * 2)} - ${Math.ceil((maxValue / 5) * 3)}`,
-            label: `${Math.ceil((maxValue / 5) * 2)} - ${Math.ceil((maxValue / 5) * 3)}`,
+            value: `10000-20000`,
+            label: `10000-20000`,
         },
         {
-            value: `${Math.ceil((maxValue / 5) * 3)} - ${Math.ceil((maxValue / 5) * 4)}`,
-            label: `${Math.ceil((maxValue / 5) * 3)} - ${Math.ceil((maxValue / 5) * 4)}`,
+            value: `20000-30000`,
+            label: `20000-30000`,
         },
         {
-            value: `${Math.ceil((maxValue / 5) * 4)} - ${Math.ceil((maxValue / 5) * 5)}`,
-            label: `${Math.ceil((maxValue / 5) * 4)} - ${Math.ceil((maxValue / 5) * 5)}`,
+            value: `30000+`,
+            label: `30000+`,
         },
     ];
-    const handleSidbar = () => {
-        setSideOpen(!sideOpen)
-    }
+
 
 
     // handle reset
@@ -85,7 +81,7 @@ const MeetingRooms = () => {
         <>
             <section className="px-4 sm:px-10 md:px-20">
                 <div className={`text-end mt-2 fixed z-50 bg-transparent backdrop:blur-sm top-12 ${sideOpen ? "left-0" : ""}`}>
-                    <Button className="" onClick={handleSidbar}><FaBars /></Button>
+                    <Button className="" onClick={() => setSideOpen(!sideOpen)}><FaBars /></Button>
                 </div>
                 <div className="gap-8 relative min-h-screen ">
                     <div className={`bg-white md:w-[20%] absolute h-full duration-300 z-30 ${sideOpen ? "-left-full" : null} border p-3`}>
@@ -94,10 +90,10 @@ const MeetingRooms = () => {
                                 <Input onChange={(e) => setSearch(e.target.value)} placeholder="Search Room Name & amenities" />
                             </Form.Item>
                             <Form.Item label="Capacity" layout="vertical" className="font-bold">
-                                <Select options={capaCityOptions} placeholder="Search By Room Name" />
+                                <Select options={capaCityOptions} placeholder="Filter by capacity" onChange={(value) => setCapacity(value)} />
                             </Form.Item>
                             <Form.Item label="Price Range" layout="vertical" className="font-bold">
-                                <Select options={priceFilter} placeholder="Search By Room Name" />
+                                <Select onChange={(value) => setRange(value)} options={priceFilter} placeholder="Search By Room Name" />
                             </Form.Item>
                             <Form.Item label="Price Range" layout="vertical" className="font-bold">
                                 <Select options={[{ value: "pricePerSlot", label: "Low To High" }, { value: "-pricePerSlot", label: "High to Low" }]} placeholder="Search By Room Name" />
