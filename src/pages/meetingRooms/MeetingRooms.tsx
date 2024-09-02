@@ -131,9 +131,6 @@ const MeetingRooms = () => {
                     </div>
                 </div>
             </section>
-            {/* <Section>
-                <div>Meeting rrom</div>
-            </Section > */}
         </>
     )
 }

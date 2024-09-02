@@ -9,7 +9,6 @@ import { TbTrash } from 'react-icons/tb';
 // import Swal from 'sweetalert2';
 import { useDeleteRoomMutation, useGetAllRoomsQuery } from '../../../redux/features/roomManagement/room.api';
 import { BiEdit } from 'react-icons/bi';
-import { TQueryParams } from '../../../types/ResponseType';
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
 
@@ -26,12 +25,11 @@ export interface DataType {
 }
 
 const AllRoomsTable: React.FC = () => {
-    const [queryParams, setQueryParams] = useState<TQueryParams[] | undefined>(undefined)
-    const { data: rooms, isLoading, isFetching } = useGetAllRoomsQuery(queryParams)
-
-
+    const [search, setSearch] = useState("")
+    const { data, isLoading, isFetching } = useGetAllRoomsQuery({ search })
+    const rooms = data?.data?.result;
     const filterableData: { text: string, value: string }[] = [];
-    const transformedProducts = rooms?.data?.map((product: any, index: number) => {
+    const transformedProducts = rooms?.map((product: any, index: number) => {
         filterableData.push({ text: product?.name, value: product.name })
         return ({
             ...product,
@@ -62,7 +60,6 @@ const AllRoomsTable: React.FC = () => {
                 }
             }
         });
-        console.log(id)
     }
 
     const columns: TableColumnsType<DataType> = [
@@ -87,9 +84,9 @@ const AllRoomsTable: React.FC = () => {
             title: 'Eminitirs',
             dataIndex: 'amenities',
             render: (amenities) => {
-                return <div className='flex flex-wrap gap-2'>
+                return <div className='flex flex-wrap gap-0 md:gap-1 justify-center'>
                     {
-                        amenities?.map((item: string) => <p key={item}>{item}</p>)
+                        amenities?.map((item: string) => <p key={item}>{item},</p>)
                     }
                 </div>
             },
@@ -121,12 +118,12 @@ const AllRoomsTable: React.FC = () => {
         return <h3 className='text-center font-bold text-xl md:text-base'>Loading...</h3>
     }
 
-    const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
-        const querynameParams: TQueryParams[] = []
+    const onChange: TableProps<DataType>['onChange'] = (_pagination, filters, _sorter, extra) => {
+
         if (extra?.action === "filter") {
-            filters?.name?.forEach(item => querynameParams.push({ name: "name", value: item }))
+            filters?.name?.forEach(item => setSearch(`${item}`))
         }
-        setQueryParams(querynameParams)
+
     };
 
     return (
@@ -134,6 +131,7 @@ const AllRoomsTable: React.FC = () => {
             {/* <h1 className='font-bold md:text-lg'>All Products</h1> */}
             <Divider className='py-0 my-3' />
             <Table
+                scroll={({ x: 800 })}
                 onChange={onChange}
                 sticky={true}
                 loading={isFetching}
