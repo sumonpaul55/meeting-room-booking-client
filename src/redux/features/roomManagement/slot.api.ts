@@ -9,8 +9,19 @@ const roomApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["slots"],
+    }),
+    createSlots: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/slots",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["slots"],
     }),
   }),
 });
 
-export const { useGetAllSlotsQuery } = roomApi;
+export const { useGetAllSlotsQuery, useCreateSlotsMutation } = roomApi;

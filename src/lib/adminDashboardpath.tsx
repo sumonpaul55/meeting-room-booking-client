@@ -1,5 +1,6 @@
 
 import Allrooms from "../pages/Dashboard/rooms/Allrooms";
+import SlotManagement from "../pages/Dashboard/slots/SlotManagement";
 
 export const adminDashDashboarditmes = [
     {
@@ -13,7 +14,7 @@ export const adminDashDashboarditmes = [
     },
     {
         name: "Slot Management",
-        path: "alots",
-        element: <Allrooms />
+        path: "alot-management",
+        element: <SlotManagement />
     }
 ]

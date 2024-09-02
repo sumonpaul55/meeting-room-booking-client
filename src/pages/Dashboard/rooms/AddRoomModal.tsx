@@ -35,7 +35,7 @@ const amenitiesOptions = [
     { value: "reception", label: "Reception Desk" },
     { value: "parking", label: "Parking Space" },
 ];
-const AddaRoomModal = ({ isUpdate, transformedProducts }: { isUpdate: boolean; transformedProducts: TRoomData | any }) => {
+const AddaRoomModal = ({ isUpdate, transformedProducts }: { isUpdate?: boolean; transformedProducts?: TRoomData | any }) => {
 
     const [file, setFile] = useState([])
     const [addRoom] = useCreateRoomMutation()
