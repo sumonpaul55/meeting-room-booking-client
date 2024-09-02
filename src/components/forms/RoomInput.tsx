@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form"
 
 type TInputProps = {
     name: string;
-    defaultValue?: string;
+    defaultValue?: string | undefined | number;
     type?: string;
     placeholder?: string;
     label?: string;

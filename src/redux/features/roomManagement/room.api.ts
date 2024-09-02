@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "../../api/baseApi";
 
 const roomApi = baseApi.injectEndpoints({
@@ -56,7 +57,17 @@ const roomApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["rooms"],
     }),
+    updateRoom: builder.mutation({
+      query: (data: any) => {
+        return {
+          url: `/rooms/${data?._id}`,
+          method: "PUT",
+          body: data,
+        };
+      },
+      invalidatesTags: ["rooms"],
+    }),
   }),
 });
 
-export const { useGetAllRoomsQuery, useCreateRoomMutation, useGetAroomsQuery, useDeleteRoomMutation } = roomApi;
+export const { useGetAllRoomsQuery, useCreateRoomMutation, useGetAroomsQuery, useDeleteRoomMutation, useUpdateRoomMutation } = roomApi;

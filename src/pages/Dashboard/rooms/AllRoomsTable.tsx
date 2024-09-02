@@ -8,9 +8,10 @@ import { TbTrash } from 'react-icons/tb';
 // import { toast } from 'sonner';
 // import Swal from 'sweetalert2';
 import { useDeleteRoomMutation, useGetAllRoomsQuery } from '../../../redux/features/roomManagement/room.api';
-import { BiEdit } from 'react-icons/bi';
+
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
+import AddaRoomModal from './AddRoomModal';
 
 export interface DataType {
     key: React.Key;
@@ -105,11 +106,13 @@ const AllRoomsTable: React.FC = () => {
         },
         {
             title: 'Action',
-            render: (transformedProducts) => (<div className='flex gap-3'>
-                {/* <EditProduct product={transformedProducts} /> */}
-                <Button onClick={() => handleDelete(transformedProducts._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} /></Button>
-                <Button onClick={() => handleDelete(transformedProducts._id)} className='w-fit p-1 h-auto border-0 text-red-600'><BiEdit size={20} /></Button>
-            </div>)
+            render: (transformedProducts) => {
+                return <div className='flex gap-3'>
+                    {/* <EditProduct product={transformedProducts} /> */}
+                    <AddaRoomModal isUpdate={true} transformedProducts={transformedProducts} />
+                    <Button onClick={() => handleDelete(transformedProducts._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} /></Button>
+                </div>
+            }
         },
     ];
 

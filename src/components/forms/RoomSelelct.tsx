@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Select } from 'antd'
 import { Controller } from 'react-hook-form';
 
@@ -5,7 +6,7 @@ type TSelectProps = {
     label: string;
     name: string;
     options: { value: string; label: string }[] | undefined;
-    defalutValue?: string;
+    defalutValue?: any;
     disabled?: boolean;
     mode?: "multiple" | undefined;
     placeholder?: string;

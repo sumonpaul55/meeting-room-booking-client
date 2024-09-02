@@ -7,8 +7,13 @@ export const adminDashDashboarditmes = [
         element: <Allrooms />
     },
     {
-        name: "All Rooms",
+        name: "Room Management",
         path: "all-rooms",
+        element: <Allrooms />
+    },
+    {
+        name: "Slot Management",
+        path: "alots",
         element: <Allrooms />
     }
 ]
