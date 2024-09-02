@@ -3,7 +3,6 @@ import { useState } from "react"
 import { useGetAllRoomsQuery } from "../../redux/features/roomManagement/room.api"
 import Loading from "../../components/common/Loading"
 import { Input, Form, Select, SelectProps, Button, Pagination } from "antd"
-import { RoomData } from "../../types/roomtype"
 import { FaBars } from "react-icons/fa"
 import RoomCard from "../../components/RoomCard"
 import { useDebounce } from "../../useHooks/useDebounce"
@@ -20,7 +19,6 @@ const MeetingRooms = () => {
     const { data, isLoading } = useGetAllRoomsQuery({ search: srcDebounce, range, capacity, sort });
     const rooms = data?.data?.result;
     const meta = data?.data?.meta;
-    console.log(meta)
 
     if (isLoading) {
         return <Loading />
@@ -118,7 +116,7 @@ const MeetingRooms = () => {
                     <div className={`absolute overflow-y-scroll h-full right-0 top-0 w-full border duration-300 p-4 bg-slate-50 ${sideOpen ? "w-[100%]" : "md:w-[80%]"}`}>
                         <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-7 ${sideOpen ? "xl:grid-cols-4" : "xl:grid-cols-3"}`}>
                             {
-                                rooms?.map((item: RoomData, idx: number) => (
+                                rooms?.map((item: any, idx: number) => (
                                     <div key={idx}>
                                         <RoomCard pageName="meetingRoom" _id={item._id} name={item.name} amenities={item.amenities} capacity={item.capacity} floorNo={item.floorNo} pricePerSlot={item.pricePerSlot} roomImg={item.roomImg} roomNo={item.roomNo} />
                                     </div>

@@ -27,7 +27,6 @@ const RoomCard: React.FC<RoomCardProps> = ({
     amenities,
     roomImg,
     _id,
-    pageName
 }) => {
     const sliderSettings = {
         dots: true,
@@ -46,23 +45,23 @@ const RoomCard: React.FC<RoomCardProps> = ({
             <Slider {...sliderSettings} className="room-img-slider">
                 {roomImg?.map((img, index) => (
                     <div key={index}>
-                        <img className={`w-full object-cover ${pageName ? "h-52" : "h-64"}`} src={img} alt={`Room ${name}`} />
+                        <img className={`w-full object-cover h-52`} src={img} alt={`Room ${name}`} />
                     </div>
                 ))}
             </Slider>
             <div className="px-3 py-4">
                 <div className="font-bold text-xl mb-2">{name}</div>
-                <div className={`px-2 text-base flex ${pageName ? "flex-wrap justify-start gap-2" : "justify-around"}`}>
+                <div className={`px-2 text-base flex flex-wrap justify-start gap-2`}>
                     <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Room No: {roomNo}</Tag>
                     <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Floor No: {floorNo}</Tag>
                     <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Capacity: {capacity}</Tag>
-                    <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Price: ${pricePerSlot} per slot</Tag>
+                    <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Price: <span className='text-base text-primary'>${pricePerSlot}</span> per slot</Tag>
                 </div>
                 <div className="mt-4 md:px-10">
                     <h4 className="font-semibold text-gray-800">Amenities:</h4>
                     <ul className="list-disc list-inside text-gray-700">
                         {amenities?.map((amenity, index) => (
-                            <li key={index}>{amenity}</li>
+                            <li key={index} className='text-sm'>{amenity}</li>
                         ))}
                     </ul>
                 </div>
