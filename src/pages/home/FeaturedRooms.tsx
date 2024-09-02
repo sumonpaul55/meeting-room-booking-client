@@ -9,7 +9,7 @@ import Loading from '../../components/common/Loading'
 
 const FeaturedRooms = () => {
     const { data: rooms, isLoading } = useGetAllRoomsQuery({ limit: 6 })
-    const allRoom = rooms?.data
+    const allRoom = rooms?.data?.result
 
 
     return (

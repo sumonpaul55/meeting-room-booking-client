@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useGetAllRoomsQuery } from "../../redux/features/roomManagement/room.api"
 import Loading from "../../components/common/Loading"
-import { Input, Form, Select, SelectProps, Button } from "antd"
+import { Input, Form, Select, SelectProps, Button, Pagination } from "antd"
 import { RoomData } from "../../types/roomtype"
 import { FaBars } from "react-icons/fa"
 import RoomCard from "../../components/RoomCard"
@@ -12,29 +12,43 @@ import { useDebounce } from "../../useHooks/useDebounce"
 const MeetingRooms = () => {
     const [sideOpen, setSideOpen] = useState(false)
     const [search, setSearch] = useState("")
-    const [range, setRange] = useState<string | undefined>()
-    const [capacity, setCapacity] = useState("")
+    const [range, setRange] = useState(undefined)
+    const [capacity, setCapacity] = useState(undefined)
+    const [sort, setSort] = useState(undefined)
     // const [searchParams, setSearchParams] = useState<[] | undefined>(undefined)
     const srcDebounce = useDebounce(search, 1000)
-
-    const { data, isLoading } = useGetAllRoomsQuery({ search: srcDebounce, range, capacity });
-    const rooms = data?.data;
+    const { data, isLoading } = useGetAllRoomsQuery({ search: srcDebounce, range, capacity, sort });
+    const rooms = data?.data?.result;
+    const meta = data?.data?.meta;
+    console.log(meta)
 
     if (isLoading) {
         return <Loading />
     }
-    const capaCityOptions: SelectProps['options'] = []
-
-    // Remove duplicates based on 'value'
-    const uniqueArray = rooms?.filter((item: RoomData, index: number, self: RoomData[]) =>
-        index === self.findIndex((t: any) => t.capacity === item.capacity)
-    );
-    uniqueArray?.map((item: RoomData) => {
-        capaCityOptions.push({
-            value: item.capacity,
-            label: item.capacity
-        })
-    })
+    const capaCityOptions: SelectProps['options'] = [{
+        value: `0-4`,
+        label: `0-4`
+    },
+    {
+        value: `4-8`,
+        label: `4-8`
+    },
+    {
+        value: `8-12`,
+        label: `8-12`
+    },
+    {
+        value: `12-16`,
+        label: `12-16`
+    },
+    {
+        value: `16-20`,
+        label: `16-20`
+    },
+    {
+        value: `20+`,
+        label: `20+`
+    },]
 
 
     let maxValue = 0
@@ -69,14 +83,12 @@ const MeetingRooms = () => {
 
 
     // handle reset
-    // const handleReset = () => {
-    //     setBrand({})
-    //     setSearch("")
-    //     setRange(undefined)
-    //     setSelectItem([])
-    //     setsort("")
-    //     setSortByRang("Sort By Price")
-    // }
+    const handleReset = () => {
+        setSearch("")
+        setRange(undefined)
+        setCapacity(undefined)
+        setSort(undefined)
+    }
     return (
         <>
             <section className="px-4 sm:px-10 md:px-20">
@@ -87,19 +99,19 @@ const MeetingRooms = () => {
                     <div className={`bg-white md:w-[20%] absolute h-full duration-300 z-30 ${sideOpen ? "-left-full" : null} border p-3`}>
                         <div className="py-1 grid grid-cols-1 md:gap-4 mt-10">
                             <Form.Item label="Search" layout="vertical" className="font-bold">
-                                <Input onChange={(e) => setSearch(e.target.value)} placeholder="Search Room Name & amenities" />
+                                <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search Room Name & amenities" />
                             </Form.Item>
                             <Form.Item label="Capacity" layout="vertical" className="font-bold">
-                                <Select options={capaCityOptions} placeholder="Filter by capacity" onChange={(value) => setCapacity(value)} />
+                                <Select options={capaCityOptions} value={capacity} placeholder="Filter by capacity" onChange={(value) => { setCapacity(value) }} />
                             </Form.Item>
                             <Form.Item label="Price Range" layout="vertical" className="font-bold">
-                                <Select onChange={(value) => setRange(value)} options={priceFilter} placeholder="Search By Room Name" />
+                                <Select value={range} onChange={(value) => setRange(value)} options={priceFilter} placeholder="Filter by Price Range" />
                             </Form.Item>
-                            <Form.Item label="Price Range" layout="vertical" className="font-bold">
-                                <Select options={[{ value: "pricePerSlot", label: "Low To High" }, { value: "-pricePerSlot", label: "High to Low" }]} placeholder="Search By Room Name" />
+                            <Form.Item label="Sort by Price" layout="vertical" className="font-bold">
+                                <Select value={sort} onChange={(value) => setSort(value)} options={[{ value: "pricePerSlot", label: "Low To High" }, { value: "-pricePerSlot", label: "High to Low" }]} placeholder="Sort by price" />
                             </Form.Item>
                             <Form.Item label="Reset" layout="vertical" className="font-bold">
-                                <Button>Reset All</Button>
+                                <Button onClick={handleReset}>Reset All</Button>
                             </Form.Item>
                         </div>
                     </div>
@@ -112,6 +124,9 @@ const MeetingRooms = () => {
                                     </div>
                                 ))
                             }
+                        </div>
+                        <div className="py-6">
+                            <Pagination size="small" pageSize={meta?.limit} total={meta?.total} showSizeChanger showQuickJumper />
                         </div>
                     </div>
                 </div>

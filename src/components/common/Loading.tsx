@@ -16,5 +16,5 @@ const Loading = () => {
 export default Loading
 
 export const AnimateSpin = () => {
-    return <div className="size-4 border-dashed border-4 border-primary rounded-full animate-spin"></div>
+    return <div className="size-4 border-dashed border-4 border-primary rounded-full animate-spin mt-12"></div>
 }
