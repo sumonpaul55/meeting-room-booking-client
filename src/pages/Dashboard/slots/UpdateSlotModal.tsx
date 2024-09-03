@@ -9,13 +9,12 @@ import RoomDatePicker from '../../../components/forms/RoomDatePicker';
 import { useGetAllRoomsQuery } from '../../../redux/features/roomManagement/room.api';
 import { TResponse } from '../../../types/ResponseType';
 import { FaEdit } from 'react-icons/fa';
-import { Tsolts } from './slotType';
 import { useUpdateSlotMutation } from '../../../redux/features/roomManagement/slot.api';
 
 import dayjs from 'dayjs';
 
 
-const UpdateslotModal = (slotData: Tsolts) => {
+const UpdateslotModal = (slotData: any) => {
     const { slotData: slots }: any = slotData;
     const [startTime, setStarttime] = useState("")
     const [endTime, setEndtime] = useState("")

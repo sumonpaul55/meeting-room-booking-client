@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { toast } from 'sonner';
 import { TbTrash } from 'react-icons/tb';
 import UpdateslotModal from './UpdateSlotModal';
+import NoDataFound from '../../../components/common/NoDataFound';
 
 // type TSlot = {
 //     room: string;
@@ -115,18 +116,23 @@ const AllslotPage = () => {
     }
     return (
         <>
+            {
+                transformSlot.length ?
+                    <div>
+                        <Table
+                            scroll={({ x: 800 })}
+                            // onChange={onChange}
+                            sticky={true}
+                            loading={isFetching}
 
-            <div>
-                <Table
-                    scroll={({ x: 800 })}
-                    // onChange={onChange}
-                    sticky={true}
-                    loading={isFetching}
+                            columns={columns}
+                            dataSource={transformSlot}
+                        />
+                    </div> :
+                    <NoDataFound />
 
-                    columns={columns}
-                    dataSource={transformSlot}
-                />
-            </div>
+            }
+
         </>
 
     )
