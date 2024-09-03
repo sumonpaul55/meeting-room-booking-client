@@ -29,7 +29,16 @@ const roomApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["slots"],
     }),
+    deleteSlot: builder.mutation({
+      query: (id: string) => {
+        return {
+          url: `/slots/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["slots"],
+    }),
   }),
 });
 
-export const { useGetAllSlotsQuery, useCreateSlotsMutation } = roomApi;
+export const { useGetAllSlotsQuery, useCreateSlotsMutation, useDeleteSlotMutation } = roomApi;

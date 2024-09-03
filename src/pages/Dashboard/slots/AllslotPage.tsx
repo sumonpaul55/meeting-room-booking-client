@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
-import { useGetAllSlotsQuery } from '../../../redux/features/roomManagement/slot.api'
-import { Table, TableColumnsType, TableProps } from 'antd';
+
+import { useDeleteSlotMutation, useGetAllSlotsQuery } from '../../../redux/features/roomManagement/slot.api'
+import { Button, Table, TableColumnsType } from 'antd';
 import { DataType } from '../rooms/AllRoomsTable';
 import Loading from '../../../components/common/Loading';
 import moment from 'moment';
+import Swal from 'sweetalert2';
+import { toast } from 'sonner';
+import { TbTrash } from 'react-icons/tb';
 
 type TSlot = {
     room: string;
@@ -14,19 +17,42 @@ type TSlot = {
     endTime: string;
 }
 const AllslotPage = () => {
-    const { data, isLoading, isFetching } = useGetAllSlotsQuery(undefined)
-
+    const { data, isLoading, isFetching } = useGetAllSlotsQuery({})
+    const [deleteSlot] = useDeleteSlotMutation()
 
     const slotTableData: TSlot[] = [];
+
     const transformedProducts = data?.data?.map((slot: any, index: number) => {
         // filterableData.push({ text: product?.name, value: product.name })
-        console.log(slot)
         return ({
             ...slot,
             key: slot._id,  // Assuming 'id' is the unique identifier
             no: index + 1
         })
     });
+
+    // handle Delete slot
+    const handleDelete = (id: string) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await deleteSlot(id)
+                if (res.data.success) {
+                    toast.success(res.data.message)
+                } else {
+                    toast.error("Something went wrong")
+                }
+            }
+        });
+    }
+
 
     const columns: TableColumnsType<DataType> = [
         {
@@ -62,13 +88,13 @@ const AllslotPage = () => {
 
         {
             title: 'Action',
-            // render: (transformedProducts) => {
-            //     return <div className='flex gap-3'>
-            //         {/* <EditProduct product={transformedProducts} /> */}
-            //         <AddaRoomModal isUpdate={true} transformedProducts={transformedProducts} />
-            //         <Button onClick={() => handleDelete(transformedProducts._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} /></Button>
-            //     </div>
-            // }
+            render: (transformedProducts) => {
+                return <div className='flex gap-3'>
+                    {/* <EditProduct product={transformedProducts} /> */}
+
+                    <Button onClick={() => handleDelete(transformedProducts._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} /></Button>
+                </div>
+            }
         },
     ];
 
@@ -86,7 +112,7 @@ const AllslotPage = () => {
     }
     return (
         <>
-            <div>All available slots</div>
+
             <div>
                 <Table
                     scroll={({ x: 800 })}

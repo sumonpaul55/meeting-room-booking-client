@@ -29,7 +29,7 @@ const RoomDetails = () => {
     const { data: slots } = useGetAllSlotsQuery({ roomId: params?.id })
     const availableSlots = slots?.data;
 
-    console.log(availableSlots)
+
 
     if (isLoading || isFetching) {
         return <Loading />
@@ -79,9 +79,9 @@ const RoomDetails = () => {
                             <h4 className="text-2xl font-semibold text-gray-800 mb-4">Available Slots</h4>
                             <div>
                                 {
-                                    availableSlots.length > 0 ?
+                                    availableSlots?.length > 0 ?
                                         availableSlots?.map((items: { startTime: string, endTime: string, date: string }) => (
-                                            <div className='flex gap-3'>
+                                            <div className='flex gap-3' key={items?.startTime}>
                                                 <div className='felx gap-2'>
                                                     <Tag>{items?.startTime}</Tag>-<Tag> {items?.endTime}</Tag>
                                                 </div>
