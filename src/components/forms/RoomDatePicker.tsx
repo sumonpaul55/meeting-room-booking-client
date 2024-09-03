@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePicker, Form } from "antd";
 import { Controller } from "react-hook-form"
 
@@ -5,14 +6,15 @@ import { Controller } from "react-hook-form"
 type TDateProps = {
     label: string;
     name: string;
-    defalutValue?: string
+    defaultValue?: any;
+    format?: string
 }
 
-const RoomDatePicker = ({ name, label }: TDateProps) => {
+const RoomDatePicker = ({ name, label, defaultValue, format }: TDateProps) => {
     return (
         <Controller name={name} render={({ field, fieldState: { error } }) => {
             return <Form.Item label={label}>
-                <DatePicker {...field} style={{ width: "100%" }} size='large' />
+                <DatePicker {...field} style={{ width: "100%" }} size='large' defaultValue={defaultValue && defaultValue} format={format && format} />
                 {
                     error && <p style={{ color: "red", marginTop: "4px" }}>{error?.message}</p>
                 }

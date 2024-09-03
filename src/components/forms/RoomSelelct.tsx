@@ -6,18 +6,20 @@ type TSelectProps = {
     label: string;
     name: string;
     options: { value: string; label: string }[] | undefined;
-    defalutValue?: any;
+    defaultValue?: any;
     disabled?: boolean;
     mode?: "multiple" | undefined;
     placeholder?: string;
+    defaultOpen?: boolean
 }
-const RoomSelect = ({ label, name, options, defalutValue, disabled, mode, placeholder }: TSelectProps) => {
+const RoomSelect = ({ label, name, options, defaultValue, disabled, mode, placeholder, defaultOpen }: TSelectProps) => {
     return (
         <Controller name={name} render={({ field, fieldState: { error } }) => {
             return <Form.Item label={label}>
                 <Select
+                    autoFocus={defaultOpen && defaultOpen}
                     mode={mode}
-                    defaultValue={defalutValue}
+                    defaultValue={defaultValue}
                     placeholder={placeholder}
                     style={{ width: "100%" }}
                     {...field}

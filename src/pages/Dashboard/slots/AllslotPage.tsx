@@ -8,21 +8,22 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
 import { TbTrash } from 'react-icons/tb';
+import UpdateslotModal from './UpdateSlotModal';
 
-type TSlot = {
-    room: string;
-    roomNo: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-}
+// type TSlot = {
+//     room: string;
+//     roomNo: string;
+//     date: string;
+//     startTime: string;
+//     endTime: string;
+// }
 const AllslotPage = () => {
     const { data, isLoading, isFetching } = useGetAllSlotsQuery({})
     const [deleteSlot] = useDeleteSlotMutation()
 
-    const slotTableData: TSlot[] = [];
+    // const slotTableData: TSlot[] = [];
 
-    const transformedProducts = data?.data?.map((slot: any, index: number) => {
+    const transformSlot = data?.data?.map((slot: any, index: number) => {
         // filterableData.push({ text: product?.name, value: product.name })
         return ({
             ...slot,
@@ -88,11 +89,13 @@ const AllslotPage = () => {
 
         {
             title: 'Action',
-            render: (transformedProducts) => {
+            render: (transformSlot) => {
                 return <div className='flex gap-3'>
                     {/* <EditProduct product={transformedProducts} /> */}
 
-                    <Button onClick={() => handleDelete(transformedProducts._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} /></Button>
+                    <Button onClick={() => handleDelete(transformSlot._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} />
+                    </Button>
+                    <UpdateslotModal slotData={transformSlot} />
                 </div>
             }
         },
@@ -121,7 +124,7 @@ const AllslotPage = () => {
                     loading={isFetching}
 
                     columns={columns}
-                    dataSource={transformedProducts}
+                    dataSource={transformSlot}
                 />
             </div>
         </>

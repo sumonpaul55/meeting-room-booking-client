@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { baseApi } from "../../api/baseApi";
 
 const roomApi = baseApi.injectEndpoints({
@@ -38,7 +40,17 @@ const roomApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["slots"],
     }),
+    updateSlot: builder.mutation({
+      query: (info) => {
+        return {
+          url: `/slots/update/${info?.id}`,
+          method: "PATCH",
+          body: info?.data,
+        };
+      },
+      invalidatesTags: ["slots"],
+    }),
   }),
 });
 
-export const { useGetAllSlotsQuery, useCreateSlotsMutation, useDeleteSlotMutation } = roomApi;
+export const { useGetAllSlotsQuery, useCreateSlotsMutation, useDeleteSlotMutation, useUpdateSlotMutation } = roomApi;
