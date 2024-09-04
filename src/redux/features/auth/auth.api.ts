@@ -20,7 +20,42 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllUser: builder.query({
+      query: (args: { search?: string; sort: string }) => {
+        const params = new URLSearchParams();
+        if (args?.search) {
+          params.append("search", args.search);
+        }
+        if (args?.sort) {
+          params.append("sort", args.sort);
+        }
+        return {
+          url: "/users",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: ["user"],
+    }),
+    updateStatus: builder.mutation({
+      query: () => {
+        return {
+          url: "/status",
+          method: "PUT",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
+    deleteUser: builder.mutation({
+      query: (id: string) => {
+        return {
+          url: `/users/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
-export const { useLogInMutation, useRegisterMutation } = authApi;
+export const { useGetAllUserQuery, useLogInMutation, useRegisterMutation, useUpdateStatusMutation, useDeleteUserMutation } = authApi;

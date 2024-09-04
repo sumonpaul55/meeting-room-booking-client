@@ -1,11 +1,17 @@
 
 import Allrooms from "../pages/Dashboard/rooms/Allrooms";
 import SlotManagement from "../pages/Dashboard/slots/SlotManagement";
+import AllUsers from "../pages/Dashboard/userManagment/AllUsers";
 
 export const adminDashDashboarditmes = [
     {
         index: true,
-        element: <Allrooms />
+        element: <AllUsers />
+    },
+    {
+        name: "User Management",
+        path: "users",
+        element: <AllUsers />
     },
     {
         name: "Room Management",
@@ -14,7 +20,7 @@ export const adminDashDashboarditmes = [
     },
     {
         name: "Slot Management",
-        path: "alot-management",
+        path: "slot-management",
         element: <SlotManagement />
     }
 ]
