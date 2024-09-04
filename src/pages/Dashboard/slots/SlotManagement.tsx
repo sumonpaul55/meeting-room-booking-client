@@ -9,7 +9,7 @@ const SlotManagement = () => {
     return (
         <div>
             <div className="flex justify-between items-center border p-2 rounded">
-                <h3 className="md:text-lg font-semibold xl:text-2xl">all rooms</h3>
+                <h3 className="md:text-lg font-semibold xl:text-2xl">All Slots</h3>
                 <CreateSlotModal />
             </div>
             <div>

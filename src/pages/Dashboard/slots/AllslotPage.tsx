@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useDeleteSlotMutation, useGetAllSlotsQuery } from '../../../redux/features/roomManagement/slot.api'
-import { Button, Table, TableColumnsType } from 'antd';
+import { Button, Table, TableColumnsType, Tag } from 'antd';
 import { DataType } from '../rooms/AllRoomsTable';
 import Loading from '../../../components/common/Loading';
 import moment from 'moment';
@@ -32,7 +32,6 @@ const AllslotPage = () => {
             no: index + 1
         })
     });
-
     // handle Delete slot
     const handleDelete = (id: string) => {
         Swal.fire({
@@ -87,16 +86,24 @@ const AllslotPage = () => {
             title: 'End Time',
             dataIndex: 'endTime',
         },
-
+        {
+            title: "Status",
+            dataIndex: "isBooked",
+            render: (isBooked: boolean) => {
+                return <Tag color={`${isBooked ? "yellow" : "blue"}`}>{!isBooked ? "Not Booked" : "Booked"}</Tag>
+            }
+        },
         {
             title: 'Action',
             render: (transformSlot) => {
+                // console.log(transformSlot?.isBooked)
                 return <div className='flex gap-3'>
                     {/* <EditProduct product={transformedProducts} /> */}
 
                     <Button onClick={() => handleDelete(transformSlot._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} />
                     </Button>
                     <UpdateslotModal slotData={transformSlot} />
+
                 </div>
             }
         },

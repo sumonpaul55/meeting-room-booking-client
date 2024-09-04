@@ -42,10 +42,11 @@ const roomApi = baseApi.injectEndpoints({
     }),
     updateSlot: builder.mutation({
       query: (info) => {
+        console.log(info);
         return {
           url: `/slots/update/${info?.id}`,
           method: "PATCH",
-          body: info?.data,
+          body: info?.updateSlotData,
         };
       },
       invalidatesTags: ["slots"],
