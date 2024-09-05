@@ -38,9 +38,9 @@ const authApi = baseApi.injectEndpoints({
       providesTags: ["user"],
     }),
     updateStatus: builder.mutation({
-      query: () => {
+      query: (id: string) => {
         return {
-          url: "/status",
+          url: `/auth/status/${id}`,
           method: "PUT",
         };
       },

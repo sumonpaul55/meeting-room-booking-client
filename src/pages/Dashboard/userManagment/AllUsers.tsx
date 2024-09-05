@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useDeleteUserMutation, useGetAllUserQuery, useUpdateStatusMutation } from "../../../redux/features/auth/auth.api"
 import { Button, Table, TableColumnsType, TableProps } from "antd";
 import { TUser } from "../../../types/TUser";
-import { FaEdit } from "react-icons/fa";
 import { TbTrash } from "react-icons/tb";
 import NoDataFound from "../../../components/common/NoDataFound";
 import Loading from "../../../components/common/Loading";
@@ -14,9 +13,8 @@ import { toast } from "sonner";
 const AllUsers = () => {
     const [search, setSearch] = useState<string | undefined>(undefined);
     const { data: users, isLoading, isFetching } = useGetAllUserQuery({ search, sort: "role" })
-    const [updateStatus] = useUpdateStatusMutation();
     const [deleteUser] = useDeleteUserMutation()
-
+    const [makeAdmin] = useUpdateStatusMutation();
     const namefiltering: { text: string; value: string }[] = []
 
     const transformedUser = users?.data?.map((user: TUser, idx: number) => {
@@ -55,6 +53,28 @@ const AllUsers = () => {
         });
     }
 
+
+    // handle make Admin
+    const handleMakeAdmin = (id: string) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You are going to make admin this user, You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await makeAdmin(id)
+                if (res.data.success) {
+                    toast.success(res.data.message)
+                } else {
+                    toast.error("Something went wrong")
+                }
+            }
+        });
+    }
     const columns: TableColumnsType<TUser> = [
         {
             title: 'No',
@@ -97,17 +117,14 @@ const AllUsers = () => {
             title: 'Action',
             render: (transformedUser) => {
                 // console.log(transformSlot?.isBooked)
-                return <div className='flex gap-3'>
+                return <div className='flex gap-3 items-center'>
                     {/* <EditProduct product={transformedProducts} /> */}
 
                     <Button onClick={() => handleDelete(transformedUser._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} />
                     </Button>
-                    <Button>
-                        <FaEdit />
-                    </Button>
-
-                </div>
-            }
+                    <Button onClick={() => handleMakeAdmin(transformedUser?._id)}>Make Admin</Button>
+                </div >
+            },
         },
     ];
 
@@ -117,8 +134,6 @@ const AllUsers = () => {
             filters?.name?.forEach((item: any) => setSearch(item))
         }
     };
-
-
 
     if (isLoading) {
         return <Loading />
@@ -139,7 +154,6 @@ const AllUsers = () => {
                         />
                     </div> :
                     <NoDataFound />
-
             }
 
         </>
