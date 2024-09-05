@@ -1,13 +1,13 @@
 
 import { Carousel, Tag } from 'antd'; // Ant Design's Carousel component
 import { FaCheckCircle } from 'react-icons/fa';
-import { Button } from 'antd';
 import { useGetAroomsQuery } from '../../redux/features/roomManagement/room.api';
 import { useParams } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
 import Section from '../../components/common/Section';
 import { useGetAllSlotsQuery } from '../../redux/features/roomManagement/slot.api';
 import moment from 'moment';
+import BookingModal from './BookingModal';
 
 
 // interface RoomDetailsProps {
@@ -28,8 +28,6 @@ const RoomDetails = () => {
 
     const { data: slots } = useGetAllSlotsQuery({ roomId: params?.id })
     const availableSlots = slots?.data;
-
-
 
     if (isLoading || isFetching) {
         return <Loading />
@@ -96,12 +94,7 @@ const RoomDetails = () => {
                     </div>
 
                     <div className="flex justify-center pb-8">
-                        <Button
-                            type="primary"
-                            size="large"
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg">
-                            Book Now
-                        </Button>
+                        <BookingModal room={room} />
                     </div>
 
                 </div>

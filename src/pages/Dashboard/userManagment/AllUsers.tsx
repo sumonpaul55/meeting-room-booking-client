@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useDeleteUserMutation, useGetAllUserQuery, useUpdateStatusMutation } from "../../../redux/features/auth/auth.api"
-import { Button, Table, TableColumnsType, TableProps } from "antd";
+import { Button, Table, TableColumnsType, TableProps, Tag } from "antd";
 import { TUser } from "../../../types/TUser";
 import { TbTrash } from "react-icons/tb";
 import NoDataFound from "../../../components/common/NoDataFound";
@@ -63,7 +63,7 @@ const AllUsers = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, Make Admin!"
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await makeAdmin(id)
@@ -101,6 +101,7 @@ const AllUsers = () => {
         {
             title: 'Role',
             dataIndex: 'role',
+            render: (role) => <Tag className="text-sm" color={`${role === "admin" ? "indigo" : "blue"}`}>{role}</Tag>,
             filters: [
                 {
                     text: "Admin",
@@ -111,7 +112,7 @@ const AllUsers = () => {
                     value: "user"
                 }
             ],
-            render: (role) => <b>{role}</b>
+
         },
         {
             title: 'Action',
@@ -122,7 +123,7 @@ const AllUsers = () => {
 
                     <Button onClick={() => handleDelete(transformedUser._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} />
                     </Button>
-                    <Button onClick={() => handleMakeAdmin(transformedUser?._id)}>Make Admin</Button>
+                    <Button onClick={() => handleMakeAdmin(transformedUser?._id)}>{transformedUser?.role === "user" ? "Make Admin" : "Make user"}</Button>
                 </div >
             },
         },

@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import Section from '../../components/common/Section'
 import RoomCard from '../../components/RoomCard'
 import { useGetAllRoomsQuery } from '../../redux/features/roomManagement/room.api'
-import { RoomData } from '../../types/roomtype'
+import { TRoomData } from '../../types/roomtype'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/common/Loading'
 
@@ -19,9 +19,9 @@ const FeaturedRooms = () => {
                 <div>
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-7 lg:gap-10 xl:gap-14'>
                         {
-                            allRoom?.map((item: RoomData, idx: number) => (
+                            allRoom?.map((item: TRoomData, idx: number) => (
                                 <div key={idx}>
-                                    <RoomCard _id={item._id} name={item.name} amenities={item.amenities} capacity={item.capacity} floorNo={item.floorNo} pricePerSlot={item.pricePerSlot} roomImg={item.roomImg} roomNo={item.roomNo} />
+                                    <RoomCard _id={item._id!} name={item.name} amenities={item.amenities} capacity={item.capacity} floorNo={item.floorNo} pricePerSlot={item.pricePerSlot} roomImg={item.roomImg!} roomNo={item.roomNo} />
                                 </div>
                             ))
                         }

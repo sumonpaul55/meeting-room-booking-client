@@ -128,7 +128,7 @@ const AddaRoomModal = ({ isUpdate, transformedProducts }: { isUpdate?: boolean; 
                                 <RoomInput type="number" className="remove-control" name="pricePerSlot" placeholder="Price Per Slot" label="Price Per Slot" defaultValue={isUpdate ? transformedProducts?.pricePerSlot : ""} />
 
                             </Flex>
-                            <RoomSelect options={amenitiesOptions} mode="multiple" name="amenities" placeholder="Select amenities" label="Amenities" defalutValue={transformedProducts?.amenities?.map((items: string) => items)} />
+                            <RoomSelect options={amenitiesOptions} mode="multiple" name="amenities" placeholder="Select amenities" label="Amenities" defaultValue={transformedProducts?.amenities?.map((items: string) => items)} />
                             {
                                 !isUpdate &&
                                 <SelectSingleOrMultiImg file={file} setFile={setFile} multiple={true} title="Image" label="Room Image" />
