@@ -75,11 +75,11 @@ const RoomDetails = () => {
                         </div>
                         <div>
                             <h4 className="text-2xl font-semibold text-gray-800 mb-4">Available Slots</h4>
-                            <div>
+                            <div className='max-h-[150px] overflow-y-auto'>
                                 {
                                     availableSlots?.length > 0 ?
-                                        availableSlots?.map((items: { startTime: string, endTime: string, date: string }) => (
-                                            <div className='flex gap-3' key={items?.startTime}>
+                                        availableSlots?.map((items: { startTime: string, endTime: string, date: string }, idx: number) => (
+                                            <div className='flex gap-3' key={idx}>
                                                 <div className='felx gap-2'>
                                                     <Tag>{items?.startTime}</Tag>-<Tag> {items?.endTime}</Tag>
                                                 </div>
@@ -93,7 +93,7 @@ const RoomDetails = () => {
 
                     </div>
 
-                    <div className="flex justify-center pb-8">
+                    <div className="flex justify-center pb-8 px-4">
                         <BookingModal room={room} />
                     </div>
 

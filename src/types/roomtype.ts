@@ -7,5 +7,5 @@ export interface TRoomData {
   amenities: string[];
   roomImg?: string[];
   _id?: string;
-  isDeleted: boolean;
+  isDeleted?: boolean;
 }

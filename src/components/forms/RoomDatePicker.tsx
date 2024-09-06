@@ -7,14 +7,15 @@ type TDateProps = {
     label: string;
     name: string;
     defaultValue?: any;
-    format?: string
+    format?: string;
+    disabledDate?: any
 }
 
-const RoomDatePicker = ({ name, label, defaultValue, format }: TDateProps) => {
+const RoomDatePicker = ({ name, label, defaultValue, format, disabledDate }: TDateProps) => {
     return (
         <Controller name={name} render={({ field, fieldState: { error } }) => {
             return <Form.Item label={label}>
-                <DatePicker {...field} style={{ width: "100%" }} size='large' defaultValue={defaultValue && defaultValue} format={format && format} />
+                <DatePicker {...field} style={{ width: "100%" }} size='large' disabledDate={disabledDate && disabledDate} defaultValue={defaultValue && defaultValue} format={format && format} />
                 {
                     error && <p style={{ color: "red", marginTop: "4px" }}>{error?.message}</p>
                 }
