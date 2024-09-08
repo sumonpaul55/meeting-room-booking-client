@@ -8,7 +8,7 @@ import RoomForm from '../../components/forms/RoomForm';
 import RoomInputNumber from '../../components/forms/RoomNumberInput';
 import { TRoomData } from '../../types/roomtype';
 import { useGetOneUserQuery } from '../../redux/features/auth/auth.api';
-import { useGetAllSlotsQuery } from '../../redux/features/roomManagement/slot.api';
+import { useCreateSlotsMutation, useGetAllSlotsQuery } from '../../redux/features/roomManagement/slot.api';
 import dayjs from 'dayjs';
 import { Tsolts } from '../Dashboard/slots/slotType';
 import { RangePickerProps } from 'antd/es/date-picker';
@@ -17,12 +17,16 @@ import Swal from 'sweetalert2';
 import { useValidUser } from '../../useHooks/useValidUser';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { TResponse } from '../../types/ResponseType';
+import { toast } from 'sonner';
 
 
 const BookingModal = ({ room }: { room: TRoomData }) => {
+    const [createSlot] = useCreateSlotsMutation()
     const [selectedDate, setSelectedDate] = useState<any>()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const localUser = useAppSelector(selectCurrentUser)
+    const [selectedSlots, setSelectedSlots] = useState<string[]>([])
     const { data } = useGetOneUserQuery(localUser?.email)
     const user = data?.data
     const dispatch = useDispatch()
@@ -38,7 +42,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         } else {
             dispatch(logOut())
             Swal.fire({
-                title: "You are unauthorized",
+                title: "Please Login and Register first",
                 showDenyButton: true,
                 confirmButtonText: "Login",
                 denyButtonText: `Go Home`
@@ -55,18 +59,23 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-
-    const selectedSlotsForBookings: string[] = []
-
+    // submit form
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const phoneNumber = data?.phone;
         const bookingData = {
-            ...data, roomId: room._id, user: user?._id, date: selectedDate
+            ...data, room: room._id, user: user?._id, date: selectedDate, slots: selectedSlots, phone: phoneNumber || user?.phone
         }
-        console.log(bookingData)
+        const res = await createSlot(bookingData) as TResponse<any>
+        if (res.error) {
+            toast.error(res?.error?.message || res?.error?.data?.message)
+        } else {
+            toast.success(res?.data?.message)
+        }
     }
 
     const availableDates: any[] = []; // Dates to enable
     const availableSlotsbySelectedDate: { label: string, value: string }[] = []
+
     slots?.map((slots: Tsolts) => {
         const formattedSelectedDate = dayjs(selectedDate).format('YYYY-MM-DD'); // Ensure consistent formatting
         const formattedAvailableDate = dayjs(slots?.date).format('YYYY-MM-DD'); // Ensure consistent formatting
@@ -82,11 +91,6 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
             // set the total price of 
         }
     });
-
-    // handle selected slots 
-    const handleSelectedSlots = (value: string) => {
-        selectedSlotsForBookings.concat(value)
-    }
 
     const disabledDate: RangePickerProps['disabledDate'] = (current) => {
         const formattedCurrentDate = dayjs(current).format('YYYY-MM-DD'); // Format the current date to match availableDates
@@ -115,16 +119,15 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
                             <DatePicker size='large' disabledDate={disabledDate} onChange={(value) => setSelectedDate(value)} />
                         </Form.Item>
                         <RoomInputNumber name='phone' className='w-full' label="Phone" defaultValue={user?.phone} />
-
                     </Flex>
                     <Flex align='center' gap={5}>
                         <Col flex={1}>
                             <Form.Item label='Availalbe Slots'>
-                                <Select mode='multiple' options={availableSlotsbySelectedDate} placeholder="Select Slots" size='large' disabled={!availableSlotsbySelectedDate.length} onChange={(value) => handleSelectedSlots(value)} />
+                                <Select mode='multiple' options={availableSlotsbySelectedDate} placeholder="Select Slots" size='large' disabled={!availableSlotsbySelectedDate.length} onChange={(value) => setSelectedSlots(value)} />
                             </Form.Item>
                         </Col>
                         <Form.Item label="Price" className=''>
-                            <InputNumber size='large' disabled value={"৳" + Number(room?.pricePerSlot) * Number(selectedSlotsForBookings?.length)} />
+                            <InputNumber size='large' disabled value={"৳" + Number(room?.pricePerSlot) * Number(selectedSlots?.length)} />
                         </Form.Item>
                     </Flex>
                     <div>

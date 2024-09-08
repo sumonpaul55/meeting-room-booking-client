@@ -90,7 +90,7 @@ const AllslotPage = () => {
             title: "Status",
             dataIndex: "isBooked",
             render: (isBooked: boolean) => {
-                return <Tag color={`${isBooked ? "yellow" : "blue"}`}>{!isBooked ? "Not Booked" : "Booked"}</Tag>
+                return <Tag color={`${isBooked ? "yellow" : "blue"}`}>{!isBooked ? "Available" : "Booked"}</Tag>
             }
         },
         {

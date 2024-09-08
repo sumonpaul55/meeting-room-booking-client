@@ -11,6 +11,7 @@ import RoomDetails from "../pages/meetingRooms/RoomDetails";
 import PrivacyPolicy from "../pages/privacyandTerm/PrivacyPolicy";
 import { adminDashDashboarditmes } from "./adminDashboardpath";
 import TermsAndConditions from "../pages/privacyandTerm/Term&Condition";
+import ProtectedRoute from "../routes/ProtectedRoute";
 
 export const NavItemsPath = [
   {
@@ -52,7 +53,7 @@ export const NavItemsPath = [
   },
   {
     path: "/room-details/:id",
-    element: <RoomDetails />
+    element: <ProtectedRoute><RoomDetails /></ProtectedRoute>
   },
   {
     path: "/privacy-policy",

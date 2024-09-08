@@ -7,9 +7,8 @@ import { Navigate, useLocation } from "react-router-dom";
 
 type TProtectedRoute = {
     children: ReactNode;
-    role: string | undefined;
 };
-const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
+const ProtectedRoute = ({ children }: TProtectedRoute) => {
     const location = useLocation();
     const token = useAppSelector(useCurrentToken)
     let user;
@@ -17,12 +16,13 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
         user = verifiyToken(token)
     }
     const dispatch = useAppDispatch()
-    if (role !== undefined && role !== user?.role) {
+    // if (role !== undefined && role !== user?.role) {
+    //     dispatch(logOut())
+    //     return <Navigate to="/login" replace={true} state={{ from: location }} />
+    // }
+    if (!token && !user) {
         dispatch(logOut())
         return <Navigate to="/login" replace={true} state={{ from: location }} />
-    }
-    if (!token) {
-        return <Navigate to="/login" replace={true} />
     }
     return children;
 
