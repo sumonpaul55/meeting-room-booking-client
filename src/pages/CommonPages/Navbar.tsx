@@ -15,12 +15,12 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 
 const Navbar = () => {
+    const dispatch = useAppDispatch()
     const token = useAppSelector(state => state.auth.token)
     let user;
     if (token) {
         user = verifiyToken(token)
     }
-    const dispatch = useAppDispatch()
     const [visible, setVisible] = useState(false);
 
     const navigate = useNavigate()

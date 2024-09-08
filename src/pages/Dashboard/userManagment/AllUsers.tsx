@@ -17,6 +17,8 @@ const AllUsers = () => {
     const [makeAdmin] = useUpdateStatusMutation();
     const namefiltering: { text: string; value: string }[] = []
 
+    console.log(users)
+
     const transformedUser = users?.data?.map((user: TUser, idx: number) => {
         const nameIsExist = namefiltering.some(item => item.text === user?.name && item?.value === user.name)
         if (!nameIsExist) {
@@ -143,7 +145,7 @@ const AllUsers = () => {
     return (
         <>
             {
-                transformedUser.length ?
+                transformedUser?.length ?
                     <div>
                         <Table
                             scroll={({ x: 800 })}

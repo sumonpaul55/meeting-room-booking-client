@@ -28,11 +28,11 @@ const Login = () => {
     const dynamiNaviGateLink = location?.state?.from?.pathname || "/"
 
 
-
     const onSubmit: SubmitHandler<FieldValues> = async (values) => {
         const toastId = toast.loading("Logining...")
         try {
             const res: any = await loginUser(values)
+
             if (res?.data?.success) {
                 const token = res?.data?.token
                 const user = verifiyToken(token)
@@ -41,7 +41,7 @@ const Login = () => {
                 toast.success(res?.data?.message, { id: toastId })
             }
             if (res.error) {
-                toast.error(res?.error?.data?.message, { id: toastId })
+                toast.error(res?.error?.message || res?.error?.data?.message, { id: toastId })
             }
         } catch (error: any) {
             toast.error(error)

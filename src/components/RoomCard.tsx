@@ -29,7 +29,6 @@ const RoomCard: React.FC<RoomCardProps> = ({ name, roomNo, floorNo, capacity, pr
     const { data } = useGetAllSlotsQuery({ roomId: _id })
     const slots = data?.data;
 
-
     const sliderSettings = {
         dots: true,
         infinite: true,
