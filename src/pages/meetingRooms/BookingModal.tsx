@@ -6,7 +6,7 @@ import { useAppSelector } from '../../redux/hooks';
 import { logOut, selectCurrentUser } from '../../redux/features/auth/authSlice';
 import { TRoomData } from '../../types/roomtype';
 import { useGetOneUserQuery } from '../../redux/features/auth/auth.api';
-import { useCreateSlotsMutation, useGetAllSlotsQuery } from '../../redux/features/roomManagement/slot.api';
+import { useGetAllSlotsQuery } from '../../redux/features/roomManagement/slot.api';
 import dayjs from 'dayjs';
 import { Tsolts } from '../Dashboard/slots/slotType';
 import { RangePickerProps } from 'antd/es/date-picker';
@@ -16,22 +16,20 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { TbookingForm, TResponse } from '../../types/ResponseType';
 import { toast } from 'sonner';
+import { useAddBookingMutation } from '../../redux/features/roomManagement/booking.api';
 
 
 const BookingModal = ({ room }: { room: TRoomData }) => {
-    const [createSlot] = useCreateSlotsMutation()
-
+    const [createBookings] = useAddBookingMutation();
+    const [selectedSlotsforBooking, setSelectedDateforBooking] = useState<string>()
     const [selectedDate, setSelectedDate] = useState<any>()
-    const [userAddress, setUserAddress] = useState("")
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const localUser = useAppSelector(selectCurrentUser)
-    const [selectedSlots, setSelectedSlots] = useState<string[]>([])
+    const localUser = useAppSelector(selectCurrentUser);
     const { data } = useGetOneUserQuery(localUser?.email)
     const user = data?.data
     const dispatch = useDispatch()
     // get all available slot and date with a specific rooms
-
-    const { data: RoomwiseSlot } = useGetAllSlotsQuery({ roomId: room?._id })
+    const { data: RoomwiseSlot } = useGetAllSlotsQuery({ roomId: room?._id, })
     const slots = RoomwiseSlot?.data;
     const validUser = useValidUser()
     const navigate = useNavigate()
@@ -59,13 +57,14 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         setIsModalOpen(false);
     };
     // submit form
+    const totalAmount = Number(room?.pricePerSlot) * Number(selectedSlotsforBooking?.length) || 0
     const onFinish: FormProps<TbookingForm>['onFinish'] = async (data) => {
-
-
+        const selectedslots = data?.slots;
         const bookingData = {
-            ...data, room: room._id, user: user?._id, date: selectedDate, slots: selectedSlots, address: userAddress || user?.address
+            ...data, room: room._id, user: user?._id, slots: selectedslots, totalAmount
         }
-        const res = await createSlot(bookingData) as TResponse<any>
+        console.log(bookingData)
+        const res = await createBookings(bookingData) as TResponse<any>
         console.log(res)
         if (res.error) {
             toast.error(res?.error?.message || res?.error?.data?.message)
@@ -127,12 +126,12 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
                     </Flex>
                     <Flex align='center' gap={5}>
                         <Col flex={1}>
-                            <Form.Item label='Availalbe Slots' rules={[{ required: true, message: 'Please select slots!' }]} name="selectedSlots">
-                                <Select mode='multiple' options={availableSlotsbySelectedDate} placeholder="Select Slots" size='large' disabled={!availableSlotsbySelectedDate.length} onChange={(value) => setSelectedSlots(value)} />
+                            <Form.Item label='Availalbe Slots' rules={[{ required: true, message: 'Please select slots!' }]} name="slots">
+                                <Select mode='multiple' options={availableSlotsbySelectedDate} placeholder="Select Slots" size='large' disabled={!availableSlotsbySelectedDate.length} onChange={(value) => setSelectedDateforBooking(value)} />
                             </Form.Item>
                         </Col>
-                        <Form.Item label="Price" name="total">
-                            <h3 className='border p-2 rounded min-w-[100px]'>${Number(room?.pricePerSlot) * Number(selectedSlots?.length)}</h3>
+                        <Form.Item label="Price">
+                            <h3 className='border p-2 rounded-md min-w-[100px]'>৳ {totalAmount}</h3>
                         </Form.Item>
                     </Flex>
                     <Form.Item name="address" label="Address">

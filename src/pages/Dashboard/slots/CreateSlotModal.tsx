@@ -50,6 +50,7 @@ const CreateSlotModal: React.FC = () => {
 
 
         const res = await createSlote(slotData) as TResponse<any>
+
         if (res.error) {
             toast.error(res?.error?.data?.message, { id })
         } else {

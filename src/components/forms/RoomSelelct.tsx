@@ -13,12 +13,11 @@ type TSelectProps = {
     defaultOpen?: boolean;
     setSelectedSlot?: any;
 }
-const RoomSelect = ({ label, name, options, defaultValue, disabled, mode, placeholder, defaultOpen, setSelectedSlot }: TSelectProps) => {
+const RoomSelect = ({ label, name, options, defaultValue, disabled, mode, placeholder, defaultOpen }: TSelectProps) => {
     return (
-        <Controller name={name} render={({ field: { onChange, error, value, ...field }, }) => {
+        <Controller name={name} render={({ field, fieldState: { error } }) => {
             return <Form.Item label={label}>
                 <Select
-                    onChange={() => setSelectedSlot(value?.length)}
                     autoFocus={defaultOpen && defaultOpen}
                     mode={mode}
                     defaultValue={defaultValue}
