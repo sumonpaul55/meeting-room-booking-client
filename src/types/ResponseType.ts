@@ -20,3 +20,11 @@ export type TResponse<T> = {
 export type TresponseWithQuery<T> = TResponse<T> & BaseQueryApi;
 
 export type TQueryParams = { name: string; value: boolean | React.Key };
+
+export type TbookingForm = {
+  date: Date;
+  room: string;
+  slots: string[];
+  user: string;
+  totalAmount?: number;
+};

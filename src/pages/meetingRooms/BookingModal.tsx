@@ -1,29 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
-import { Button, Col, Flex, InputNumber, Modal, Select } from 'antd';
+import { Button, Col, Flex, FormProps, InputNumber, Modal, Select } from 'antd';
 import { DatePicker, Form, Input } from 'antd';
 import { useAppSelector } from '../../redux/hooks';
 import { logOut, selectCurrentUser } from '../../redux/features/auth/authSlice';
-import RoomForm from '../../components/forms/RoomForm';
-import RoomInputNumber from '../../components/forms/RoomNumberInput';
 import { TRoomData } from '../../types/roomtype';
 import { useGetOneUserQuery } from '../../redux/features/auth/auth.api';
 import { useCreateSlotsMutation, useGetAllSlotsQuery } from '../../redux/features/roomManagement/slot.api';
 import dayjs from 'dayjs';
 import { Tsolts } from '../Dashboard/slots/slotType';
 import { RangePickerProps } from 'antd/es/date-picker';
-import { FieldValues, SubmitHandler } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { useValidUser } from '../../useHooks/useValidUser';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { TResponse } from '../../types/ResponseType';
+import { TbookingForm, TResponse } from '../../types/ResponseType';
 import { toast } from 'sonner';
 
 
 const BookingModal = ({ room }: { room: TRoomData }) => {
     const [createSlot] = useCreateSlotsMutation()
+
     const [selectedDate, setSelectedDate] = useState<any>()
+    const [userAddress, setUserAddress] = useState("")
     const [isModalOpen, setIsModalOpen] = useState(false);
     const localUser = useAppSelector(selectCurrentUser)
     const [selectedSlots, setSelectedSlots] = useState<string[]>([])
@@ -60,12 +59,14 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         setIsModalOpen(false);
     };
     // submit form
-    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const phoneNumber = data?.phone;
+    const onFinish: FormProps<TbookingForm>['onFinish'] = async (data) => {
+
+
         const bookingData = {
-            ...data, room: room._id, user: user?._id, date: selectedDate, slots: selectedSlots, phone: phoneNumber || user?.phone
+            ...data, room: room._id, user: user?._id, date: selectedDate, slots: selectedSlots, address: userAddress || user?.address
         }
         const res = await createSlot(bookingData) as TResponse<any>
+        console.log(res)
         if (res.error) {
             toast.error(res?.error?.message || res?.error?.data?.message)
         } else {
@@ -97,14 +98,16 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         // Disable all dates except for the availableDates and prevent selecting past dates
         return !availableDates.includes(formattedCurrentDate)
     };
-
     return (
         <>
             <Button type="primary" onClick={showModal} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold w-full px-4 md:px-6 py-0 rounded-lg">
                 Book Now
             </Button>
             <Modal title="Basic Modal" open={isModalOpen} onCancel={handleCancel}>
-                <RoomForm onSubmit={onSubmit}>
+                <Form onFinish={onFinish} layout='vertical' initialValues={{
+                    phone: `${user?.phone}`,
+                    address: `${user?.address}`,
+                }}>
                     {/* Date Picker */}
                     <Flex gap={5} justify='space-between'>
                         <Form.Item label="Name" className='w-full'>
@@ -115,27 +118,33 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
                         </Form.Item>
                     </Flex>
                     <Flex gap={5} justify='space-between' align='center'>
-                        <Form.Item label="Available Date" className='mt-2'>
+                        <Form.Item label="Available Date" className='mt-2' rules={[{ required: true, message: "Pick a date" }]} name="date">
                             <DatePicker size='large' disabledDate={disabledDate} onChange={(value) => setSelectedDate(value)} />
                         </Form.Item>
-                        <RoomInputNumber name='phone' className='w-full' label="Phone" defaultValue={user?.phone} />
+                        <Form.Item label="Phone" rules={[{ required: true, message: "Enter Phone" }]} name='phone'>
+                            <InputNumber className='w-full' placeholder='Phone' />
+                        </Form.Item>
                     </Flex>
                     <Flex align='center' gap={5}>
                         <Col flex={1}>
-                            <Form.Item label='Availalbe Slots'>
+                            <Form.Item label='Availalbe Slots' rules={[{ required: true, message: 'Please select slots!' }]} name="selectedSlots">
                                 <Select mode='multiple' options={availableSlotsbySelectedDate} placeholder="Select Slots" size='large' disabled={!availableSlotsbySelectedDate.length} onChange={(value) => setSelectedSlots(value)} />
                             </Form.Item>
                         </Col>
-                        <Form.Item label="Price" className=''>
-                            <InputNumber size='large' disabled value={"৳" + Number(room?.pricePerSlot) * Number(selectedSlots?.length)} />
+                        <Form.Item label="Price" name="total">
+                            <h3 className='border p-2 rounded min-w-[100px]'>${Number(room?.pricePerSlot) * Number(selectedSlots?.length)}</h3>
                         </Form.Item>
                     </Flex>
+                    <Form.Item name="address" label="Address">
+                        <Input placeholder='Enter Your Address' />
+                    </Form.Item>
+
                     <div>
                         <Button htmlType='submit'>
                             Confirm Booking
                         </Button>
                     </div>
-                </RoomForm>
+                </Form>
             </Modal>
         </>
     );
