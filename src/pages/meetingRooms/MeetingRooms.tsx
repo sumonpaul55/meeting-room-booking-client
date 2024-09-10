@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react"
-import { useGetAllRoomsQuery } from "../../redux/features/roomManagement/room.api"
 import Loading from "../../components/common/Loading"
 import { Input, Form, Select, SelectProps, Button, Pagination } from "antd"
 import { FaBars } from "react-icons/fa"
 import RoomCard from "../../components/RoomCard"
 import { useDebounce } from "../../useHooks/useDebounce"
+import { useGetAllRoomsQuery } from "../../redux/api/roomManagement/room.api"
 
 
 const MeetingRooms = () => {

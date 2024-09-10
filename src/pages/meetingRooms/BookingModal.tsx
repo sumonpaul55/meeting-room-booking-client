@@ -2,41 +2,51 @@
 import { useState } from 'react';
 import { Button, Col, Flex, FormProps, InputNumber, Modal, Select } from 'antd';
 import { DatePicker, Form, Input } from 'antd';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logOut, selectCurrentUser } from '../../redux/features/auth/authSlice';
 import { TRoomData } from '../../types/roomtype';
 import { useGetOneUserQuery } from '../../redux/features/auth/auth.api';
-import { useGetAllSlotsQuery } from '../../redux/features/roomManagement/slot.api';
 import dayjs from 'dayjs';
 import { Tsolts } from '../Dashboard/slots/slotType';
 import { RangePickerProps } from 'antd/es/date-picker';
 import Swal from 'sweetalert2';
 import { useValidUser } from '../../useHooks/useValidUser';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { TbookingForm, TResponse } from '../../types/ResponseType';
+import { TbookingForm } from '../../types/ResponseType';
+
+import { useGetAllSlotsQuery } from '../../redux/api/roomManagement/slot.api';
+import { setBooking } from '../../redux/features/bookings/bookingSlice';
 import { toast } from 'sonner';
-import { useAddBookingMutation } from '../../redux/features/roomManagement/booking.api';
+import moment from 'moment';
 
 
 const BookingModal = ({ room }: { room: TRoomData }) => {
-    const [createBookings] = useAddBookingMutation();
+
     const [selectedSlotsforBooking, setSelectedDateforBooking] = useState<string>()
     const [selectedDate, setSelectedDate] = useState<any>()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const localUser = useAppSelector(selectCurrentUser);
     const { data } = useGetOneUserQuery(localUser?.email)
     const user = data?.data
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     // get all available slot and date with a specific rooms
-    const { data: RoomwiseSlot } = useGetAllSlotsQuery({ roomId: room?._id, })
+    const { data: RoomwiseSlot } = useGetAllSlotsQuery({ roomId: room?._id, isBooked: false })
     const slots = RoomwiseSlot?.data;
     const validUser = useValidUser()
     const navigate = useNavigate()
     const showModal = () => {
         if (validUser) {
-            setIsModalOpen(true);
-        } else {
+            if (slots?.length < 1) {
+                Swal.fire({
+                    title: "Not available slots in this room",
+                    confirmButtonText: "Ok",
+                })
+            } else {
+                setIsModalOpen(true);
+            }
+
+        }
+        else {
             dispatch(logOut())
             Swal.fire({
                 title: "Please Login and Register first",
@@ -58,19 +68,25 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
     };
     // submit form
     const totalAmount = Number(room?.pricePerSlot) * Number(selectedSlotsforBooking?.length) || 0
+
+
     const onFinish: FormProps<TbookingForm>['onFinish'] = async (data) => {
         const selectedslots = data?.slots;
+        const phoneNumber = data?.phone;
+        const address = data?.address;
+        const date = moment(new Date(selectedDate)).format("YYYY-MM-DD");
+
         const bookingData = {
-            ...data, room: room._id, user: user?._id, slots: selectedslots, totalAmount
+            date, phone: phoneNumber, address, room: { _id: room._id, name: room?.name }, user: user?._id, slots: selectedslots, totalAmount, isConfirmed: "unconfirmed"
         }
-        console.log(bookingData)
-        const res = await createBookings(bookingData) as TResponse<any>
-        console.log(res)
-        if (res.error) {
-            toast.error(res?.error?.message || res?.error?.data?.message)
-        } else {
-            toast.success(res?.data?.message)
+        // console.log(bookingData)
+        const addbooking = dispatch(setBooking(bookingData))
+        if (addbooking?.payload) {
+            setIsModalOpen(false)
+            toast.success("Booking added Successfully")
+            navigate("/checkout")
         }
+
     }
 
     const availableDates: any[] = []; // Dates to enable
@@ -117,7 +133,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
                         </Form.Item>
                     </Flex>
                     <Flex gap={5} justify='space-between' align='center'>
-                        <Form.Item label="Available Date" className='mt-2' rules={[{ required: true, message: "Pick a date" }]} name="date">
+                        <Form.Item label="Available Date" className='mt-2' rules={[{ required: true, message: "Pick a date" }]}>
                             <DatePicker size='large' disabledDate={disabledDate} onChange={(value) => setSelectedDate(value)} />
                         </Form.Item>
                         <Form.Item label="Phone" rules={[{ required: true, message: "Enter Phone" }]} name='phone'>
@@ -140,7 +156,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
 
                     <div>
                         <Button htmlType='submit'>
-                            Confirm Booking
+                            Go for Booking
                         </Button>
                     </div>
                 </Form>

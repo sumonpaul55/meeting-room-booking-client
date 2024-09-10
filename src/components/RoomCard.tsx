@@ -6,8 +6,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Tag } from 'antd';
 import { Link } from 'react-router-dom';
-import { useGetAllSlotsQuery } from '../redux/features/roomManagement/slot.api';
 import BookingModal from '../pages/meetingRooms/BookingModal';
+import { useGetAllSlotsQuery } from '../redux/api/roomManagement/slot.api';
 
 interface RoomCardProps {
     name: string;

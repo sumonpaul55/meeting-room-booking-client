@@ -3,13 +3,16 @@ import { baseApi } from "../../api/baseApi";
 const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllSlots: builder.query({
-      query: (query: { roomId?: string; date?: string }) => {
+      query: (query: { roomId?: string; date?: string; isBooked?: boolean }) => {
         const params = new URLSearchParams();
         if (query?.date) {
           params.append("date", query?.date);
         }
         if (query?.roomId) {
           params.append("roomId", query?.roomId);
+        }
+        if (query?.isBooked) {
+          params.append("isBooked", `${query?.isBooked}`);
         }
         return {
           url: "/slots/availability",

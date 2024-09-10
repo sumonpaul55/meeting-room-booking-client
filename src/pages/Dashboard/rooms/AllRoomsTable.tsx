@@ -7,11 +7,11 @@ import { TbTrash } from 'react-icons/tb';
 // import EditProduct from '../addProduct.tsx/editProduct/EditProductModal';
 // import { toast } from 'sonner';
 // import Swal from 'sweetalert2';
-import { useDeleteRoomMutation, useGetAllRoomsQuery } from '../../../redux/features/roomManagement/room.api';
 
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
 import AddaRoomModal from './AddRoomModal';
+import { useDeleteRoomMutation, useGetAllRoomsQuery } from '../../../redux/api/roomManagement/room.api';
 
 export interface DataType {
     key: React.Key;

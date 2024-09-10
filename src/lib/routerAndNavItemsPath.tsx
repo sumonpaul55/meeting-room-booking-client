@@ -12,6 +12,7 @@ import PrivacyPolicy from "../pages/privacyandTerm/PrivacyPolicy";
 import { adminDashDashboarditmes } from "./adminDashboardpath";
 import TermsAndConditions from "../pages/privacyandTerm/Term&Condition";
 import ProtectedRoute from "../routes/ProtectedRoute";
+import CheckOutPage from "../pages/CommonPages/CheckOutPage";
 
 export const NavItemsPath = [
   {
@@ -62,6 +63,10 @@ export const NavItemsPath = [
   {
     path: "/terms-of-service",
     element: <TermsAndConditions />
+  },
+  {
+    path: "//checkout",
+    element: <CheckOutPage />
   }
   // {
   //   path: "user/dashboard",

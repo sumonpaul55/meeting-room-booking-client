@@ -27,4 +27,6 @@ export type TbookingForm = {
   slots: string[];
   user: string;
   totalAmount?: number;
+  phone?: number;
+  address?: string;
 };

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useDeleteSlotMutation, useGetAllSlotsQuery } from '../../../redux/features/roomManagement/slot.api'
 import { Button, Table, TableColumnsType, Tag } from 'antd';
 import { DataType } from '../rooms/AllRoomsTable';
 import Loading from '../../../components/common/Loading';
@@ -10,6 +9,7 @@ import { toast } from 'sonner';
 import { TbTrash } from 'react-icons/tb';
 import UpdateslotModal from './UpdateSlotModal';
 import NoDataFound from '../../../components/common/NoDataFound';
+import { useDeleteSlotMutation, useGetAllSlotsQuery } from '../../../redux/api/roomManagement/slot.api';
 
 // type TSlot = {
 //     room: string;
@@ -100,10 +100,10 @@ const AllslotPage = () => {
                 return <div className='flex gap-3'>
                     {/* <EditProduct product={transformedProducts} /> */}
 
-                    <Button onClick={() => handleDelete(transformSlot._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} />
+                    <Button onClick={() => handleDelete(transformSlot._id)} className='w-fit p-1 h-auto border-0 text-red-600'>
+                        <TbTrash size={20} />
                     </Button>
                     <UpdateslotModal slotData={transformSlot} />
-
                 </div>
             }
         },

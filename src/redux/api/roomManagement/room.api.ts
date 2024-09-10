@@ -31,6 +31,7 @@ const roomApi = baseApi.injectEndpoints({
         if (capacity) {
           params.append("capacity", capacity);
         }
+
         return {
           url: "/rooms",
           method: "GET",
@@ -67,6 +68,15 @@ const roomApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["rooms"],
     }),
+    // getRoomsForBookings: builder.query({
+    //   query: (roomsId: any) => {
+    //     return {
+    //       url: "/rooms/someRooms",
+    //       method: "GET",
+    //     };
+    //   },
+    //   providesTags: ["rooms"],
+    // }),
   }),
 });
 

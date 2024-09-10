@@ -2,10 +2,10 @@
 import { Button } from 'antd'
 import Section from '../../components/common/Section'
 import RoomCard from '../../components/RoomCard'
-import { useGetAllRoomsQuery } from '../../redux/features/roomManagement/room.api'
 import { TRoomData } from '../../types/roomtype'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/common/Loading'
+import { useGetAllRoomsQuery } from '../../redux/api/roomManagement/room.api'
 
 const FeaturedRooms = () => {
     const { data: rooms, isLoading } = useGetAllRoomsQuery({ limit: 6 })

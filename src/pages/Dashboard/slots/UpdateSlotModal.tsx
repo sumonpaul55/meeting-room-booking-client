@@ -6,12 +6,12 @@ import RoomSelect from '../../../components/forms/RoomSelelct';
 import { toast } from 'sonner';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import RoomDatePicker from '../../../components/forms/RoomDatePicker';
-import { useGetAllRoomsQuery } from '../../../redux/features/roomManagement/room.api';
 import { TResponse } from '../../../types/ResponseType';
 import { FaEdit } from 'react-icons/fa';
-import { useUpdateSlotMutation } from '../../../redux/features/roomManagement/slot.api';
 
 import dayjs from 'dayjs';
+import { useUpdateSlotMutation } from '../../../redux/api/roomManagement/slot.api';
+import { useGetAllRoomsQuery } from '../../../redux/api/roomManagement/room.api';
 
 
 const UpdateslotModal = (slotData: any) => {

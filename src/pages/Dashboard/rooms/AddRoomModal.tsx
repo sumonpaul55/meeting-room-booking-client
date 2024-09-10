@@ -9,12 +9,12 @@ import SelectSingleOrMultiImg from '../../../components/forms/RoomImage';
 import { toast } from 'sonner';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { uploadImageToCloudinary } from '../../../utils/uploadImagetoCloudinary';
-import { useCreateRoomMutation, useUpdateRoomMutation } from '../../../redux/features/roomManagement/room.api';
 import { TResponse } from '../../../types/ResponseType';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BiEdit } from 'react-icons/bi';
 import { TRoomData } from '../../../types/roomtype';
 import { createRoomValidation, updateRoomValidation } from '../../../schemaValidation/createRoomValidation';
+import { useCreateRoomMutation, useUpdateRoomMutation } from '../../../redux/api/roomManagement/room.api';
 
 
 
