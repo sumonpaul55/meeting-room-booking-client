@@ -103,7 +103,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         if (formattedSelectedDate === formattedAvailableDate && slots?.isBooked === false) {
             availableSlotsbySelectedDate.push({
                 label: `${slots?.startTime} - ${slots?.endTime}`,
-                value: `${slots?._id}, ${slots?.startTime}-${slots?.endTime}`
+                value: `${slots?._id},${slots?.startTime}-${slots?.endTime}`
             })
             // set the total price of 
         }
