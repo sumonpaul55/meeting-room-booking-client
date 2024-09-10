@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type TBooking = {
-  room: string | undefined;
+  room: { _id: string | undefined; name: string };
   slots: string[];
   user: string;
   date: any;
@@ -10,6 +10,8 @@ export type TBooking = {
   address: string | undefined;
   totalAmount: number;
   isConfirmed: string;
+  userName: string;
+  email: string;
 };
 
 export type TInitialState = {

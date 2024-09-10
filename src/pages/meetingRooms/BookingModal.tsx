@@ -70,6 +70,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
     const totalAmount = Number(room?.pricePerSlot) * Number(selectedSlotsforBooking?.length) || 0
 
 
+
     const onFinish: FormProps<TbookingForm>['onFinish'] = async (data) => {
         const selectedslots = data?.slots;
         const phoneNumber = data?.phone;
@@ -77,7 +78,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         const date = moment(new Date(selectedDate)).format("YYYY-MM-DD");
 
         const bookingData = {
-            date, phone: phoneNumber, address, room: { _id: room._id, name: room?.name }, user: user?._id, slots: selectedslots, totalAmount, isConfirmed: "unconfirmed"
+            userName: user?.name, email: user?.email, date, phone: phoneNumber, address, room: { _id: room._id, name: room?.name }, user: user?._id, slots: selectedslots, totalAmount, isConfirmed: "unconfirmed"
         }
         // console.log(bookingData)
         const addbooking = dispatch(setBooking(bookingData))
@@ -102,7 +103,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         if (formattedSelectedDate === formattedAvailableDate && slots?.isBooked === false) {
             availableSlotsbySelectedDate.push({
                 label: `${slots?.startTime} - ${slots?.endTime}`,
-                value: slots?._id
+                value: `${slots?._id}, ${slots?.startTime}-${slots?.endTime}`
             })
             // set the total price of 
         }
@@ -151,7 +152,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
                         </Form.Item>
                     </Flex>
                     <Form.Item name="address" label="Address">
-                        <Input placeholder='Enter Your Address' />
+                        <Input placeholder='Enter Your Address' disabled />
                     </Form.Item>
 
                     <div>

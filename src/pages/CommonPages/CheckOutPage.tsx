@@ -1,91 +1,80 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, Table, TableColumnsType, Tag } from "antd";
+import { Button, Table, TableColumnsType, TableProps, Tag } from "antd";
 import Section from "../../components/common/Section"
 import { useAppSelector } from "../../redux/hooks"
-import { TbTrash } from "react-icons/tb";
-import { DataType } from "../Dashboard/rooms/AllRoomsTable";
 import moment from "moment";
 import NoDataFound from "../../components/common/NoDataFound";
 import { useGetRoomsForBookingsQuery } from "../../redux/api/roomManagement/room.api";
+import { useEffect } from "react";
 
 
 const CheckOutPage = () => {
 
     const { booking } = useAppSelector(state => state.booking)
+    console.log(booking)
 
-    // const columns: TableColumnsType<DataType> = [
-    //     {
-    //         title: 'No',
-    //         dataIndex: "no",
-    //         render: (text: string) => <a className='md:font-semibold text-xs sm:text-base' style={{ lineHeight: "1" }}>{text}</a>,
-    //     },
-    //     {
-    //         title: "Room Name",
-    //         dataIndex: ["room", "name"],
-    //         render: (text: string) => <a className='md:font-semibold text-xs sm:text-base' style={{ lineHeight: "1" }}>{text}</a>,
-    //         // filters: filterableData,
-    //         // onFilter: (value, record) => record.address.indexOf(value as string) === 0,
-    //     },
-    //     {
-    //         title: 'Room No',
-    //         dataIndex: ["room", "roomNo"],
-    //         // render: (text: string) => <a className='md:font-bold text-xs sm:text-base' style={{ lineHeight: "1" }}>{text}</a>,
-    //     },
-    //     {
-    //         title: 'Date',
-    //         dataIndex: "date",
-    //         render: (date) => <p>{moment(date).format("MMM Do YY")}</p>
-    //     },
-    //     {
-    //         title: 'Start Time',
-    //         dataIndex: 'startTime',
-    //     },
-    //     {
-    //         title: 'End Time',
-    //         dataIndex: 'endTime',
-    //     },
-    //     {
-    //         title: "Status",
-    //         dataIndex: "isBooked",
-    //         render: (isBooked: boolean) => {
-    //             return <Tag color={`${isBooked ? "yellow" : "blue"}`}>{!isBooked ? "Available" : "Booked"}</Tag>
-    //         }
-    //     },
-    //     {
-    //         title: 'Action',
-    //         render: (transData) => {
-    //             // console.log(transformSlot?.isBooked)
-    //             return <div className='flex gap-3'>
-    //                 {/* <EditProduct product={transformedProducts} /> */}
+    let name;
+    let email;
+    let address;
+    const tableProps = booking?.map((item, idx) => {
+        name = item?.userName;
+        email = item?.email;
+        address = item?.address
 
-    //                 <Button className='w-fit p-1 h-auto border-0 text-red-600'>
-    //                     <TbTrash size={20} />
-    //                 </Button>
+        return {
+            key: idx + 1,
+            ...item, no: idx + 1,
+        }
+    })
+    const columns: TableColumnsType = [
+        {
+            title: "No",
+            dataIndex: 'no'
+        },
+        {
+            title: "Room Name",
+            dataIndex: "room",
+            render: (room) => <p>{room?.name}</p>
+        },
+        {
+            title: "Date",
+            dataIndex: "date",
+            render: (date) => <p>{moment(date).format("DD/MM/YYYY")}</p>
+        }
+    ]
 
-    //             </div>
-    //         }
-    //     },
-    // ];
+
+    useEffect(() => {
+        if (booking?.length) {
+            window.onbeforeunload = () => true;
+        }
+        return () => {
+            window.onbeforeunload = null;
+        };
+    }, [booking]);
+
     return (
         <Section className="py-16">
-            <h3 className="sm:tex-lg lg:text-xl font-semibold text-center">Booking Summary</h3>
-            {/* {
-                transData?.length ?
-                    <div>
-                        <Table
-                            scroll={({ x: 800 })}
-                            // onChange={onChange}
-                            sticky={true}
-                            loading={isFetching}
+            <h3 className="sm:tex-lg lg:text-xl font-semibold text-center font-roboto">Booking Summary</h3>
+            <div className="mt-5">
+                {
+                    booking?.length ?
+                        <div className="flex justify-between flex-col md:flex-row">
+                            <div className="w-full">
+                                <Table columns={columns} dataSource={tableProps} />
+                            </div>
+                            <div className="my-1 p-2 md:p-4 md:min-w-[400px] text-left shadow">
+                                <h2 className="font-bold font-poppins text-lg md:text-xl border-b pb-2">User Info</h2>
+                                <h2 className="py-1 font-roboto font-semibold mt-4 text-lightText">Name: {name}</h2>
+                                <h2 className="py-1 font-roboto font-semibold mt-4 text-lightText">Email: {email}</h2>
+                                <h2 className="py-1 font-roboto font-semibold mt-4 text-lightText">Address: {address}</h2>
+                            </div>
+                        </div> :
+                        <NoDataFound />
 
-                            columns={columns}
-                            dataSource={transData}
-                        />
-                    </div> :
-                    <NoDataFound />
-
-            } */}
+                }
+            </div>
         </Section>
     )
 }
