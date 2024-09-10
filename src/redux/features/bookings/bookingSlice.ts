@@ -30,7 +30,6 @@ const bookingSlice = createSlice({
       state.booking.push(action.payload);
     },
     removeBooking: (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
       state.booking = state.booking.filter((item) => item.room._id !== action.payload);
     },
   },

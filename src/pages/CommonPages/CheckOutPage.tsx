@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, Table, TableColumnsType, Tag } from "antd";
+import { Button, Table, TableColumnsType, Tag, } from "antd";
 import Section from "../../components/common/Section"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import moment from "moment";
@@ -11,12 +11,13 @@ import { removeBooking } from "../../redux/features/bookings/bookingSlice";
 
 
 const CheckOutPage = () => {
-    let { booking } = useAppSelector(state => state.booking)
+    const { booking } = useAppSelector(state => state.booking)
     const dispatch = useAppDispatch()
     let name;
     let email;
     let address;
     const slots: string[] = []
+
     const tableProps = booking?.map((item, idx) => {
         name = item?.userName;
         email = item?.email;
@@ -42,7 +43,7 @@ const CheckOutPage = () => {
             title: "Times",
             dataIndex: "slots",
             render: (slots) => slots?.map((time: string) => {
-                return <p key={time}>{time.split(",")[1]}</p>
+                return <Tag color="indigo" key={time}>{time.split(",")[1]}</Tag>
             })
         },
         {
@@ -89,14 +90,13 @@ const CheckOutPage = () => {
         });
     }
 
-
     return (
         <Section className="py-16">
             <h3 className="sm:tex-lg lg:text-xl font-semibold text-center font-roboto">Booking Summary</h3>
             <div className="mt-5">
                 {
                     booking?.length ?
-                        <div className="flex justify-between flex-col md:flex-row">
+                        <div className="flex justify-between flex-col md:flex-row gap-3">
                             <div className="w-full">
                                 <Table columns={columns} dataSource={tableProps} pagination={false} />
                             </div>

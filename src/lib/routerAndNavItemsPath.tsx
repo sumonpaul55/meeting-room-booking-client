@@ -13,6 +13,7 @@ import { adminDashDashboarditmes } from "./adminDashboardpath";
 import TermsAndConditions from "../pages/privacyandTerm/Term&Condition";
 import ProtectedRoute from "../routes/ProtectedRoute";
 import CheckOutPage from "../pages/CommonPages/CheckOutPage";
+import Success from "../pages/CommonPages/Success";
 
 export const NavItemsPath = [
   {
@@ -65,8 +66,12 @@ export const NavItemsPath = [
     element: <TermsAndConditions />
   },
   {
-    path: "//checkout",
+    path: "/checkout",
     element: <CheckOutPage />
+  },
+  {
+    path: "/success",
+    element: <Success />
   }
   // {
   //   path: "user/dashboard",

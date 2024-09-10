@@ -148,7 +148,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
                             </Form.Item>
                         </Col>
                         <Form.Item label="Price">
-                            <h3 className='border p-2 rounded-md min-w-[100px]'>৳ {totalAmount}</h3>
+                            <h3 className='border p-2 rounded-md min-w-[100px]'>$ {totalAmount}</h3>
                         </Form.Item>
                     </Flex>
                     <Form.Item name="address" label="Address">
