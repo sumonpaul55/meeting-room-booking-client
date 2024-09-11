@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, Table, TableColumnsType, Tag, } from "antd";
+import { Button, Table, TableColumnsType, } from "antd";
 import Section from "../../components/common/Section"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import moment from "moment";
@@ -8,27 +8,51 @@ import NoDataFound from "../../components/common/NoDataFound";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { removeBooking } from "../../redux/features/bookings/bookingSlice";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
+
+
+
+const stripePromise = loadStripe(process.env.VITE_Publishable_Key as string)
 
 const CheckOutPage = () => {
     const { booking } = useAppSelector(state => state.booking)
     const dispatch = useAppDispatch()
     let name;
-    let email;
     let address;
-    const slots: string[] = []
+    let phone;
+    let email;
+    const room: { _id: string, date: string, slots: [] }[] = []
+    let totalAmount = 0;
+    let userId = ""
+
+
+    const eachsslots: string[] | any = []
 
     const tableProps = booking?.map((item, idx) => {
+        item?.slots?.map(item => {
+            eachsslots.push(item.split(",")[0])
+        })
+        totalAmount += item?.totalAmount
+        userId = item?.user;
+        phone = item?.phone;
         name = item?.userName;
         email = item?.email;
-        address = item?.address
-        const eachSlot = item?.slots?.map(item => item.split(",")[0])
-        slots.push(`${eachSlot}`)
+        address = item?.address;
+        room.push({ _id: `${item?.room?._id}`, date: `${item?.date}`, slots: eachsslots, })
+
         return {
             key: idx + 1,
             ...item, no: idx + 1,
         }
     })
+    // make booking info
+    const bookingInfo = {
+        totalAmount: totalAmount, email, user: userId, phone, room
+    }
+
 
     const columns: TableColumnsType = [
         {
@@ -43,7 +67,7 @@ const CheckOutPage = () => {
             title: "Times",
             dataIndex: "slots",
             render: (slots) => slots?.map((time: string) => {
-                return <Tag color="indigo" key={time}>{time.split(",")[1]}</Tag>
+                return <span className="bg-indigo-500 text-white font-thin mx-1 rounded" key={time}>{time.split(",")[1]}</span>
             })
         },
         {
@@ -89,16 +113,20 @@ const CheckOutPage = () => {
             }
         });
     }
-
     return (
-        <Section className="py-16">
+        <Section className="py-5 md:py-16">
             <h3 className="sm:tex-lg lg:text-xl font-semibold text-center font-roboto">Booking Summary</h3>
             <div className="mt-5">
                 {
                     booking?.length ?
                         <div className="flex justify-between flex-col md:flex-row gap-3">
                             <div className="w-full">
-                                <Table columns={columns} dataSource={tableProps} pagination={false} />
+                                <Table columns={columns} dataSource={tableProps} pagination={false} scroll={{ x: 500 }} />
+                                <div className="mt-10">
+                                    <Elements stripe={stripePromise}>
+                                        <CheckoutForm bookingInfo={bookingInfo} total={totalAmount}></CheckoutForm>
+                                    </Elements>
+                                </div>
                             </div>
                             <div className="my-1 p-2 md:p-4 md:min-w-[400px] text-left shadow">
                                 <h2 className="font-bold font-poppins text-lg md:text-xl border-b pb-2">User Info</h2>

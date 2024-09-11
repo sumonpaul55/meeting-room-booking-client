@@ -32,9 +32,12 @@ const bookingSlice = createSlice({
     removeBooking: (state, action: PayloadAction<any>) => {
       state.booking = state.booking.filter((item) => item.room._id !== action.payload);
     },
+    clearBookingSlice: (state) => {
+      state.booking = [];
+    },
   },
 });
 
-export const { setBooking, removeBooking } = bookingSlice.actions;
+export const { setBooking, removeBooking, clearBookingSlice } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

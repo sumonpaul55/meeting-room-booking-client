@@ -84,7 +84,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         const addbooking = dispatch(setBooking(bookingData))
         if (addbooking?.payload) {
             setIsModalOpen(false)
-            toast.success("Booking added Successfully")
+            toast.success("Please pay now for confirm")
             navigate("/checkout")
         }
 
@@ -103,7 +103,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         if (formattedSelectedDate === formattedAvailableDate && slots?.isBooked === false) {
             availableSlotsbySelectedDate.push({
                 label: `${slots?.startTime} - ${slots?.endTime}`,
-                value: `${slots?._id},${slots?.startTime}-${slots?.endTime}`
+                value: `${slots?._id}, ${slots?.startTime}-${slots?.endTime}`
             })
             // set the total price of 
         }
