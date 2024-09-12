@@ -79,8 +79,6 @@ const MeetingRooms = () => {
         },
     ];
 
-
-
     // handle reset
     const handleReset = () => {
         setSearch("")
