@@ -2,8 +2,7 @@
 
 
 .overlay{
-    background: rgba(0, 0, 0, 0.582);
-    background: linear-gradient(110deg, #09001cc8 50%, #00031a25 0);
+   background: linear-gradient(110deg, #060016cc 50%, #00031a25 0);
 }
 
 .ant-upload-wrapper {

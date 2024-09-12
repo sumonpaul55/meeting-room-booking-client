@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Section from '../../components/common/Section';
-
+import faq from "../../assets/faq.jpg"
 const faqs = [
     {
         question: 'How do I book a meeting room?',
@@ -39,40 +39,38 @@ const Faq: React.FC = () => {
     return (
         <Section className='py-20 px-4 md:px-0n bg-gray-100'>
             <div className="container mx-auto">
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-7'>
-                    <div className="">
-                        <div className="container mx-auto">
-                            <h2 className="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-                            <div className="space-y-6">
-                                {faqs.map((faq, index) => (
-                                    <motion.div
-                                        key={index}
-                                        className="bg-white p-6 rounded-lg shadow-lg"
-                                        onClick={() => toggleFAQ(index)}
-                                        whileHover={{ scale: 1.02 }}
-                                        transition={{ type: 'spring', stiffness: 300 }}
-                                    >
-                                        <h3 className="text-xl font-semibold cursor-pointer flex justify-between items-center">
-                                            {faq.question}
-                                            <span>{activeIndex === index ? '-' : '+'}</span>
-                                        </h3>
-                                        {activeIndex === index && (
-                                            <motion.p
-                                                className="mt-4 text-gray-700"
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                transition={{ duration: 0.3 }}
-                                            >
-                                                {faq.answer}
-                                            </motion.p>
-                                        )}
-                                    </motion.div>
-                                ))}
-                            </div>
+                <div className="container mx-auto">
+                    <h2 className="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-7 items-center'>
+                        <div className="space-y-2">
+                            {faqs.map((faq, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="bg-white p-4 rounded-lg shadow-lg"
+                                    onClick={() => toggleFAQ(index)}
+                                    whileHover={{ scale: 1.02 }}
+                                    transition={{ type: 'spring', stiffness: 300 }}
+                                >
+                                    <h3 className="text-xl font-semibold cursor-pointer flex justify-between items-center">
+                                        {faq.question}
+                                        <span>{activeIndex === index ? '-' : '+'}</span>
+                                    </h3>
+                                    {activeIndex === index && (
+                                        <motion.p
+                                            className="mt-4 text-gray-700"
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            {faq.answer}
+                                        </motion.p>
+                                    )}
+                                </motion.div>
+                            ))}
                         </div>
-                    </div>
-                    <div>
-                        img
+                        <div>
+                            <img src={faq} alt="faq" className='rounded' />
+                        </div>
                     </div>
                 </div>
             </div>
