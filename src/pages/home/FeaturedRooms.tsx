@@ -8,7 +8,7 @@ import Loading from '../../components/common/Loading'
 import { useGetAllRoomsQuery } from '../../redux/api/roomManagement/room.api'
 
 const FeaturedRooms = () => {
-    const { data: rooms, isLoading } = useGetAllRoomsQuery({ limit: 6 })
+    const { data: rooms, isLoading } = useGetAllRoomsQuery({ limit: 6, sort: "-createdAt" })
     const allRoom = rooms?.data?.result
 
 
