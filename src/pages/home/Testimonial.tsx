@@ -63,7 +63,7 @@ const TestimonialSlider = () => {
     };
 
     return (
-        <Section className="py-20 bg-lightBg">
+        <Section className="py-20 bg-gray-100">
             <h2 className="text-2xl md:text-4xl text-center mb-6 font-roboto font-bold">What Our Clients Say</h2>
             <Slider {...settings}>
                 {testimonials.map((testimonial, index) => (

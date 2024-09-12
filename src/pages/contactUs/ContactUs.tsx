@@ -13,7 +13,8 @@ const ContactUs: React.FC = () => {
                         <ContactForm />
                     </div>
                 </div>
-                <div className="container mx-auto bg-white bg-opacity-90 backdrop-blur mt-16 py-16 rounded-lg shadow-lg ">
+                <div
+                    className="container mx-auto bg-white bg-opacity-90 backdrop-blur mt-16 py-16 rounded-lg shadow-lg ">
                     <div className="mt-5 p-4 text-center">
                         <h2 className="text-xl lg:text-5xl font-bold mb-6 text-blue-600">Follow Us</h2>
                         <div className="flex justify-center space-x-6 mt-10">
@@ -33,7 +34,7 @@ const ContactUs: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

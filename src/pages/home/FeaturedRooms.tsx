@@ -27,7 +27,6 @@ const FeaturedRooms = () => {
                         }
                     </div>
                     {
-                        allRoom?.length > 6 &&
                         <div className='text-center mt-20'>
                             <Link to="/meeting-rooms">
                                 <Button className='bg-primary text-white py-5 px-6 md:px-10 lg:px-14 md:text-xl font-roboto font-semibold'>See All</Button>

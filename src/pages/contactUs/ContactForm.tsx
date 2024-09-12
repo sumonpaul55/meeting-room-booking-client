@@ -7,7 +7,7 @@ const ContactForm: React.FC = () => {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 1 }}
             className="p-8 bg-black text-white shadow-lg rounded-lg bg-opacity-80 backdrop-blur"
         >
             <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
