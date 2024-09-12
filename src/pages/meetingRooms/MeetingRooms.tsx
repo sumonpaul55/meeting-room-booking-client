@@ -17,10 +17,11 @@ const MeetingRooms = () => {
     const [sort, setSort] = useState(undefined)
     // const [searchParams, setSearchParams] = useState<[] | undefined>(undefined)
     const srcDebounce = useDebounce(search, 1000)
-    const { data, isLoading } = useGetAllRoomsQuery({ search: srcDebounce, range, capacity, sort });
+    const [pages, setPages] = useState(1)
+    const { data, isLoading } = useGetAllRoomsQuery({ search: srcDebounce, range, capacity, sort, page: `${pages}` });
     const rooms = data?.data?.result;
     const meta = data?.data?.meta;
-
+    console.log(meta)
     if (isLoading) {
         return <Loading />
     }
@@ -85,7 +86,14 @@ const MeetingRooms = () => {
         setRange(undefined)
         setCapacity(undefined)
         setSort(undefined)
+        setPages(1)
     }
+
+    // const onChange: PaginationProps["onChange"] = (page) => {
+    //     console.log(page)
+    //     setPages(page)
+    // }
+
     return (
         <>
             {
@@ -116,7 +124,6 @@ const MeetingRooms = () => {
                         </div>
                         {
                             rooms?.length ?
-
                                 <div className={`absolute overflow-y-scroll h-full right-0 top-0 w-full border duration-300 p-4 bg-slate-50 ${sideOpen ? "w-[100%]" : "md:w-[80%]"}`}>
                                     <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-7 ${sideOpen ? "xl:grid-cols-4" : "xl:grid-cols-3"}`}>
                                         {
@@ -129,7 +136,7 @@ const MeetingRooms = () => {
                                         }
                                     </div>
                                     <div className="py-6">
-                                        <Pagination size="small" pageSize={meta?.limit} total={meta?.total} showSizeChanger showQuickJumper />
+                                        <Pagination size="small" pageSize={pages} total={meta?.totalPage} showSizeChanger onChange={(page) => setPages(page)} />
                                     </div>
                                 </div>
                                 :

@@ -27,7 +27,7 @@ export interface DataType {
 
 const AllRoomsTable: React.FC = () => {
     const [search, setSearch] = useState("")
-    const { data, isLoading, isFetching } = useGetAllRoomsQuery({ search })
+    const { data, isLoading, isFetching } = useGetAllRoomsQuery({ search, limit: 10 })
     const rooms = data?.data?.result;
     const filterableData: { text: string, value: string }[] = [];
     const transformedProducts = rooms?.map((product: any, index: number) => {

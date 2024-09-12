@@ -14,7 +14,21 @@ const roomApi = baseApi.injectEndpoints({
       invalidatesTags: ["rooms"],
     }),
     getAllRooms: builder.query({
-      query: ({ search, range, limit, sort, capacity }: { search?: string; range?: string; limit?: number; sort?: string; capacity?: string }) => {
+      query: ({
+        search,
+        range,
+        limit,
+        sort,
+        capacity,
+        page,
+      }: {
+        search?: string;
+        range?: string;
+        limit?: number;
+        sort?: string;
+        capacity?: string;
+        page?: string;
+      }) => {
         const params = new URLSearchParams();
         if (search) {
           params.append("search", search);
@@ -30,6 +44,9 @@ const roomApi = baseApi.injectEndpoints({
         }
         if (capacity) {
           params.append("capacity", capacity);
+        }
+        if (page) {
+          params.append("page", page);
         }
 
         return {
