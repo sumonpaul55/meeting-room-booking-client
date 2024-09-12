@@ -2,8 +2,9 @@
 
 
 .overlay{
-   background: linear-gradient(110deg, #060016cc 50%, #00031a25 0);
+   background: linear-gradient(to left, #030015ba 40%, #00000000 60%);
 }
+
 
 .ant-upload-wrapper {
     flex-direction: column;
@@ -36,3 +37,8 @@
     z-index: -1;
 }
 
+@media (max-width: 500px) {
+    .overlay{
+        background:#000000b1;
+     }
+}

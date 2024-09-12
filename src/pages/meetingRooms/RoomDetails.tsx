@@ -36,7 +36,7 @@ const RoomDetails = () => {
     return (
         <Section className='pb-10'>
             {
-                data?.length ?
+                Object.values(room).length ?
                     <div className="container mx-auto p-4">
                         <h1 className='my-6 font-roboto text-2xl font-semibold'>Room Details</h1>
                         <div className="bg-white shadow-lg rounded-lg">
