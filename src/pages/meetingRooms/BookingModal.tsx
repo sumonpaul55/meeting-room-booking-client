@@ -44,7 +44,6 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
             } else {
                 setIsModalOpen(true);
             }
-
         }
         else {
             dispatch(logOut())
@@ -87,7 +86,6 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
             toast.success("Please pay now for confirm")
             navigate("/checkout")
         }
-
     }
 
     const availableDates: any[] = []; // Dates to enable

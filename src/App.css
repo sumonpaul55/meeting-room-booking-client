@@ -3,7 +3,7 @@
 
 .overlay{
     background: rgba(0, 0, 0, 0.582);
-    background: linear-gradient(110deg, rgba(0, 0, 0, 0.76) 48%, rgba(0, 0, 0, 0.398) 1%);
+    background: linear-gradient(110deg, #09001cd1 50%, #0006343a 0);
 }
 
 

@@ -8,7 +8,7 @@ const HeroSection = () => {
 
     return (
         <div
-            className="relative items-center flex md:items-start h-[50vh] sm:h-[80vh] bg-cover bg-center"
+            className="relative items-center flex md:items-start h-[60vh] sm:h-[80vh] bg-cover bg-center"
             style={{ backgroundImage: `url('banner.jpg')` }} // Replace with your image path
         >
             <div className="absolute inset-0 overlay"></div> {/* Dark overlay */}
