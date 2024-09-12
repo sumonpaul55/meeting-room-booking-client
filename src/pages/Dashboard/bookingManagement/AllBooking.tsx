@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Table, Tag } from "antd";
-import { useConfirmationBookingMutation, useGetAllBookingQuery } from "../../../redux/api/roomManagement/booking.api"
+import { useConfirmationBookingMutation, useDeleteBookingMutation, useGetAllBookingQuery } from "../../../redux/api/roomManagement/booking.api"
 import moment from "moment";
 import { toast } from "sonner";
 import { TResponse } from "../../../types/ResponseType";
+import { FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllBooking = () => {
     const { data } = useGetAllBookingQuery({})
     const [confirmBooking] = useConfirmationBookingMutation()
+    const [deleteBooking] = useDeleteBookingMutation()
     const bookingData = data?.data?.map((booking: any, idx: number) => {
         return { ...booking, key: idx, no: idx + 1 }
     })
@@ -65,9 +68,12 @@ const AllBooking = () => {
 
                 return <>
                     {
-                        allData?.isConfirmed === "unconfirmed" && <div className="flex gap-1 items-center">
-                            <Button className="bg-primary text-white" onClick={() => handleConfirm(allData?._id, allData?.isConfirmed)}>Confirm</Button>
-                            <Button className="bg-danger text-white">Reject</Button>
+                        <div className="flex gap-1 items-center">
+                            <Button disabled={allData?.isConfirmed === "canceled"} className="bg-primary text-white" onClick={() => handleConfirm(allData?._id, allData?.isConfirmed)}>{allData?.isConfirmed === "canceled" ? "Rejected" : allData?.isConfirmed === "confirmed" ? "Unconfirm" : allData?.isConfirmed === "unconfirmed" ? "Confirm" : null}</Button>
+                            <Button onClick={() => handleConfirm(allData?._id, allData?.isConfirmed === "canceled" ? "unconfirmed" : "canceled")} className="bg-danger text-white">{allData?.isConfirmed === "canceled" ? "Accept Again" : "Reject"}</Button>
+                            <Button className="px-3" onClick={() => handleDelete(allData?._id)}>
+                                <FaTrash className="text-danger" />
+                            </Button>
                         </div>
                     }
                 </>
@@ -76,11 +82,10 @@ const AllBooking = () => {
     ]
     // handle confirm
     const handleConfirm = async (id: string, status: string) => {
-        const newStatus = status === "unconfirmed" ? "confirmed" : status === "confirmed" ? "unconfirmed" : "canceled";
 
+        const newStatus = status === "unconfirmed" ? "confirmed" : status === "confirmed" ? "unconfirmed" : "canceled"
         const toastId = toast.loading("Changing...");
         const res = await confirmBooking({ id: id, status: newStatus }) as TResponse<any>;
-        console.log(res?.data?.message)
         if (res.data) {
             toast.success(res?.data?.message, { id: toastId })
         }
@@ -88,7 +93,30 @@ const AllBooking = () => {
             toast.error(res?.error?.message || res?.error?.data?.message, { id: toastId })
         }
     }
-
+    const handleDelete = (id: string) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const toastId = toast.loading("Deleteing...")
+                const res = await deleteBooking(id) as TResponse<any>
+                console.log(res)
+                if (res?.data) {
+                    toast.success(res.data.message, { id: toastId })
+                } else if (res?.error) {
+                    toast.error(res?.error?.data?.message, { id: toastId })
+                } else {
+                    toast.error("Something went worng", { id: toastId })
+                }
+            }
+        });
+    }
     return (
         <>
             <Table dataSource={bookingData} columns={Tablecolumn} />
