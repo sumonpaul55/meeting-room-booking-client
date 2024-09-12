@@ -1,50 +1,32 @@
-# React + TypeScript + Vite
+<!-- room Booking System client -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# React, ts, antd, stripe, slick carouse and so more
 
-Currently, two official plugins are available:
+# If your want to run this project locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+steps: clone this from :https://github.com/sumonpaul55/meeting-room-booking-client.git
 
-## Expanding the ESLint configuration
+# add a .env file at your root directory
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# and follow this .env example.
 
-- Configure the top-level `parserOptions` property like this:
+# env example
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+<!-- # cludinay -->
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+VITE_Cloud_Name=your cloud name
+VITE_Api_Key=your cloudinary apikey
+VITE_Api_Secret=Your cloudinary api secret
+VITE_UpLoad_presect=your preset
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+<!-- # jwt  -->
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+VITE_AccessToken_Secret=your jwt access token secret
+
+<!-- # stripe -->
+
+VITE_Publishable_Key=Your stripe Publishable key
+
+# npm i
+
+# finally, npm run dev
