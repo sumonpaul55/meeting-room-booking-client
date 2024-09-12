@@ -4,16 +4,16 @@ import { Layout, Menu } from 'antd';
 import { Outlet } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks';
 import { adminDashDashboarditmes } from '../lib/adminDashboardpath';
-import { userDashBoardPath } from '../lib/userDashboardPath';
 import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { navbarGenerator } from '../utils/navbarGenerator';
 import { verifiyToken } from '../utils/VerifyToken';
+import NoDataFound from '../components/common/NoDataFound';
 const { Content, Sider } = Layout;
 
 
 const DashBoard: React.FC = () => {
-    const token = useAppSelector(state => state.auth.token)
     let loggeduser;
+    const token = useAppSelector(state => state.auth.token)
     if (token) {
         loggeduser = verifiyToken(token)
     }
@@ -23,15 +23,18 @@ const DashBoard: React.FC = () => {
         case "admin":
             items = navbarGenerator(adminDashDashboarditmes)
             break;
-        case "user":
-            items = navbarGenerator(userDashBoardPath)
-            break;
+        // case "user":
+        //     items = navbarGenerator(userDashBoardPath)
+        //     break;
     }
 
     // const {
     //     token: { colorBgContainer },
     // } = theme.useToken();
 
+    if (loggeduser?.role !== "admin") {
+        return <NoDataFound />
+    }
     return (
         <Layout>
             <div className='h-full fixed top-14 z-50'>

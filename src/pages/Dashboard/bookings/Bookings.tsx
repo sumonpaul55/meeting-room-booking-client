@@ -4,6 +4,7 @@ import moment from "moment";
 import Section from "../../../components/common/Section";
 import { useGetMyBookingsQuery } from "../../../redux/api/roomManagement/booking.api";
 import Loading from "../../../components/common/Loading";
+import NoDataFound from "../../../components/common/NoDataFound";
 
 const Bookings = () => {
     const { data, isFetching, isLoading } = useGetMyBookingsQuery({})
@@ -76,7 +77,11 @@ const Bookings = () => {
     return (
         <Section className="py-7">
             <h1 className="mb-4 font-semibold text-lg md:text-xl">My Bookings</h1>
-            <Table dataSource={bookingData} columns={Tablecolumn} />
+            {
+                bookingData?.length ?
+                    <Table loading={isFetching} dataSource={bookingData} columns={Tablecolumn} /> :
+                    <NoDataFound />
+            }
         </Section>
     )
 }
