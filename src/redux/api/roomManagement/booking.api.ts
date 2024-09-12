@@ -10,29 +10,29 @@ const bookingApi = baseApi.injectEndpoints({
           body: data,
         };
       },
-      invalidatesTags: ["slots"],
+      invalidatesTags: ["bookings"],
     }),
-    // deleteSlot: builder.mutation({
-    //   query: (id: string) => {
-    //     return {
-    //       url: `/slots/delete/${id}`,
-    //       method: "DELETE",
-    //     };
-    //   },
-    //   invalidatesTags: ["slots"],
-    // }),
-    // updateSlot: builder.mutation({
-    //   query: (info) => {
-    //     console.log(info);
-    //     return {
-    //       url: `/slots/update/${info?.id}`,
-    //       method: "PATCH",
-    //       body: info?.updateSlotData,
-    //     };
-    //   },
-    //   invalidatesTags: ["slots"],
-    // }),
+    getAllBooking: builder.query({
+      query: () => {
+        return {
+          url: "/bookings",
+          method: "GET",
+        };
+      },
+      providesTags: ["bookings"],
+    }),
+
+    confirmationBooking: builder.mutation({
+      query: (info: { id: string; status: string }) => {
+        return {
+          url: `/confirm-booking/${info.id}`,
+          method: "PUT",
+          body: { status: info.status },
+        };
+      },
+      invalidatesTags: ["bookings"],
+    }),
   }),
 });
 
-export const { useAddBookingMutation } = bookingApi;
+export const { useAddBookingMutation, useGetAllBookingQuery, useConfirmationBookingMutation } = bookingApi;

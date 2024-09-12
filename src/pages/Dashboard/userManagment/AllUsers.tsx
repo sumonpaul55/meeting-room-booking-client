@@ -17,7 +17,6 @@ const AllUsers = () => {
     const [makeAdmin] = useUpdateStatusMutation();
     const namefiltering: { text: string; value: string }[] = []
 
-    console.log(users)
 
     const transformedUser = users?.data?.map((user: TUser, idx: number) => {
         const nameIsExist = namefiltering.some(item => item.text === user?.name && item?.value === user.name)
@@ -57,7 +56,7 @@ const AllUsers = () => {
 
 
     // handle make Admin
-    const handleMakeAdmin = (id: string) => {
+    const handleMakeAdmin = (id: string, role: string) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You are going to make admin this user, You won't be able to revert this!",
@@ -65,7 +64,7 @@ const AllUsers = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Make Admin!"
+            confirmButtonText: `Yes, Make ${role === "admin" ? "User" : "Admin"}!`
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await makeAdmin(id)
@@ -125,7 +124,7 @@ const AllUsers = () => {
 
                     <Button onClick={() => handleDelete(transformedUser._id)} className='w-fit p-1 h-auto border-0 text-red-600'><TbTrash size={20} />
                     </Button>
-                    <Button onClick={() => handleMakeAdmin(transformedUser?._id)}>{transformedUser?.role === "user" ? "Make Admin" : "Make user"}</Button>
+                    <Button onClick={() => handleMakeAdmin(transformedUser?._id, transformedUser?.role)}>{transformedUser?.role === "user" ? "Make Admin" : "Make user"}</Button>
                 </div >
             },
         },

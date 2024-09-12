@@ -5,7 +5,7 @@ import { Button, Card, } from "antd";
 import { toast } from "sonner";
 import { useAddBookingMutation } from "../../redux/api/roomManagement/booking.api";
 import { useState } from "react";
-import Success from "./Success";
+import SuccessModal from "./SuccessModal";
 
 
 export type TBookingInfo = {
@@ -65,11 +65,11 @@ const CheckoutForm = ({ bookingInfo, total }: { bookingInfo: TBookingInfo; total
                 }
 
                 const res: any = await addbooking(newBookingInfo)
+
                 if (res?.error) {
                     toast.error(res?.error?.message || res?.error?.data?.message, { id: toastId, duration: 4000 })
                 } else {
                     toast.success(res?.date?.message, { id: toastId, duration: 4000 });
-
                     setIsSuccessModalOpen(true)
                 }
 
@@ -94,7 +94,7 @@ const CheckoutForm = ({ bookingInfo, total }: { bookingInfo: TBookingInfo; total
                 </form>
 
             </Card>
-            <Success id={paymentId} total={bookingInfo?.totalAmount} isSuccessModalOpen={isSuccessModalOpen} setIsSuccessModalOpen={setIsSuccessModalOpen} totalRoom={bookingInfo?.room?.length} totalSlot={slotNumber} />
+            <SuccessModal id={paymentId} total={bookingInfo?.totalAmount} isSuccessModalOpen={isSuccessModalOpen} setIsSuccessModalOpen={setIsSuccessModalOpen} totalRoom={bookingInfo?.room?.length} totalSlot={slotNumber} />
         </>
     )
 }

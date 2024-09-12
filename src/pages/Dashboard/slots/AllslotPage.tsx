@@ -124,7 +124,7 @@ const AllslotPage = () => {
     return (
         <>
             {
-                transformSlot.length ?
+                transformSlot?.length ?
                     <div>
                         <Table
                             scroll={({ x: 800 })}
