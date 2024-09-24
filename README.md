@@ -2,12 +2,12 @@
 
 # React, ts, antd, stripe, slick carouse and so more
 
-Live link: https://meeting-room-booking-client.vercel.app
+# Live link & admin creadentials:
 
-# admin creadentials:
+- https://meeting-room-booking-client.vercel.app
 
-- email: sumon@gmail.com
-- pass: 654321
+* email: sumon@gmail.com
+* pass: 654321
 
 # If your want to run this project locally
 
