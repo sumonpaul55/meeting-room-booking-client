@@ -70,12 +70,6 @@ A full-featured meeting room booking platform built using the MERN stack, TypeSc
 
 1. Clone the repository:
    ```bash
-
+   git clone <repository-url>
    ```
-
-# git clone <repository-url>
-
-```
-npm i
-# npm run dev
-```
+   npm run dev
