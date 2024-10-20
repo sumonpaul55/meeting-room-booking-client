@@ -50,7 +50,7 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-primary bg-opacity-20">
+        <div className="md:-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-primary bg-opacity-20">
             <motion.div
                 className="p-8 bg-white shadow-lg rounded-lg w-full max-w-lg"
                 initial={{ opacity: 0, y: -50 }}

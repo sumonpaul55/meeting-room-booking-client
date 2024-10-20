@@ -53,8 +53,6 @@ const AllUsers = () => {
             }
         });
     }
-
-
     // handle make Admin
     const handleMakeAdmin = (id: string, role: string) => {
         Swal.fire({
