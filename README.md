@@ -70,6 +70,6 @@ A full-featured meeting room booking platform built using the MERN stack, TypeSc
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/sumonpaul55/meeting-room-booking-client.git
+   https://github.com/sumonpaul55/meeting-room-booking-client.git
    ```
    npm run dev
