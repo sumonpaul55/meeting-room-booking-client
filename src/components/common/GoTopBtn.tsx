@@ -14,7 +14,7 @@ function Gotop() {
         })
     }, [])
     if (scroll > 500) {
-        return <button className='fixed bg-sky-600 p-3 z-[9999] text-white rounded-full text-2xl bottom-5 right-3' onClick={handleGotop}><AiOutlineArrowUp className='animate-bounce -translate-y-2' /></button>
+        return <button className='fixed bg-sky-600 p-3 z-[9999] text-white rounded-full text-2xl bottom-5 right-6' onClick={handleGotop}><AiOutlineArrowUp className='animate-bounce -translate-y-2' /></button>
     }
 }
 

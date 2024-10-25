@@ -103,7 +103,7 @@ const MeetingRooms = () => {
                         <Button className="" onClick={() => setSideOpen(!sideOpen)}><FaBars /></Button>
                     </div>
                     <div className="gap-8 relative min-h-screen ">
-                        <div className={`bg-white md:w-[20%] absolute h-full duration-300 z-30 ${sideOpen ? "-left-full" : null} border p-3`}>
+                        <div className={`bg-white lg:w-[20%] absolute h-full duration-300 z-30 ${sideOpen ? "-left-full" : null} border p-3`}>
                             <div className="py-1 grid grid-cols-1 md:gap-4 mt-10">
                                 <Form.Item label="Search" layout="vertical" className="font-bold">
                                     <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search Room Name & amenities" />

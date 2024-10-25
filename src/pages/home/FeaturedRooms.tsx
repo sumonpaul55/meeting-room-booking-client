@@ -14,7 +14,7 @@ const FeaturedRooms = () => {
 
     return (
         <Section className='py-16 md:py-32 px-4 md:px-0'>
-            <h2 className="text-2xl md:text-4xl font-roboto font-bold mb-12 featuredRooms text-white border-b md:pl-10 pl-3 pb-4 after:w-[80%] md:after:w-[60%] xl:after:w-[30%]">Our Featured Rooms</h2>
+            {/* <h2 className="text-2xl md:text-4xl font-roboto font-bold mb-12 featuredRooms text-white border-b md:pl-10 pl-3 pb-4 after:w-[80%] md:after:w-[60%] xl:after:w-[30%]">Our Featured Rooms</h2> */}
             {isLoading ? <Loading /> :
                 <div>
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-7 lg:gap-10 xl:gap-14'>

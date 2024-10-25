@@ -63,12 +63,12 @@ const TestimonialSlider = () => {
     };
 
     return (
-        <Section className="py-20 bg-gray-100">
+        <Section className="py-16 bg-gray-100 px-3">
             <h2 className="text-2xl md:text-4xl text-center mb-6 font-roboto font-bold">What Our Clients Say</h2>
-            <Slider {...settings}>
+            <Slider {...settings} arrows={true}>
                 {testimonials.map((testimonial, index) => (
                     <div key={index} className="px-4 py-10">
-                        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div className="bg-white p-3 md:p-6 rounded-lg shadow-md text-center">
                             <img
                                 src={testimonial.image}
                                 alt={testimonial.name}

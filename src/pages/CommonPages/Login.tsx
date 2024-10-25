@@ -50,7 +50,7 @@ const Login = () => {
     };
 
     return (
-        <div className="md:-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-primary bg-opacity-20">
+        <div className="md:h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-primary bg-opacity-20">
             <motion.div
                 className="p-8 bg-white shadow-lg rounded-lg w-full max-w-lg"
                 initial={{ opacity: 0, y: -50 }}
@@ -78,6 +78,11 @@ const Login = () => {
                 <div className='mt-7 flex-wrap flex sm:gap-6'>
                     <p>Don't You have Account?</p>
                     <Link to="/register" className='text-pink-600 font-semibold'>Please Register</Link>
+                </div>
+                <div className='mt-5'>
+                    <h3 className='font-semibold mb-3'>Admin Cadentials:</h3>
+                    <p>Email: paul@gmail.com</p>
+                    <p>pass: 654321</p>
                 </div>
             </motion.div>
         </div>

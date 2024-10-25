@@ -7,7 +7,7 @@ const RoomifyFooter = () => {
     return (
         <footer className="bg-slate-900 text-white py-16 font-roboto z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* Contact Information */}
                     <div>
                         <h3 className="text-xl font-bold mb-4">Contact Information</h3>
@@ -27,10 +27,21 @@ const RoomifyFooter = () => {
                         </ul>
                     </div>
 
+                    {/* Additional Links */}
+                    <div className="">
+                        <h3 className="text-xl font-bold mb-4">Menus</h3>
+                        <ul className='space-y-2'>
+                            {/* <li><Link to="/">Home</Link></li> */}
+                            <li><Link to="/meeting-rooms">Meeting Rooms</Link></li>
+                            <li><Link to="/about">About</Link></li>
+                            <li><Link to="/contact">contact</Link></li>
+                        </ul>
+                    </div>
+
                     {/* Social Media Links */}
-                    <div className="text-center">
+                    <div className="lg:text-center">
                         <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-                        <div className="flex justify-center space-x-6">
+                        <div className="flex lg:justify-center space-x-6">
                             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-blue-600">
                                 <FaFacebook />
                             </a>
@@ -43,8 +54,9 @@ const RoomifyFooter = () => {
                         </div>
                     </div>
 
+
                     {/* Additional Links */}
-                    <div className="text-right">
+                    <div className="lg:text-right">
                         <h3 className="text-xl font-bold mb-4">Quick Links</h3>
                         <ul>
                             <li className="mb-2">

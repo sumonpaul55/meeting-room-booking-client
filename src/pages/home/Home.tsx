@@ -9,12 +9,14 @@ import WhyChooseUs from "./WhyChooseUs"
 const Home = () => {
     return (
         <>
-            <HeroSection />
-            <ServiceAdvertisement />
-            <FeaturedRooms />
-            <TestimonialSlider />
-            <WhyChooseUs />
-            <Faq />
+            <div className="px-2 md:px-0">
+                <HeroSection />
+                <ServiceAdvertisement />
+                <FeaturedRooms />
+                <TestimonialSlider />
+                <WhyChooseUs />
+                <Faq />
+            </div>
         </>
     )
 }

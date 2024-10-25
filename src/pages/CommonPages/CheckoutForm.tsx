@@ -48,7 +48,8 @@ const CheckoutForm = ({ bookingInfo, total }: { bookingInfo: TBookingInfo; total
             toast.error(error.message, { id: toastId, duration: 4000 })
         } else {
             // send response to the server
-            const response = await fetch("https://room-booking-server2.vercel.app/api/confirm-payment", {
+            // const response = await fetch("https://room-booking-server2.vercel.app/api/confirm-payment", {
+            const response = await fetch("http://localhost:5000/api/confirm-payment", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
