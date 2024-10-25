@@ -4,12 +4,26 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useGetAllRoomsQuery } from "../../redux/api/roomManagement/room.api";
 import { TRoomData } from "../../types/roomtype";
+import { useDeleteAllOldSlotMutation } from "../../redux/api/roomManagement/slot.api";
+import { useEffect } from "react";
+
 // import { useGetAllRoomsQuery } from "../../redux/features/roomManagement/room.api";
 
 const HeroSection = () => {
     // const { data: rooms } = useGetAllRoomsQuery(undefined);
+    const [deleteAllOldSlot] = useDeleteAllOldSlotMutation()
+
     const { data } = useGetAllRoomsQuery({ limit: 4 })
-    const rooms = data?.data?.result
+    const rooms = data?.data?.result;
+
+    useEffect(() => {
+        const startMonth = new Date().getDate() === 15;
+        if (startMonth) {
+            deleteAllOldSlot({})
+        }
+    }, [])
+
+
     return (
         <div
             className="relative items-center flex md:items-center h-full lg:h-[80vh] bg-cover bg-center"

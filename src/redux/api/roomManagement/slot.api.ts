@@ -41,6 +41,15 @@ const roomApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["slots"],
     }),
+    deleteAllOldSlot: builder.mutation({
+      query: () => {
+        return {
+          url: `/slots/delete-old-slots`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["slots"],
+    }),
     updateSlot: builder.mutation({
       query: (info) => {
         console.log(info);
@@ -55,4 +64,4 @@ const roomApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllSlotsQuery, useCreateSlotsMutation, useDeleteSlotMutation, useUpdateSlotMutation } = roomApi;
+export const { useGetAllSlotsQuery, useCreateSlotsMutation, useDeleteSlotMutation, useUpdateSlotMutation, useDeleteAllOldSlotMutation } = roomApi;
