@@ -13,8 +13,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 
 
-
-
 const stripePromise = loadStripe(process.env.VITE_Publishable_Key as string)
 
 const CheckOutPage = () => {
@@ -52,6 +50,13 @@ const CheckOutPage = () => {
     const bookingInfo = {
         totalAmount: totalAmount, email, user: userId, phone, room
     }
+
+    let TotalSlot: number = 0
+    let totalAmounts: number = 0
+    booking?.map((item) => {
+        TotalSlot = Number(TotalSlot) + Number(item?.slots?.length)
+        totalAmounts = Number(totalAmounts) + item?.totalAmount
+    })
 
 
     const columns: TableColumnsType = [
@@ -129,10 +134,13 @@ const CheckOutPage = () => {
                                 </div>
                             </div>
                             <div className="my-1 p-2 md:p-4 md:min-w-[400px] text-left shadow">
-                                <h2 className="font-bold font-poppins text-lg md:text-xl border-b pb-2">User Info</h2>
-                                <h2 className="py-1 font-roboto font-semibold mt-4 text-lightText">Name: {name}</h2>
-                                <h2 className="py-1 font-roboto font-semibold mt-4 text-lightText">Email: {email}</h2>
-                                <h2 className="py-1 font-roboto font-semibold mt-4 text-lightText">Address: {address}</h2>
+                                <h2 className="font-bold font-poppins text-lg md:text-xl border-b pb-2">User Info & Summery</h2>
+                                <h2 className="py-1 font-roboto font-semibold mt-2 text-lightText">Name: {name}</h2>
+                                <h2 className="py-1 font-roboto font-semibold mt-2 text-lightText">Email: {email}</h2>
+                                <h2 className="py-1 font-roboto font-semibold mt-2 text-lightText">Address: {address}</h2>
+                                <hr className="mt-6" />
+                                <h2 className="py-1 font-roboto font-semibold mt-2 text-lightText">Total Slots: {TotalSlot!}</h2>
+                                <h2 className="py-1 font-roboto font-semibold text-lightText">Total Amount: ${totalAmounts}</h2>
                             </div>
                         </div> :
                         <NoDataFound />

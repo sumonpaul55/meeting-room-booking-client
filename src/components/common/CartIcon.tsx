@@ -7,7 +7,6 @@ import { useAppSelector } from '../../redux/hooks';
 const CartIcon = () => {
     const items = useAppSelector(state => state.booking.booking)
     const { pathname } = useLocation()
-    console.log(pathname)
     return (
         <>
             {

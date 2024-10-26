@@ -21,7 +21,6 @@ const MeetingRooms = () => {
     const { data, isLoading } = useGetAllRoomsQuery({ search: srcDebounce, range, capacity, sort, page: `${pages}` });
     const rooms = data?.data?.result;
     const meta = data?.data?.meta;
-    console.log(meta)
     if (isLoading) {
         return <Loading />
     }
