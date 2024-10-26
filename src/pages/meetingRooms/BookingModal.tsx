@@ -83,17 +83,20 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
         const addbooking = dispatch(setBooking(bookingData))
         if (addbooking?.payload) {
             setIsModalOpen(false)
-            toast.success("Please pay now for confirm")
-            navigate("/checkout")
+            toast.success("Rooms Added To Your Cart")
         }
     }
 
     const availableDates: any[] = []; // Dates to enable
+
     const availableSlotsbySelectedDate: { label: string, value: string }[] = []
 
     slots?.map((slots: Tsolts) => {
+        // console.log(slots)
         const formattedSelectedDate = dayjs(selectedDate).format('YYYY-MM-DD'); // Ensure consistent formatting
         const formattedAvailableDate = dayjs(slots?.date).format('YYYY-MM-DD'); // Ensure consistent formatting
+
+
         // console.log(formattedAvailableDate)
         if (!availableDates.includes(formattedAvailableDate)) {
             availableDates.push(formattedAvailableDate);
@@ -115,7 +118,7 @@ const BookingModal = ({ room }: { room: TRoomData }) => {
     return (
         <>
             <Button type="primary" onClick={showModal} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold w-full px-4 md:px-6 py-0 rounded-lg">
-                Book Now
+                Add To Cart
             </Button>
             <Modal title="Basic Modal" open={isModalOpen} onCancel={handleCancel}>
                 <Form onFinish={onFinish} layout='vertical' initialValues={{
