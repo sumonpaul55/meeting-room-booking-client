@@ -41,7 +41,7 @@ const Navbar = () => {
     }
     const UserdropDownItems: MenuItem[] = [
         {
-            key: "bookings-or-dashboard", label: <NavLink to={user?.role === "user" ? `/myBookings` : "admin/dashboard"}><Button className="px-2">{user?.role === "user" ? "My Bookings" : "Dashboard"}<BiBox size={16} /></Button></NavLink>
+            key: "bookings-or-dashboard", label: <NavLink to={user?.role === "user" ? `/user/dashboard` : user?.role === "admin" ? "admin/dashboard" : ""}><Button className="px-2">{"Dashboard"}<BiBox size={16} /></Button></NavLink>
         },
         {
             key: "Logout", label: <Button onClick={() => handleLogout()} className="px-2 w-full justify-start">Logout <BiExit size={16} /></Button>
@@ -72,7 +72,11 @@ const Navbar = () => {
                             {
                                 user &&
                                 <Dropdown trigger={['click']} menu={{ items: UserdropDownItems }} arrow={true} overlayStyle={{ border: "1px solid #ccc", borderRadius: "8px" }}>
-                                    <Button className="px-6 font-semibold">User <FaUser size={15} /></Button>
+                                    <Button className="px-3 h-auto font-semibold">{user?.name.split(" ")[0]}
+                                        {
+                                            user?.profileImage ? <img className="size-7 rounded-full" src={user?.profileImage} alt={user?.name} /> : <FaUser size={15} />
+                                        }
+                                    </Button>
                                 </Dropdown>
                             }
                         </div>

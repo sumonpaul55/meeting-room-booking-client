@@ -2,6 +2,7 @@
 import BookedSlots from "../pages/Dashboard/bookedSlots/BookedSlots";
 import BookingMangement from "../pages/Dashboard/bookingManagement/BookingMangement";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
+import MyProfile from "../pages/Dashboard/myProfile/myProfile";
 import Allrooms from "../pages/Dashboard/rooms/Allrooms";
 import SlotManagement from "../pages/Dashboard/slots/SlotManagement";
 import AllUsers from "../pages/Dashboard/userManagment/AllUsers";
@@ -10,6 +11,11 @@ export const adminDashDashboarditmes = [
     {
         index: true,
         element: <DashboardHome />
+    },
+    {
+        name: "My Profile",
+        path: "my-profile",
+        element: <MyProfile />
     },
     {
         name: "User Management",

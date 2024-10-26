@@ -52,7 +52,11 @@ export const NavItemsPath = [
     element: <DashBoard />,
     children: adminDashDashboarditmes
   },
-
+  {
+    path: "/user/dashboard",
+    element: <DashBoard />,
+    children: adminDashDashboarditmes
+  },
   {
     path: "/room-details/:id",
     element: <ProtectedRoute><RoomDetails /></ProtectedRoute>

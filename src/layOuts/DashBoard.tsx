@@ -7,7 +7,8 @@ import { adminDashDashboarditmes } from '../lib/adminDashboardpath';
 import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { navbarGenerator } from '../utils/navbarGenerator';
 import { verifiyToken } from '../utils/VerifyToken';
-import NoDataFound from '../components/common/NoDataFound';
+import { userDashBoardPath } from '../lib/userDashboardPath';
+// import NoDataFound from '../components/common/NoDataFound';
 const { Content, Sider } = Layout;
 
 
@@ -23,18 +24,18 @@ const DashBoard: React.FC = () => {
         case "admin":
             items = navbarGenerator(adminDashDashboarditmes)
             break;
-        // case "user":
-        //     items = navbarGenerator(userDashBoardPath)
-        //     break;
+        case "user":
+            items = navbarGenerator(userDashBoardPath)
+            break;
     }
 
     // const {
     //     token: { colorBgContainer },
     // } = theme.useToken();
 
-    if (loggeduser?.role !== "admin") {
-        return <NoDataFound />
-    }
+    // if (loggeduser?.role !== "admin") {
+    //     return <NoDataFound />
+    // }
     return (
         <Layout>
             <div className='h-full fixed top-14 z-50'>
