@@ -40,7 +40,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ name, roomNo, floorNo, capacity, pr
 
     return (
         <motion.div
-            className="rounded-lg overflow-hidden shadow-md bg-gray-100 h-full flex flex-col justify-between"
+            className="rounded-lg overflow-hidden shadow-lg bg-gray-200 h-full flex flex-col justify-between"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}>
             <div>

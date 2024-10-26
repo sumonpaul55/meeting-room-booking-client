@@ -29,8 +29,8 @@
 .featuredRooms::after{
     content: "";
     position: absolute;
-    left: 0;
-    height: 70px;
+    left: 20px;
+    height: 60px;
     transform: skewX(-35deg);
     background: #000;
     bottom: 0;

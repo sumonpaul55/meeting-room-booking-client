@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { verifiyToken } from "../../utils/VerifyToken";
+import Section from "../../components/common/Section";
 type MenuItem = Required<MenuProps>['items'][number];
 
 
@@ -55,8 +56,8 @@ const Navbar = () => {
 
     return (
         <nav className="shadow-md sticky top-0 bg-white bg-opacity-70 backdrop-blur z-50 py-1">
-            <div className="container mx-auto">
-                <div className="px-4 sm:px-6 lg:px-8">
+            <Section>
+                <div className="">
                     <div className="flex justify-between">
                         <div className="flex">
                             <div className="flex-shrink-0 flex items-center">
@@ -93,7 +94,7 @@ const Navbar = () => {
                         </Dropdown>
                     }
                 </Drawer>
-            </div>
+            </Section>
         </nav>
     );
 };
