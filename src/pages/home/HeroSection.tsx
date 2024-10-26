@@ -31,7 +31,7 @@ const HeroSection = () => {
         >
             <div className="absolute inset-0 overlay"></div> {/* Dark overlay */}
             <div className="container mx-auto">
-                <div className="p-3">
+                <div className="p-3 md:p-0">
                     <div className="grid grid-cols-1 md:grid-cols-2">
                         <div className="hidden md:grid grid-cols-2 lg:grid-cols-2 gap-4">
                             {
