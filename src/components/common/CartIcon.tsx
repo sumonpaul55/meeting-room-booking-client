@@ -1,17 +1,19 @@
 
 import { motion } from 'framer-motion';
 import { FaShoppingCart } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 
 const CartIcon = () => {
     const items = useAppSelector(state => state.booking.booking)
+    const { pathname } = useLocation()
+    console.log(pathname)
     return (
         <>
             {
-                !items?.length ? null :
+                pathname === "/checkout" ? null : !items?.length ? null :
                     <motion.div
-                        className="fixed right-0 w-[50px] top-12 sm:top-20 z-50 p-2 rounded-l-full bg-blue-600 text-white shadow-lg"
+                        className="fixed right-0 w-[50px] top-16 sm:top-24 z-50 p-2 rounded-l-full bg-blue-600 text-white shadow-lg"
                         whileHover={{ scale: 1.04, }}
                         whileTap={{ scale: 0.9 }}
                         initial={{ y: -100, opacity: 0 }}
