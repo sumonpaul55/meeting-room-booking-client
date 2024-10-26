@@ -38,22 +38,21 @@ const DashBoard: React.FC = () => {
     // }
     return (
         <Layout>
-            <div className='h-full fixed top-14 z-50'>
+            <div className='h-full fixed top-14 left-0 z-0'>
                 <Sider
+                    width="250px"
                     className='lg:fixed top-0 h-screen'
                     breakpoint="lg"
                     collapsedWidth="0">
-                    <Menu theme="dark" mode="inline" items={items} style={{ fontSize: "16px", marginTop: "25px" }} />
+                    <Menu theme="dark" mode="inline" items={items} style={{ fontSize: "16px", marginTop: "25px", }} />
                 </Sider>
             </div>
-            <Layout>
-                <Content style={{ margin: '10px 10px 0' }}>
-                    <div
-                        className='min-h-screen overflow-y-scroll lg:ml-[200px]'>
-                        <Outlet />
-                    </div>
-                </Content>
-            </Layout>
+            <Content style={{ margin: '10px 10px 0' }}>
+                <div
+                    className='min-h-screen overflow-y-scroll lg:ml-[270px]'>
+                    <Outlet />
+                </div>
+            </Content>
         </Layout>
     );
 };

@@ -11,7 +11,8 @@ const SuccessModal = ({ isSuccessModalOpen, setIsSuccessModalOpen, id, total, to
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
     const handleViewBookings = () => {
-        navigate('/myBookings');
+        navigate('/user/dashboard/myBookings');
+        dispatch(clearBookingSlice())
     };
     const handleGoHome = () => {
         dispatch(clearBookingSlice())

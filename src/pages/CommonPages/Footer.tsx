@@ -6,10 +6,10 @@ import Section from '../../components/common/Section';
 const RoomifyFooter = () => {
     const thisYear = new Date().getFullYear()
     return (
-        <footer className="bg-slate-900 text-white py-16 font-roboto z-50">
+        <footer className="bg-slate-900 text-white py-16 font-roboto z-10 relative">
             <Section>
                 <div className="">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 md:gap-16 lg:gap-5">
                         {/* Contact Information */}
                         <div>
                             <h3 className="text-xl font-bold mb-4 border-b border-dotted border-gray-600 pb-2 w-fit">Contact Information</h3>

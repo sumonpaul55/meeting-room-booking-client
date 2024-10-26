@@ -4,7 +4,6 @@ import AboutUs from "../pages/aboutUs/AboutUs";
 import Login from "../pages/CommonPages/Login";
 import Registration from "../pages/CommonPages/Registration";
 import ContactUs from "../pages/contactUs/ContactUs";
-import Bookings from "../pages/Dashboard/bookings/Bookings";
 import Home from "../pages/home/Home";
 import MeetingRooms from "../pages/meetingRooms/MeetingRooms";
 import RoomDetails from "../pages/meetingRooms/RoomDetails";
@@ -13,6 +12,7 @@ import { adminDashDashboarditmes } from "./adminDashboardpath";
 import TermsAndConditions from "../pages/privacyandTerm/Term&Condition";
 import ProtectedRoute from "../routes/ProtectedRoute";
 import CheckOutPage from "../pages/CommonPages/CheckOutPage";
+import { userDashBoardPath } from "./userDashboardPath";
 
 export const NavItemsPath = [
   {
@@ -43,19 +43,19 @@ export const NavItemsPath = [
     path: "register",
     element: <Registration />
   },
-  {
-    path: "myBookings",
-    element: <Bookings />
-  },
+  // {
+  //   path: "myBookings",
+  //   element: <Bookings />
+  // },
   {
     path: "/admin/dashboard",
-    element: <DashBoard />,
+    element: <ProtectedRoute><DashBoard /></ProtectedRoute>,
     children: adminDashDashboarditmes
   },
   {
     path: "/user/dashboard",
     element: <DashBoard />,
-    children: adminDashDashboarditmes
+    children: userDashBoardPath
   },
   {
     path: "/room-details/:id",
