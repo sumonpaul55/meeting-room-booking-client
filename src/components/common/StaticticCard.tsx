@@ -9,7 +9,7 @@ const StatisticsCard = () => {
                 <FaUser className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Total Users</h4>
-                    <p className="text-3xl font-bold mt-1">120</p>
+                    <p className="text-3xl font-bold mt-1">12</p>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@ const StatisticsCard = () => {
                 <FaUserShield className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Total Admins</h4>
-                    <p className="text-3xl font-bold mt-1">5</p>
+                    <p className="text-3xl font-bold mt-1">3</p>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@ const StatisticsCard = () => {
                 <FaHotel className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Total Rooms</h4>
-                    <p className="text-3xl font-bold mt-1">45</p>
+                    <p className="text-3xl font-bold mt-1">16</p>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@ const StatisticsCard = () => {
                 <FaList className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Total Slots</h4>
-                    <p className="text-3xl font-bold mt-1">150</p>
+                    <p className="text-3xl font-bold mt-1">62</p>
                 </div>
             </div>
 
@@ -41,15 +41,14 @@ const StatisticsCard = () => {
                 <FaBook className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Total Booked Rooms</h4>
-                    <p className="text-3xl font-bold mt-1">78</p>
+                    <p className="text-3xl font-bold mt-1">8</p>
                 </div>
             </div>
-
             <div className="flex items-center p-6 rounded-lg shadow-lg text-white bg-gradient-to-r from-teal-400 to-green-500">
                 <FaCalendarAlt className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Available Slots</h4>
-                    <p className="text-3xl font-bold mt-1">72</p>
+                    <p className="text-3xl font-bold mt-1">40</p>
                 </div>
             </div>
 
@@ -57,7 +56,7 @@ const StatisticsCard = () => {
                 <FaUsers className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Active Users</h4>
-                    <p className="text-3xl font-bold mt-1">80</p>
+                    <p className="text-3xl font-bold mt-1">9</p>
                 </div>
             </div>
 
@@ -65,7 +64,7 @@ const StatisticsCard = () => {
                 <FaDoorClosed className="text-5xl mr-4 opacity-90" />
                 <div>
                     <h4 className="text-xl font-semibold">Rooms Occupied</h4>
-                    <p className="text-3xl font-bold mt-1">30</p>
+                    <p className="text-3xl font-bold mt-1">6</p>
                 </div>
             </div>
         </div>

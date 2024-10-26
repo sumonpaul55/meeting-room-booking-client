@@ -6,6 +6,7 @@ export interface regiResponse {
   role: string;
   address: string;
   isDeleted: boolean;
+  profileImage?: string;
   _id: string;
   message?: string;
 }

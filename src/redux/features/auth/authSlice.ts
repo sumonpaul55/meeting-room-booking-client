@@ -7,6 +7,9 @@ export type TUser = {
   iat: number;
   exp: number;
   name: string;
+  profileImage: string;
+  phone: string;
+  address: string;
 };
 
 export type TInitialState = {
