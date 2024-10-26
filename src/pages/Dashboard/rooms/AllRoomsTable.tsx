@@ -138,7 +138,6 @@ const AllRoomsTable: React.FC = () => {
                 onChange={onChange}
                 sticky={true}
                 loading={isFetching}
-
                 columns={columns}
                 dataSource={transformedProducts}
             />

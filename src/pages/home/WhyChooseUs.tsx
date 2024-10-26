@@ -52,7 +52,7 @@ const WhyChooseUs: React.FC = () => {
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
-                            className="bg-gray-100 rounded-lg shadow p-6 w-full"
+                            className="bg-gray-200 rounded-lg shadow-lg p-6 w-full"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.3 }}
                         >

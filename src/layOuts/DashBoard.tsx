@@ -49,7 +49,6 @@ const DashBoard: React.FC = () => {
                 <Content style={{ margin: '10px 10px 0' }}>
                     <div
                         className='min-h-screen overflow-y-scroll lg:ml-[200px]'>
-
                         <Outlet />
                     </div>
                 </Content>
