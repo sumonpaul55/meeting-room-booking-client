@@ -8,7 +8,7 @@ import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const AllBooking = () => {
-    const { data } = useGetAllBookingQuery({})
+    const { data, isLoading } = useGetAllBookingQuery({})
     const [confirmBooking] = useConfirmationBookingMutation()
     const [deleteBooking] = useDeleteBookingMutation()
     const bookingData = data?.data?.map((booking: any, idx: number) => {
@@ -119,7 +119,7 @@ const AllBooking = () => {
     }
     return (
         <>
-            <Table dataSource={bookingData} columns={Tablecolumn} />
+            <Table loading={isLoading} dataSource={bookingData} columns={Tablecolumn} />
         </>
     )
 }
