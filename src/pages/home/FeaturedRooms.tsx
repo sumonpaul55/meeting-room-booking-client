@@ -13,7 +13,7 @@ const FeaturedRooms = () => {
 
 
     return (
-        <Section className='py-16 md:py-32 px-4 md:px-0'>
+        <Section className='py-16 md:py-32'>
             <h2 className="text-xl md:text-4xl font-roboto font-bold mb-12 featuredRooms text-white border-b md:pl-10 pl-3 pb-2 after:w-[80%] md:after:w-[60%] xl:after:w-[30%]">Our Featured Rooms</h2>
             {isLoading ? <Loading /> :
                 <div>

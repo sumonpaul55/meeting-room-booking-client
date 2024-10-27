@@ -51,23 +51,16 @@ const RoomCard: React.FC<RoomCardProps> = ({ name, roomNo, floorNo, capacity, pr
                         </div>
                     ))}
                 </Slider>
-                <div className="py-4 px-3">
+                <div className="p-2">
                     <div className="font-bold text-xl mb-2">{name}</div>
-                    <div className={`px-2 text-base flex flex-wrap justify-start gap-2`}>
-                        <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Room No: {roomNo}</Tag>
-                        <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'>Floor No: {floorNo}</Tag>
-                        <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Capacity: {capacity}</Tag>
-                        <Tag className='p-1 px-2 font-semibold font-roboto' color='blue'> Price: <span className='text-base text-primary'>${pricePerSlot}</span> per slot</Tag>
+                    <div className={`text-base flex flex-wrap justify-start gap-1`}>
+                        <Tag className='p-1 font-semibold font-roboto' color='blue'>Room No: {roomNo}</Tag>
+                        <Tag className='p-1 font-semibold font-roboto' color='blue'>Floor No: {floorNo}</Tag>
+                        <Tag className='p-1 font-semibold font-roboto' color='blue'> Capacity: {capacity}</Tag>
+                        <Tag className='p-1 font-semibold font-roboto' color='blue'> Price: <span className='text-primary'>${pricePerSlot}</span> per slot</Tag>
                     </div>
-                    <div className='mt-3 md:mt-3 flex sm:flex-row flex-col gap-2 px-2'>
-                        <div className="flex-1">
-                            <h4 className="font-semibold text-gray-800">Amenities:</h4>
-                            <ul className="list-disc list-inside text-gray-700">
-                                {amenities?.map((amenity, index) => (
-                                    <li key={index} className='text-sm'>{amenity}</li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div className='mt-3 md:mt-3 flex sm:flex-row gap-2'>
+
                         <div className='flex-1'>
                             <h4 className="font-semibold text-gray-800">Availble Slots:</h4>
                             <ul className="list-none list-inside text-gray-700 space-y-1 max-h-[100px] overflow-y-auto">
@@ -79,6 +72,15 @@ const RoomCard: React.FC<RoomCardProps> = ({ name, roomNo, floorNo, capacity, pr
                                 }
                             </ul>
                         </div>
+                        <div className="flex-1">
+                            <h4 className="font-semibold text-gray-800">Amenities:</h4>
+                            <ul className="list-disc list-inside text-gray-700">
+                                {amenities?.map((amenity, index) => (
+                                    <li key={index} className='text-sm'>{amenity}</li>
+                                ))}
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>

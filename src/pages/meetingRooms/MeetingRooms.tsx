@@ -101,8 +101,8 @@ const MeetingRooms = () => {
                     <div className={`text-end mt-2 fixed z-50 bg-transparent backdrop:blur-sm top-12 ${sideOpen ? "left-0" : ""}`}>
                         <Button className="" onClick={() => setSideOpen(!sideOpen)}><FaBars /></Button>
                     </div>
-                    <div className="gap-8 relative min-h-screen ">
-                        <div className={`bg-white lg:w-[20%] absolute h-full duration-300 z-30 ${sideOpen ? "-left-full" : null} border p-3`}>
+                    <div className="gap-8 relative min-h-screen">
+                        <div className={`bg-white lg:w-[20%] absolute h-full duration-300 z-30 ${sideOpen ? "-left-full" : ""} border p-3`}>
                             <div className="py-1 grid grid-cols-1 md:gap-4 mt-10">
                                 <Form.Item label="Search" layout="vertical" className="font-bold">
                                     <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search Room Name & amenities" />
@@ -123,7 +123,7 @@ const MeetingRooms = () => {
                         </div>
                         {
                             rooms?.length ?
-                                <div className={`absolute overflow-y-scroll h-full right-0 top-0 w-full border duration-300 p-4 bg-slate-50 ${sideOpen ? "w-[100%]" : "md:w-[80%]"}`}>
+                                <div className={`absolute overflow-y-scroll h-full py-5 right-0 top-0 w-full border duration-300 p-4 bg-slate-50 ${sideOpen ? "w-[100%]" : "md:w-[80%]"}`}>
                                     <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-7 ${sideOpen ? "xl:grid-cols-4" : "xl:grid-cols-3"}`}>
                                         {
 

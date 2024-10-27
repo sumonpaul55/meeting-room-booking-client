@@ -59,7 +59,7 @@ const RoomDetails = () => {
                             <div className="p-3 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-5">
                                 <div className='flex flex-col gap-4'>
                                     <h1 className="text-4xl font-bold text-gray-800 mb-4">Name: {room?.name}</h1>
-                                    <p className="text-gray-600 mb-2"> <Tag className='text-base font-semibold md:text-lg' color='blue'>Room No: {room?.roomNo}</Tag> | <Tag className='text-base font-semibold md:text-lg' color='blue'> Floor: {room?.floorNo}</Tag></p>
+                                    <p className="text-gray-600 mb-2"> <Tag className='text-base font-semibold md:text-lg' color='blue'>Room No: {room?.roomNo}</Tag> | <Tag className='text-base font-semibold md:text-lg mt-3' color='blue'> Floor: {room?.floorNo}</Tag></p>
                                     <p className="text-gray-600 mb-2"><Tag className='text-base font-semibold md:text-lg' color='blue'>Capacity: {room?.capacity} people</Tag></p>
                                     <p className="text-2xl font-semibold text-gray-800 mb-6">Price Per Slot: ${room?.pricePerSlot}</p>
                                 </div>
