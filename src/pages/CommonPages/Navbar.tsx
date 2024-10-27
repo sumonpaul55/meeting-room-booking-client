@@ -41,7 +41,7 @@ const Navbar = () => {
     }
     const UserdropDownItems: MenuItem[] = [
         {
-            key: "bookings-or-dashboard", label: <NavLink to={user?.role === "user" ? `/user/dashboard` : user?.role === "admin" ? "admin/dashboard" : ""}><Button className="px-2">{"Dashboard"}<BiBox size={16} /></Button></NavLink>
+            key: "bookings-or-dashboard", label: <NavLink onClick={() => setVisible(false)} to={user?.role === "user" ? `/user/dashboard` : user?.role === "admin" ? "admin/dashboard" : ""}> <Button className="px-2">{"Dashboard"}<BiBox size={16} /></Button></NavLink >
         },
         {
             key: "Logout", label: <Button onClick={() => handleLogout()} className="px-2 w-full justify-start">Logout <BiExit size={16} /></Button>
@@ -50,6 +50,7 @@ const Navbar = () => {
     const handleLogout = () => {
         const tosatId = toast.loading("Porccessing...")
         dispatch(logOut());
+        setVisible(true);
         toast.success("Logged Out Successful", { id: tosatId })
         navigate('/')
     }

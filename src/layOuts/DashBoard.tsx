@@ -38,10 +38,10 @@ const DashBoard: React.FC = () => {
     // }
     return (
         <Layout>
-            <div className='h-full fixed top-14 left-0 z-0'>
+            <div className='h-full fixed top-14 left-0 z-10'>
                 <Sider
                     width="250px"
-                    className='lg:fixed top-0 h-screen'
+                    className='lg:fixed -top-4 h-screen'
                     breakpoint="lg"
                     collapsedWidth="0">
                     <Menu theme="dark" mode="inline" items={items} style={{ fontSize: "16px", marginTop: "25px", }} />

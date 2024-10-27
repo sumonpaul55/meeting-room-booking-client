@@ -32,8 +32,8 @@ const HeroSection = () => {
             <div className="absolute inset-0 overlay"></div> {/* Dark overlay */}
             <div className="container mx-auto">
                 <div className="p-3 md:p-0">
-                    <div className="grid grid-cols-1 md:grid-cols-2">
-                        <div className="hidden md:grid grid-cols-2 lg:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                        <div className="hidden md:grid grid-cols-2 lg:grid-cols-2 gap-6" >
                             {
                                 rooms?.length &&
                                 rooms?.map((item: TRoomData, idx: number) => {
@@ -59,11 +59,10 @@ const HeroSection = () => {
                             }
                         </div>
                         <motion.div
-                            className="relative text-white space-y-4 sm:space-y-7 md:px-10 text-right py-10 md:py-5"
+                            className="relative text-white space-y-4 sm:space-y-7 text-right py-10 md:py-5"
                             initial={{ opacity: 0, y: -50 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                        >
+                            transition={{ duration: 1 }}>
                             <h1 className="sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-right">
                                 Seamless Room Bookings, Anytime, Anywhere
                             </h1>

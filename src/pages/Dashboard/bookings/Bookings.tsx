@@ -78,7 +78,7 @@ const Bookings = () => {
             <h1 className="mb-4 font-semibold text-lg md:text-xl">My Bookings</h1>
             {
                 bookingData?.length ?
-                    <Table loading={isFetching} dataSource={bookingData} columns={Tablecolumn} /> :
+                    <Table loading={isFetching} className="overflow-x-auto bg-white" dataSource={bookingData} columns={Tablecolumn} /> :
                     <NoDataFound />
             }
         </Section>
